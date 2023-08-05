@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "form-notify/line-login-button",
+  "version": "0.1.0",
+  "title": "LINE Login Button",
+  "category": "widgets",
+  "description": "Place the LINE Login button in your content.",
+  "textdomain": "form-notfiy",
+  "keywords": [
+    "LINE",
+    "登入",
+    "button"
+  ]
+}

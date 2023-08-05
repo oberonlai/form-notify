@@ -1,0 +1,20 @@
+/*!
+ * 
+ * formNotify
+ * 
+ * @author 
+ * @version 1.0.0
+ * @link UNLICENSED
+ * @license UNLICENSED
+ * 
+ * Copyright (c) 2023 
+ * 
+ * This software is released under the UNLICENSED License
+ * https://opensource.org/licenses/UNLICENSED
+ * 
+ * Compiled with the help of https://wpack.io
+ * A zero setup Webpack Bundler Script for WordPress
+ */
+.logged-in .form-notify-line-login{display:none}.form-notify-line-login .wp-block-button{width:100%}.form-notify-line-login .wp-block-button__width-25 a{width:25%}.form-notify-line-login .wp-block-button__width-50 a{width:50%}.form-notify-line-login .wp-block-button__width-75 a{width:75%}.form-notify-line-login .wp-block-button__width-100 a{width:100%}.form-notify-line-login .wp-block-button__link{color:#fff;transition:all .2s ease}.form-notify-line-login .wp-block-button__link span img{width:auto;display:inline;position:relative;top:3px;margin-right:7px}.form-notify-line-login .wp-block-button__link:hover{-webkit-filter:brightness(1.1);filter:brightness(1.1)}.form-notify-line-login .wp-block-button__link:not(.has-background),.form-notify-line-login .wp-block-button__link:not(.has-background):hover{background-color:#03c34c}.form-notify-line-login .wp-block-button__link:not(.has-text-color),.form-notify-line-login .wp-block-button__link:not(.has-text-color):hover{color:#fff}.form-notify-line-login .alignright{text-align:right}.editor-styles-wrapper .form-notify-line-login .wp-block-button{width:100%}.editor-styles-wrapper .form-notify-line-login .wp-block-button.wp-block-button__width-25>div{width:25%}.editor-styles-wrapper .form-notify-line-login .wp-block-button.wp-block-button__width-50>div{width:50%}.editor-styles-wrapper .form-notify-line-login .wp-block-button.wp-block-button__width-75>div{width:75%}.editor-styles-wrapper .form-notify-line-login .wp-block-button.wp-block-button__width-100>div{width:100%}.editor-styles-wrapper .form-notify-line-login .wp-block-button__link{background-color:#03c34c;color:#fff;transition:all .2s ease}.editor-styles-wrapper .form-notify-line-login .wp-block-button__link span img{width:auto;display:inline;position:relative;top:3px;margin-right:7px}
+
+/*# sourceMappingURL=lineLoginButton-d605b671.css.map*/

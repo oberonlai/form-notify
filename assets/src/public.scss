@@ -1,0 +1,83 @@
+.wc-notify-line-wrap {
+	padding: 1.3rem 0;
+}
+
+.woocommerce-checkout {
+	.wc-notify-line-wrap {
+		display: block;
+		width: 100%;;
+	}
+}
+
+
+.wc-notify-line-wrap.aligncenter,
+.wc-notify-line-wrap.center {
+	text-align: center
+}
+.wc-notify-line-wrap.alignleft,
+.wc-notify-line-wrap.left {
+	text-align: left
+}
+.wc-notify-line-wrap.alignright,
+.wc-notify-line-wrap.right {
+	text-align: right
+}
+.wc-notify-line-wrap.alignwide a,
+.wc-notify-line-wrap.alignfull a {
+	width: 100%;
+}
+.wc-notify-line-wrap.half a {
+	width: 50%;
+}
+.wc-notify-line-wrap a {
+	display: inline-block;
+	background: #02d534!important;
+	color: #fff!important;
+	text-decoration: none!important;
+	text-align: center;
+	border-radius: 5px;
+	white-space: nowrap;
+	transition: background .2s ease;
+}
+.wc-notify-line-wrap a:hover {
+	background: #12b83a!important;
+}
+
+.wc-notify-line-wrap a img {
+	display: inline;
+	position: relative;
+	top: 7px;
+	left: -5px;
+	vertical-align: baseline!important;
+}
+
+.wc-notify-line-wrap a svg {
+	position: relative;
+	top: 6px;
+	left: -5px;
+	vertical-align: baseline!important;
+}
+
+.wc-notify-line-wrap a.size-f {
+	width: 100%;
+	padding: .3rem 1rem .7rem;
+}
+
+.wc-notify-line-wrap a.size-l {
+	width: 50%;
+	padding: .3rem 1rem .7rem;
+}
+
+.wc-notify-line-wrap a.size-m {
+	padding: .3rem 4rem .7rem;
+}
+
+.wc-notify-line-wrap a.size-s {
+	padding: .3rem 1rem .7rem;
+}
+
+@media only screen and (max-width:640px){
+	.wc-notify-line-wrap a.size-l {
+		width: 100%;
+	}
+}
