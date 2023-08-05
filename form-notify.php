@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Form Notify
  * Plugin URI:        https://oberonlai.blog
- * Description:       Notification form WordPress form plugins.
+ * Description:       Notification for WordPress form plugins.
  * Version:           1.0.0
  * Author:            Oberon Lai
  * Author URI:        https://oberonlai.blog
