@@ -36,7 +36,7 @@ class Mitake {
 	/**
 	 * SMS 簡訊傳送
 	 *
-	 * @param string $phone 手機號碼.
+	 * @param string $phone   手機號碼.
 	 * @param string $message 簡訊內容.
 	 */
 	public function send_sms( $phone, $message ) {
@@ -128,6 +128,7 @@ class Mitake {
 			)
 		);
 	}
+
 	/**
 	 * API Callback
 	 */
@@ -180,15 +181,16 @@ class Mitake {
 	/**
 	 * Send notify for events
 	 *
-	 * @param string $type 通知類型.
+	 * @param string $type     通知類型.
 	 * @param string $receiver 接收者.
-	 * @param string $message 通知內容.
+	 * @param string $message  通知內容.
 	 */
-	public function send_notify_events( $type, $receiver, $message, $history_via, $cron_name ) {
+	public function send_notify_events( $type, $receiver, $message, $history_via, $cron_name ): void {
 		if ( 'mitake' === $type ) {
 			if ( $this->get_points() > 0 ) {
-				$batch_id   = $this->send_sms( $receiver, $message );
-				$history_id = History::insert( 0, $receiver . ' - ' . $history_via, 0, __( 'Mitake SMS', 'form-notify' ), $message, __( 'Processing', 'form-notify' ) );
+				$msgid = $this->send_sms( $receiver, $message );
+				$type  = __( 'Mitake SMS', 'form-notify' ) . ',' . $msgid;
+				History::insert( 0, $receiver . ' - ' . $history_via, 0, $type, $message, __( 'Processing', 'form-notify' ) );
 			} else {
 				History::insert( 0, $receiver . ' - ' . $history_via, 0, __( 'Mitake SMS', 'form-notify' ), $message, __( 'Form Notify Mitake Sending Result: Points are not enough.', 'form-notify' ) );
 			}
