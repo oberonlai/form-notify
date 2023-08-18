@@ -62,6 +62,14 @@ add_action(
 	}
 );
 
+new Updater(
+	array(
+		'plugin_slug' => 'form-notify',
+		'version'     => FORMNOTIFY_VERSION,
+		'json_url'    => 'https://oberonlai.blog/form-notify.json',
+	)
+);
+
 add_action(
 	'wp_enqueue_scripts',
 	function () {

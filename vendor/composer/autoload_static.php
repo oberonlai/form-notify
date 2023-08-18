@@ -22,7 +22,6 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         'O' => 
         array (
             'ODS\\' => 4,
-            'ODSFormNotify\\' => 14,
         ),
         'F' => 
         array (
@@ -43,10 +42,7 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         'ODS\\' => 
         array (
             0 => __DIR__ . '/..' . '/oberonlai/wp-option/src',
-        ),
-        'ODSFormNotify\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/oberonlai/wp-metabox/src',
+            1 => __DIR__ . '/..' . '/oberonlai/wp-updater/src',
         ),
         'FORMNOTIFY\\Tests\\' => 
         array (

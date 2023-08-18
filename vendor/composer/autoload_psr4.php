@@ -8,8 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
     'PostTypes\\' => array($vendorDir . '/oberonlai/wp-cpt/src'),
-    'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src'),
-    'ODSFormNotify\\' => array($vendorDir . '/oberonlai/wp-metabox/src'),
+    'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src', $vendorDir . '/oberonlai/wp-updater/src'),
     'FORMNOTIFY\\Tests\\' => array($baseDir . '/tests'),
     'FORMNOTIFY\\' => array($baseDir . '/src'),
 );

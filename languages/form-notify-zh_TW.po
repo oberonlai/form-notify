@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Notify 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/form-notify\n"
-"POT-Creation-Date: 2023-08-05T04:16:03+00:00\n"
-"PO-Revision-Date: 2023-08-05 12:17+0800\n"
+"POT-Creation-Date: 2023-08-18T09:03:02+00:00\n"
+"PO-Revision-Date: 2023-08-18 17:04+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -27,7 +27,7 @@ msgid "https://oberonlai.blog"
 msgstr "https://oberonlai.blog"
 
 #. Description of the plugin
-msgid "Notification form WordPress form plugins."
+msgid "Notification for WordPress form plugins."
 msgstr "提供 WordPress 表單發送通知功能，包含 LINE 推播與手機簡訊。"
 
 #. Author of the plugin
@@ -54,7 +54,7 @@ msgstr "請先輸入帳號與密碼"
 msgid "Every8d SMS"
 msgstr "Every8d 簡訊服務"
 
-#: src/APIs/E8d/Every8d.php:253 src/APIs/Mitake/Mitake.php:191
+#: src/APIs/E8d/Every8d.php:253 src/APIs/Mitake/Mitake.php:193
 msgid "Processing"
 msgstr "處理中"
 
@@ -159,10 +159,6 @@ msgstr "註冊"
 msgid "Button Text"
 msgstr "按鈕文字"
 
-#: src/APIs/Line/Login/User.php:116
-msgid "Please enter your emaill address to login with LINE."
-msgstr "請輸入您的電子郵件地址。"
-
 #: src/APIs/Line/Login/User.php:250
 msgid "Register Failed."
 msgstr "註冊失敗。"
@@ -179,12 +175,12 @@ msgstr "關閉"
 msgid "Please set LINE Notify access token first."
 msgstr "請前往設定頁輸入 LINE Notify Token。"
 
-#: src/APIs/Mitake/Mitake.php:191 src/APIs/Mitake/Mitake.php:193
+#: src/APIs/Mitake/Mitake.php:192 src/APIs/Mitake/Mitake.php:195
 #: src/Posts/Notify/Metabox/Action.php:42
 msgid "Mitake SMS"
 msgstr "三竹簡訊服務"
 
-#: src/APIs/Mitake/Mitake.php:193
+#: src/APIs/Mitake/Mitake.php:195
 msgid "Form Notify Mitake Sending Result: Points are not enough."
 msgstr "三竹簡訊推播結果：剩餘點數不足。"
 
@@ -358,12 +354,11 @@ msgstr "其他設定"
 
 #: src/Options/LineButton.php:57
 msgid "Redirect Page URL"
-msgstr "登入後跳轉網址"
+msgstr "登入後重新導向網址"
 
 #: src/Options/LineButton.php:58
-msgid ""
-"The redirect page after LINE Login. Default page is WooCommerce My Account."
-msgstr "LINE登入後的跳轉頁面。預設是 WooCommerce 我的帳號頁。"
+msgid "The redirect page after LINE Login."
+msgstr "LINE登入後的重新導向網址。"
 
 #: src/Options/LineButton.php:70
 msgid "User Role"
@@ -649,6 +644,14 @@ msgstr "事件"
 #: src/Posts/Notify/Metabox/Trigger.php:40
 msgid "Select the trigger event of sending notifications."
 msgstr "選擇發送通知的觸發事件。"
+
+#~ msgid "Please enter your emaill address to login with LINE."
+#~ msgstr "請輸入您的電子郵件地址。"
+
+#~ msgid ""
+#~ "The redirect page after LINE Login. Default page is WooCommerce My "
+#~ "Account."
+#~ msgstr "LINE登入後的跳轉頁面。預設是 WooCommerce 我的帳號頁。"
 
 #~ msgid "Via Back In Stock Notification"
 #~ msgstr "透過商品到貨通知"

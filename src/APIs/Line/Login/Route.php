@@ -54,6 +54,7 @@ class Route {
 		header( 'Location:' . $url );
 		exit;
 	}
+
 	/**
 	 * 處理登入後的跳轉事件
 	 */
@@ -94,7 +95,7 @@ class Route {
 			$user_email   = ( $user->email ) ? $user->email : wp_unslash( $_COOKIE['form_notify_line_email'] );
 
 			if ( empty( $user_email ) ) {
-				$redirect_url = ( get_option( 'form_notify_line_btn_redirect' ) ) ? get_option( 'form_notify_line_btn_redirect' ) : wc_get_account_endpoint_url( 'my-account' );
+				$redirect_url = ( get_option( 'form_notify_line_btn_redirect' ) ) ? get_option( 'form_notify_line_btn_redirect' ) : home_url();
 
 				if ( 'auto' === get_option( 'form_notify_line_btn_user_email' ) ) {
 					$user_email = $user_raw_id . '@line.com';
@@ -104,7 +105,7 @@ class Route {
 				}
 			} else {
 				unset( $_COOKIE['form_notify_line_email'] );
-				setcookie( 'form_notify_line_email', null, -1, '/' );
+				setcookie( 'form_notify_line_email', null, - 1, '/' );
 			}
 
 			$user_obj = new User();

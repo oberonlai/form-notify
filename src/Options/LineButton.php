@@ -55,8 +55,8 @@ class LineButton {
 			array(
 				'id'           => 'line_btn_redirect',
 				'label'        => __( 'Redirect Page URL', 'form-notify' ),
-				'desc'         => __( 'The redirect page after LINE Login. Default page is WooCommerce My Account.', 'form-notify' ),
-				'placeholder'  => 'https://example.com/my-account',
+				'desc'         => __( 'The redirect page after LINE Login.', 'form-notify' ),
+				'placeholder'  => 'https://example.com/login-success',
 				'show_in_rest' => true,
 				'class'        => '',
 				'size'         => 'regular',

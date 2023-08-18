@@ -113,7 +113,7 @@ class User {
 		if ( isset( $_GET['lgmode'] ) ) {
 
 			if ( 'check-email' === $_GET['lgmode'] ) {
-				wc_add_notice( __( 'Please enter your emaill address to login with LINE.', 'form-notify' ), 'error' );
+				//wc_add_notice( __( 'Please enter your emaill address to login with LINE.', 'form-notify' ), 'error' );
 			} else {
 				session_start();
 
@@ -260,7 +260,7 @@ class User {
 							<?php echo esc_attr( __( 'Register', 'form-notify' ) ); ?>
 						</button>
 					</div>
-					<a href="<?php echo esc_html( wc_get_account_endpoint_url( 'my-account' ) ); ?>" class="d:block mt:5 t:center w:100% r:5 appearance:none border:0 outline:0 p:8|0 t:none f:16 bg:#333! f:white! cursor:pointer ~background|.2s|ease bg:#555:hover!" type="submit">
+					<a href="<?php echo esc_html( home_url() ); ?>" class="d:block mt:5 t:center w:100% r:5 appearance:none border:0 outline:0 p:8|0 t:none f:16 bg:#333! f:white! cursor:pointer ~background|.2s|ease bg:#555:hover!" type="submit">
 						<?php echo esc_attr( __( 'Close', 'form-notify' ) ); ?>
 					</a>
 				</form>
@@ -274,7 +274,7 @@ class User {
 	 */
 	public function add_email() {
 		if ( isset( $_POST['form_notify_user_email'] ) && ! empty( $_POST['form_notify_user_email'] ) ) {
-			setcookie( 'wc_notfify_line_email', sanitize_email( $_POST['form_notify_user_email'] ), time() + 3600, '/' );
+			setcookie( 'form_notfify_line_email', sanitize_email( $_POST['form_notify_user_email'] ), time() + 3600, '/' );
 			wp_safe_redirect( home_url() . '?lgmode=true' );
 		}
 	}
