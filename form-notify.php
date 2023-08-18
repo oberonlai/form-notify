@@ -62,7 +62,7 @@ add_action(
 	}
 );
 
-new Updater(
+new ODS\Updater(
 	array(
 		'plugin_slug' => 'form-notify',
 		'version'     => FORMNOTIFY_VERSION,

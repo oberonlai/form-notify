@@ -57,11 +57,11 @@ class Updater {
 		$this->plugin_slug   = $args['plugin_slug'];
 		$this->version       = $args['version'];
 		$this->cache_key     = $args['plugin_slug'] . '_updater';
-		$this->json_url     = $args['json_url'];
+		$this->json_url      = $args['json_url'];
 		$this->cache_allowed = false;
 
 		add_filter( 'plugins_api', array( $this, 'info' ), 20, 3 );
-		add_filter( 'site_transient_update_plugins', array( $this, 'update' ) );
+		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update' ) );
 		add_action( 'upgrader_process_complete', array( $this, 'purge' ), 10, 2 );
 
 	}
@@ -70,8 +70,8 @@ class Updater {
 	 * The information on update popup
 	 *
 	 * @param object $response Response.
-	 * @param string $action Action.
-	 * @param object $args Arguments.
+	 * @param string $action   Action.
+	 * @param object $args     Arguments.
 	 *
 	 * @return object $response Response.
 	 */
@@ -193,7 +193,7 @@ class Updater {
 	 * Purge cache
 	 *
 	 * @param object $upgrader Upgrader.
-	 * @param array  $options Options.
+	 * @param array  $options  Options.
 	 *
 	 * @return void
 	 */
