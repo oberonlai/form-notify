@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WordPress Form Notify
  *
@@ -42,17 +41,31 @@ function form_notify_load_plugin_i18n() {
 add_action( 'plugin_loaded', 'form_notify_load_plugin_i18n' );
 
 /**
+ * Get params from url
+ *
+ * @param string $key key name.
+ *
+ * @return string|null
+ */
+function form_notify_get_params( $key ): string|null {
+	$query_string = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
+	parse_str( $query_string, $params );
+
+	return isset( $params[ $key ] ) ? $params[ $key ] : '';
+}
+
+/**
  * Wpack Enqueue
  */
 add_action(
 	'admin_init',
 	function () {
 		global $pagenow;
-		if ( ( isset( $_GET['post'] ) && 'post.php' === $pagenow ) ||
-			 ( isset( $_GET['post'] ) && 'shop_order' === get_post_type( $_GET['post'] ) ) ||
-			 ( isset( $_GET['post'] ) && 'form-notify' === get_post_type( $_GET['post'] ) ) ||
-			 ( isset( $_GET['post_type'] ) && 'form-notify' === $_GET['post_type'] && 'post-new.php' === $pagenow ) ||
-			 ( isset( $_GET['page'] ) && 'form-notify-setting' === $_GET['page'] ) ) {
+		$current_post = sanitize_text_field( wp_unslash( $_GET['post'] ?? '' ) );
+		$current_page = sanitize_text_field( wp_unslash( $_GET['page'] ?? '' ) );
+		$post_type    = sanitize_text_field( wp_unslash( $_GET['post_type'] ?? '' ) );
+
+		if ( ( $current_post && 'post.php' === $pagenow ) || ( $current_post && 'shop_order' === get_post_type( $current_post ) ) || ( $current_post && 'form-notify' === get_post_type( $current_post ) ) || ( $post_type && 'form-notify' === $post_type && 'post-new.php' === $pagenow ) || ( $current_page && 'form-notify-setting' === $current_page ) ) {
 			$enqueue = new \WPackio\Enqueue( 'formNotify', 'assets/dist', '1.0.0', 'plugin', __FILE__ );
 			$enqueue->enqueue( 'app', 'admin', array() );
 		}
@@ -96,28 +109,29 @@ add_filter(
 );
 
 
-function form_notify_line_button_enqueue_scripts() {
-	$enqueue = new \WPackio\Enqueue( 'formNotify', 'assets/dist', '1.0.0', 'plugin', __FILE__ );
+add_action(
+	'init',
+	function () {
+		$enqueue = new \WPackio\Enqueue( 'formNotify', 'assets/dist', '1.0.0', 'plugin', __FILE__ );
 
-	$assets = $enqueue->enqueue(
-		'blocks',
-		'lineLoginButton',
-		array(
-			'js_dep' => array( 'wp-blocks', 'wp-components', 'wp-editor', 'wp-i18n', 'wp-data' ),
-		)
-	);
+		$assets = $enqueue->enqueue(
+			'blocks',
+			'lineLoginButton',
+			array(
+				'js_dep' => array( 'wp-blocks', 'wp-components', 'wp-editor', 'wp-i18n', 'wp-data' ),
+			)
+		);
 
-	wp_localize_script(
-		array_pop( $assets['js'] )['handle'],
-		'lineLoginButtonParams',
-		array(
-			'buttonIconUrl' => FORMNOTIFY_PLUGIN_URL . 'assets/img/dashicon.png',
-		)
-	);
+		wp_localize_script(
+			array_pop( $assets['js'] )['handle'],
+			'lineLoginButtonParams',
+			array(
+				'buttonIconUrl' => FORMNOTIFY_PLUGIN_URL . 'assets/img/dashicon.png',
+			)
+		);
 
-}
-
-add_action( 'init', 'form_notify_line_button_enqueue_scripts' );
+	}
+);
 
 add_action(
 	'before_woocommerce_init',

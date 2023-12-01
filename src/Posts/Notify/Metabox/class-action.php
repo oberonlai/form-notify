@@ -1,21 +1,36 @@
 <?php
+/**
+ * Action Metabox
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Posts\Notify\Metabox\Action;
 
 defined( 'ABSPATH' ) || exit;
 
-use ODSFormNotify\Metabox as FormMetabox;
+use FORMNOTIFY\APIs\Metabox\Metabox as FormMetabox;
 
 /**
  * Notify Metabox
  */
 class Action {
-	public static function register() {
+	/**
+	 * Register
+	 *
+	 * @return void
+	 */
+	public static function register(): void {
 		$class = new self();
 		add_action( 'admin_init', array( $class, 'init' ), 99 );
 	}
 
-	public function init() {
+	/**
+	 * Init
+	 *
+	 * @return void
+	 */
+	public function init(): void {
 
 		/**
 		 * Action

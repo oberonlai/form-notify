@@ -1,7 +1,15 @@
 <?php
+/**
+ * Metabox API
+ *
+ * @package FORMNOTIFY\APIs\Metabox
+ */
 
-namespace ODSFormNotify;
+namespace FORMNOTIFY\APIs\Metabox;
 
+/**
+ * Metabox API
+ */
 class Metabox {
 
 	const BLOCK_NAMESPACE                  = 'form-notify-box'; // (A.K.A "Metabox Constructor Class")

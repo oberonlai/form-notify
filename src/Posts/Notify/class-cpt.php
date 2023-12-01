@@ -1,4 +1,9 @@
 <?php
+/**
+ * Register Notify post type
+ *
+ * @package FormNotify
+ */
 
 namespace FORMNOTIFY\Posts\Notify;
 
@@ -11,12 +16,22 @@ use PostTypes\Taxonomy;
  * Register Notify post type
  */
 class Cpt {
-	public static function register() {
+	/**
+	 * Register
+	 *
+	 * @return void
+	 */
+	public static function register(): void {
 		$class = new self();
 		add_action( 'plugins_loaded', array( $class, 'init' ) );
 	}
 
-	public function init() {
+	/**
+	 * Initialize class and add hooks
+	 *
+	 * @return void
+	 */
+	public function init(): void {
 
 		$name = array(
 			'name'   => 'form-notify',

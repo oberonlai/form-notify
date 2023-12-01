@@ -1,21 +1,36 @@
 <?php
+/**
+ * Trigger Metabox
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Posts\Notify\Metabox;
 
 defined( 'ABSPATH' ) || exit;
 
-use ODSFormNotify\Metabox as FormMetabox;
+use FORMNOTIFY\APIs\Metabox\Metabox as FormMetabox;
 
 /**
  * Notify Metabox
  */
 class Trigger {
-	public static function register() {
+	/**
+	 * Register
+	 *
+	 * @return void
+	 */
+	public static function register(): void {
 		$class = new self();
 		add_action( 'admin_init', array( $class, 'init' ), 90 );
 	}
 
-	public function init() {
+	/**
+	 * Init
+	 *
+	 * @return void
+	 */
+	public function init(): void {
 		$trigger = new FormMetabox(
 			array(
 				'id'       => 'form_notify_trigger',

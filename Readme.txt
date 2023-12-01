@@ -3,7 +3,7 @@ Contributors: oberonlai
 Donate link: https://paypal.me/oberonlai
 Tags: notification, email, alert, message, notify, LINE Login, LINE Notify, LINE Messaging API, SMS, Elementor Form, Gravity Form, Fluent Form
 Requires at least: 4.8
-Tested up to: 6.2.2
+Tested up to: 6.4.1
 Requires PHP: 8.0
 Stable tag: 1.0.1
 License: GPLv3
