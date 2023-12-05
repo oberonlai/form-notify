@@ -47,7 +47,7 @@ add_action( 'plugin_loaded', 'form_notify_load_plugin_i18n' );
  *
  * @return string|null
  */
-function form_notify_get_params( $key ): string|null {
+function form_notify_get_params( string $key ): string|null {
 	$query_string = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
 	parse_str( $query_string, $params );
 
