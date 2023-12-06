@@ -1,6 +1,6 @@
-# PostTypes v2.1
+# PostTypes v2.2
 
-[![Build Status](https://flat.badgen.net/travis/jjgrainger/PostTypes?label=build)](https://travis-ci.org/jjgrainger/PostTypes) [![Latest Stable Version](https://flat.badgen.net/github/release/jjgrainger/PostTypes/stable)](https://packagist.org/packages/jjgrainger/posttypes) [![Total Downloads](https://flat.badgen.net/packagist/dt/jjgrainger/PostTypes)](https://packagist.org/packages/jjgrainger/posttypes) [![License](https://flat.badgen.net/github/license/jjgrainger/PostTypes)](https://packagist.org/packages/jjgrainger/posttypes)
+[![tests](https://github.com/jjgrainger/PostTypes/actions/workflows/tests.yml/badge.svg)](https://github.com/jjgrainger/PostTypes/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/jjgrainger/PostTypes/branch/master/graph/badge.svg?token=SGrK2xDF46)](https://codecov.io/gh/jjgrainger/PostTypes) [![Latest Stable Version](https://flat.badgen.net/github/release/jjgrainger/PostTypes/stable)](https://packagist.org/packages/jjgrainger/posttypes) [![Total Downloads](https://flat.badgen.net/packagist/dt/jjgrainger/PostTypes)](https://packagist.org/packages/jjgrainger/posttypes) [![License](https://flat.badgen.net/github/license/jjgrainger/PostTypes)](https://packagist.org/packages/jjgrainger/posttypes)
 
 > Simple WordPress custom post types.
 
@@ -27,7 +27,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use PostTypes\PostType;
 
-$books = new PostType('book');
+$books = new PostType( 'book' );
 
 $books->register();
 ```
@@ -44,6 +44,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 // Import PostTypes.
 use PostTypes\PostType;
+use PostTypes\Taxonomy;
 
 // Create a book post type.
 $books = new PostType( 'book' );
@@ -77,7 +78,7 @@ $genres->register();
 * The full documentation can be found online at [posttypes.jjgrainger.co.uk](https://posttypes.jjgrainger.co.uk)
 * The class has no methods for making custom fields for post types, use [Advanced Custom Fields](https://advancedcustomfields.com)
 * The book's example used in the README.md can be found in [examples/books.php](examples/books.php)
-* Licensed under the [MIT License](https://github.com/jjgrainger/wp-posttypes/blob/master/LICENSE)
+* Licensed under the [MIT License](https://github.com/jjgrainger/PostTypes/blob/master/LICENSE)
 * Maintained under the [Semantic Versioning Guide](https://semver.org)
 
 ## Author

@@ -9,6 +9,8 @@ namespace FORMNOTIFY\APIs;
 
 defined( 'ABSPATH' ) || exit;
 
+use Snicco\Component\BetterWPDB\BetterWPDB;
+
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
@@ -50,9 +52,9 @@ class HistoryTable extends \WP_List_Table {
 		$sql .= $this->sql_query();
 
 		// orderby.
-		if ( ! empty( form_notify_get_params( 'orderby' ) ) ) {
-			$orderby = ' ORDER BY ' . esc_sql( form_notify_get_params( 'orderby' ) );
-			$order   = ! empty( form_notify_get_params( 'order' ) ) ? ' ' . esc_sql( form_notify_get_params( 'order' ) ) : ' ASC';
+		if ( form_notify_get_params( 'orderby' ) && form_notify_get_params( 'order' ) ) {
+			$orderby = str_replace( "'", '', form_notify_get_params( 'orderby' ) );
+			$order   = form_notify_get_params( 'order' );
 			$sql    .= $wpdb->prepare( ' ORDER BY %s %s', $orderby, $order );
 		} else {
 			$sql .= ' ORDER BY id DESC';
@@ -61,11 +63,11 @@ class HistoryTable extends \WP_List_Table {
 		$sql .= $wpdb->prepare( ' LIMIT %d', $per_page );
 		$sql .= $wpdb->prepare( ' OFFSET %d', ( $page_number - 1 ) * $per_page );
 
+		$sql = str_replace( "'", '', $sql );
+
 		$cache = wp_cache_get( 'form_notify_history' );
 
 		if ( ! $cache ) {
-			// $sql   = "SELECT * FROM {$wpdb->prefix}form_notify_history ORDER BY id DESC LIMIT %d OFFSET 0";
-			// $cache = $wpdb->get_results( $wpdb->prepare( $sql, $per_page ), 'ARRAY_A' );
 			$cache = $wpdb->get_results( $sql, 'ARRAY_A' );
 			wp_cache_set( 'form_notify_history', $cache );
 		}
@@ -333,7 +335,7 @@ class HistoryTable extends \WP_List_Table {
 				exit;
 			};
 
-			$delete_ids = wp_unslash( $_POST['bulk-delete'] );
+			$delete_ids = sanitize_text_field( wp_unslash( $_POST['bulk-delete'] ) );
 			foreach ( $delete_ids as $id ) {
 				$this->delete_history( $id );
 			}

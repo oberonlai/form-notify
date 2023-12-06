@@ -7,8 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
-    'PostTypes\\' => array($vendorDir . '/oberonlai/wp-cpt/src'),
+    'Snicco\\Component\\BetterWPDB\\' => array($vendorDir . '/snicco/better-wpdb/src'),
+    'PostTypes\\' => array($vendorDir . '/jjgrainger/posttypes/src'),
     'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src', $vendorDir . '/oberonlai/wp-updater/src'),
-    'FORMNOTIFY\\Tests\\' => array($baseDir . '/tests'),
-    'FORMNOTIFY\\' => array($baseDir . '/src'),
 );

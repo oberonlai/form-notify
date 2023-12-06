@@ -179,4 +179,4 @@ class Form {
 }
 
 
-Form::init();
+// Form::init();

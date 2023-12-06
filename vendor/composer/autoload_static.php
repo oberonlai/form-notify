@@ -15,6 +15,10 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         array (
             'WPackio\\' => 8,
         ),
+        'S' => 
+        array (
+            'Snicco\\Component\\BetterWPDB\\' => 28,
+        ),
         'P' => 
         array (
             'PostTypes\\' => 10,
@@ -23,11 +27,6 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         array (
             'ODS\\' => 4,
         ),
-        'F' => 
-        array (
-            'FORMNOTIFY\\Tests\\' => 17,
-            'FORMNOTIFY\\' => 11,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -35,22 +34,18 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         array (
             0 => __DIR__ . '/..' . '/wpackio/enqueue/inc',
         ),
+        'Snicco\\Component\\BetterWPDB\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/snicco/better-wpdb/src',
+        ),
         'PostTypes\\' => 
         array (
-            0 => __DIR__ . '/..' . '/oberonlai/wp-cpt/src',
+            0 => __DIR__ . '/..' . '/jjgrainger/posttypes/src',
         ),
         'ODS\\' => 
         array (
             0 => __DIR__ . '/..' . '/oberonlai/wp-option/src',
             1 => __DIR__ . '/..' . '/oberonlai/wp-updater/src',
-        ),
-        'FORMNOTIFY\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/tests',
-        ),
-        'FORMNOTIFY\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
