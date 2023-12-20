@@ -1,4 +1,9 @@
 <?php
+/**
+ * Elementor Notify class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events\Elementor;
 
@@ -19,7 +24,7 @@ class Notify extends AbstractNotify {
 	 *
 	 * @return string $content Message content.
 	 */
-	public function replace_message_content( $content, $data ) {
+	public function replace_message_content( string $content, array $data ): string {
 		if ( $data ) {
 			foreach ( $data as $key => $value ) {
 				$content = str_replace( '{{' . $key . '}}', $value, $content );

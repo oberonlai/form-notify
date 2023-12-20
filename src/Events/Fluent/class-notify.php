@@ -1,4 +1,9 @@
 <?php
+/**
+ * Fluent form Notify class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events\Fluent;
 
@@ -13,11 +18,11 @@ class Notify extends \FORMNOTIFY\Events\AbstractNotify {
 	 * Replace message content to form data.
 	 *
 	 * @param string $content Message content.
-	 * @param array  $data Form data.
+	 * @param array  $data    Form data.
 	 *
 	 * @return string $content Message content.
 	 */
-	public function replace_message_content( $content, $data ) {
+	public function replace_message_content( string $content, array $data ): string {
 		if ( $data ) {
 			$replace = array();
 			foreach ( $data as $key => $value ) {
@@ -34,6 +39,7 @@ class Notify extends \FORMNOTIFY\Events\AbstractNotify {
 			}
 			$content = preg_replace( '/\{\{.*?\}\}/', '', $content );
 		}
+
 		return $content;
 	}
 }

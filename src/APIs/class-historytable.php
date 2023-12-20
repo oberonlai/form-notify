@@ -9,8 +9,6 @@ namespace FORMNOTIFY\APIs;
 
 defined( 'ABSPATH' ) || exit;
 
-use Snicco\Component\BetterWPDB\BetterWPDB;
-
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
@@ -64,12 +62,15 @@ class HistoryTable extends \WP_List_Table {
 		$sql .= $wpdb->prepare( ' OFFSET %d', ( $page_number - 1 ) * $per_page );
 
 		$sql = str_replace( "'", '', $sql );
+		$sql = str_replace( '"', "'", $sql );
 
 		$cache = wp_cache_get( 'form_notify_history' );
 
 		if ( ! $cache ) {
+			// @codingStandardsIgnoreStart
 			$cache = $wpdb->get_results( $sql, 'ARRAY_A' );
 			wp_cache_set( 'form_notify_history', $cache );
+			// @codingStandardsIgnoreEnd
 		}
 
 		return $cache;
@@ -86,11 +87,16 @@ class HistoryTable extends \WP_List_Table {
 
 		$sql .= $this->sql_query();
 
+		$sql = str_replace( "'", '', $sql );
+		$sql = str_replace( '"', "'", $sql );
+
 		$cache = wp_cache_get( 'form_notify_history_total' );
 
 		if ( ! $cache ) {
+			// @codingStandardsIgnoreStart
 			$cache = $wpdb->get_var( $sql );
 			wp_cache_set( 'form_notify_history_total', $cache );
+			// @codingStandardsIgnoreEnd
 		}
 
 		return $cache;
@@ -121,7 +127,7 @@ class HistoryTable extends \WP_List_Table {
 		$date_start = form_notify_get_params( 'date_start' );
 		$date_end   = form_notify_get_params( 'date_end' );
 		if ( $date_start && $date_end ) {
-			$sql .= ' WHERE notify_time >="' . esc_sql( $date_start ) . '" AND notify_time <= "' . esc_sql( $date_end ) . '"';
+			$sql .= ' WHERE notify_time >="' . esc_sql( $date_start ) . ' 00:00:00" AND notify_time <= "' . esc_sql( $date_end ) . ' 23:59:59"';
 		}
 
 		return $sql;
@@ -185,7 +191,7 @@ class HistoryTable extends \WP_List_Table {
 				<input type="date" value="<?php echo esc_attr( ( $date_end ) ? $date_end : '' ); ?>" name="date_end">
 				<input type="submit" value="篩選" class="button">
 				<input type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'form-notify' ) ); ?>">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?edit.php?post_type=form-notify&page=form-notify-history' ) ); ?>" class="button">重設</a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=form-notify&page=form-notify-history' ) ); ?>" class="button">重設</a>
 			</div>
 			<?php
 		endif;
@@ -200,22 +206,40 @@ class HistoryTable extends \WP_List_Table {
 	 * @return mixed
 	 */
 	public function column_default( $item, $column_name ): mixed {
-		switch ( $column_name ) {
-			case 'user_id':
-				$delete_nonce = wp_create_nonce( 'history_delete' );
-				$actions      = array(
-					'delete' => sprintf( '<a href="edit.php?post_type=form-notify&page=%s&action=%s&data=%s&_wpnonce=%s">' . __( 'Delete History', 'form-notify' ) . '</a>', esc_attr( form_notify_get_params( 'page' ) ), 'delete', absint( $item['id'] ), $delete_nonce ),
-				);
+		return match ( $column_name ) {
+			'user_info' => $this->get_column_name( (array) $item ),
+			default => $item[ $column_name ],
+		};
+	}
 
-				return ( '0' !== $item['user_id'] ) ? '<a href="' . admin_url( 'user-edit.php?user_id=' . $item['user_id'] ) . '">' . get_userdata( $item['user_id'] )->user_login . '</a>' . $this->row_actions( $actions ) : '<span>-</span>' . $this->row_actions( $actions );
-			case 'user_info':
-				return $item[ $column_name ];
-			case 'order_id':
-				return ( '0' !== $item[ $column_name ] ) ? '<a href="' . admin_url( 'post.php?post=' . $item[ $column_name ] ) . '&action=edit">#' . $item[ $column_name ] . '</a>' : '-';
-			default:
-		}
+	/**
+	 * Get column name value
+	 *
+	 * @param array $item item data.
+	 */
+	private function get_column_name( array $item ): string {
+		$delete_nonce = wp_create_nonce( 'history_delete' );
+		$actions      = $this->get_column_action( (array) $item, $delete_nonce );
 
-		return $item[ $column_name ];
+		return $item['user_info'] . $this->row_actions( $actions );
+	}
+
+	/**
+	 * Get column action
+	 *
+	 * @param array  $item         item data.
+	 * @param string $delete_nonce delete nonce.
+	 */
+	private function get_column_action( array $item, string $delete_nonce ): array {
+		$action['delete'] = sprintf(
+			'<a href="' . admin_url() . 'edit.php?post_type=form-notify&page=%1$s&action=%2$s&id=%3$s&_wpnonce=%4$s">' . __( 'delete', 'form-notify' ) . '</a>',
+			'form-notify-history',
+			'delete',
+			$item['id'],
+			$delete_nonce
+		);
+
+		return $action;
 	}
 
 	/**
@@ -303,11 +327,13 @@ class HistoryTable extends \WP_List_Table {
 	 */
 	public function delete_history( int $id ): void {
 		global $wpdb;
+		// @codingStandardsIgnoreStart
 		$wpdb->delete(
 			"{$wpdb->prefix}form_notify_history",
 			array( 'id' => $id ),
 			array( '%d' )
 		);
+		// @codingStandardsIgnoreEnd
 	}
 
 	/**
@@ -318,7 +344,7 @@ class HistoryTable extends \WP_List_Table {
 	public function process_bulk_action(): void {
 		if ( 'delete' === $this->current_action() ) {
 			$nonce = form_notify_get_params( '_wpnonce' );
-			$data  = form_notify_get_params( 'data' );
+			$data  = form_notify_get_params( 'id' );
 
 			if ( ! wp_verify_nonce( $nonce, 'history_delete' ) ) {
 				die( '發生錯誤！' );
@@ -329,13 +355,17 @@ class HistoryTable extends \WP_List_Table {
 			}
 		}
 
-		if ( ( isset( $_POST['action'] ) && 'bulk-delete' === $_POST['action'] ) || ( isset( $_POST['action2'] ) && 'bulk-delete' === $_POST['action2'] ) ) {
+		$action  = form_notify_get_params( 'action' );
+		$action2 = form_notify_get_params( 'action2' );
 
-			if ( ! isset( $_POST['bulk-delete'] ) ) {
-				exit;
-			};
+		// @codingStandardsIgnoreStart
+		$bulk = isset( $_GET['bulk-delete'] ) ? wp_unslash( $_GET['bulk-delete'] ) : array();
+		// @codingStandardsIgnoreEnd
 
-			$delete_ids = sanitize_text_field( wp_unslash( $_POST['bulk-delete'] ) );
+		$sanitized_bulk = array_map( 'sanitize_text_field', $bulk );
+
+		if ( 'bulk-delete' === $action || 'bulk-delete' === $action2 ) {
+			$delete_ids = esc_sql( $sanitized_bulk );
 			foreach ( $delete_ids as $id ) {
 				$this->delete_history( $id );
 			}

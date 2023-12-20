@@ -266,6 +266,97 @@ class Every8d {
 	}
 
 	/**
+	 * Check sent status
+	 *
+	 * @param string $batch_id batch id.
+	 *
+	 * @return string $message
+	 */
+	public function check_status( string $batch_id ): string {
+		$body    = array(
+			'BID'        => $batch_id,
+			'RESPFORMAT' => 1,
+			'PNO'        => 1,
+		);
+		$options = array(
+			'method'  => 'POST',
+			'timeout' => 60,
+			'headers' => array(
+				'Content-Type'  => 'application/x-www-form-urlencoded',
+				'Authorization' => 'Bearer ' . get_option( 'wc_notify_e8d_token' ),
+			),
+			'body'    => http_build_query( $body ),
+		);
+
+		$response = wp_remote_request( $this->get_status_url, $options );
+		$message  = __( 'Success', 'wc-notify' );
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message();
+
+			return __( 'Occur error when connecting API. Please try later.', 'wc-notify' );
+		} else {
+			$resp   = json_decode( wp_remote_retrieve_body( $response ) );
+			$status = $resp->DATA[0]->STATUS ?? ''; // phpcs:ignore.
+			if ( '' === $status ) {
+				return '找不到批次識別碼';
+			} elseif ( '100' !== $status ) {
+				switch ( $status ) {
+					case '-5':
+						$message = 'Short Message 內容長度超過限制，該訊息傳送失敗。';
+						break;
+					case '-4':
+						$message = '訊息預計發送時間已逾期 24 小時以上，該訊息傳送失敗。';
+						break;
+					case '-3':
+						$message = '受話方手機號碼為無效號碼或黑名單，該訊息傳送失敗。';
+						break;
+					case '-2':
+						$message = 'API 帳號或密碼錯誤，該訊息傳送失敗。';
+						break;
+					case '-1':
+						$message = '參數錯誤，該訊息傳送失敗。';
+						break;
+					case '0':
+						$message = '訊息已成功傳送給電信端，電信基地台與受話方手機溝通超過五分鐘，該訊息仍未送達受話方手機。';
+						break;
+					case '101':
+						$message = '電信端回覆因受話方手機關機/訊號不良/簡訊功能異常等原因，該訊息無法送達受話方手機。';
+						break;
+					case '102':
+						$message = '電信端回覆因網路系統/基地台設備異常等原因，該訊息無法送達受話方手機。';
+						break;
+					case '103':
+						$message = '電信端回覆因受話方手機門號為空號或停用中，該訊息無法送達受話方手機。';
+						break;
+					case '104':
+						$message = '電信端回覆因受話方手機門號為電信黑名單，該訊息無法送達受話方手機。';
+						break;
+					case '105':
+						$message = '電信端回覆因受話方手機設備問題/手機出現未預期錯誤等原因，該訊息無法送達受話方手機。';
+						break;
+					case '106':
+						$message = '電信端回覆因系統傳送時發生非預期錯誤，該訊息無法送達受話方手機。';
+						break;
+					case '107':
+						$message = '電信端回覆因受話方手機關機/訊號不良/簡訊功能異常等原因，該息無法送達受話方手機。';
+						break;
+					case '301':
+						$message = '無額度(或額度不足)無法發送。';
+						break;
+					case '500':
+						$message = '表該門號為國際門號，請至帳號設定開啟國際簡訊發送功能。';
+						break;
+					default:
+						// code...
+						break;
+				}
+			}
+
+			return $message;
+		}
+	}
+
+	/**
 	 * Get points api body
 	 *
 	 * @param WP_REST_Request $request request.

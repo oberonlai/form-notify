@@ -1,10 +1,15 @@
 <?php
+/**
+ * Elementor Form class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events\Elementor;
 
 defined( 'ABSPATH' ) || exit;
 
-use FORMNOTIFY\APIs\E8d\Every8d;
+use FORMNOTIFY\APIs\Sms\Every8d;
 use FORMNOTIFY\Options\History;
 
 /**
@@ -17,7 +22,7 @@ class Form {
 	 *
 	 * @var object $notify Notify object.
 	 */
-	private $notify;
+	private object $notify;
 
 	/**
 	 * Construct
@@ -32,7 +37,7 @@ class Form {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init(): void {
 		if ( in_array( 'elementor-pro/elementor-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 			$class = new self();
 			add_filter( 'form_notify_trigger_event_options', array( $class, 'add_trigger_event_options' ) );
@@ -50,13 +55,18 @@ class Form {
 	 *
 	 * @return array $options event options.
 	 */
-	public function add_trigger_event_options( $options ) {
+	public function add_trigger_event_options( array $options ): array {
 		$options['by_elementor_form'] = __( 'After Elementor Form submitted', 'form-notify' );
 
 		return $options;
 	}
 
-	public function add_form_select( $trigger ) {
+	/**
+	 * Add form select
+	 *
+	 * @param object $trigger Trigger object.
+	 */
+	public function add_form_select( object $trigger ): void {
 		$trigger->addSelect(
 			array(
 				'id'         => 'form_notify_trigger_form_elementor',
@@ -75,7 +85,7 @@ class Form {
 	 *
 	 * @param object $param Options' param.
 	 */
-	public function add_form_params( $param ) {
+	public function add_form_params( object $param ) {
 		$forms = $this->get_forms( 'params' );
 
 		if ( ! $forms ) {
@@ -118,14 +128,21 @@ class Form {
 		);
 	}
 
-	private function get_forms( $type ) {
+	/**
+	 * Get forms
+	 *
+	 * @param string $type options or params.
+	 *
+	 * @return array $options or $params.
+	 */
+	private function get_forms( string $type ): array {
 		$options   = array();
 		$params    = array();
 		$args_post = array(
-			'posts_per_page' => '999',
+			'posts_per_page' => '100',
 			'post_type'      => 'any',
-			'meta_key'       => '_elementor_data',
-			'meta_value'     => 'form_fields',
+			'meta_key'       => '_elementor_data', // phpcs:ignore.
+			'meta_value'     => 'form_fields', // phpcs:ignore.
 			'meta_compare'   => 'LIKE',
 		);
 
@@ -168,7 +185,13 @@ class Form {
 		return ( 'options' === $type ) ? $options : $params;
 	}
 
-	public function push( $record, $handler ) {
+	/**
+	 * Push
+	 *
+	 * @param object $record  Record object.
+	 * @param object $handler Handler object.
+	 */
+	public function push( object $record, object $handler ): void {
 		$form_name  = $record->get_form_settings( 'form_name' );
 		$raw_fields = $record->get( 'fields' );
 		$form_data  = array();
@@ -187,7 +210,7 @@ class Form {
 	 * @param string $batch_id   批次編號.
 	 * @param string $history_id 紀錄編號.
 	 */
-	public function check_sms_status( $phone, $batch_id, $history_id ) {
+	public function check_sms_status( string $phone, string $batch_id, string $history_id ): void {
 		$sdk    = new Every8d();
 		$result = $sdk->check_status( $batch_id );
 
@@ -197,4 +220,10 @@ class Form {
 	}
 }
 
-Form::init();
+add_action(
+	'init',
+	function () {
+		Form::init();
+	}
+);
+

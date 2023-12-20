@@ -1,12 +1,20 @@
 <?php
+/**
+ * Gravity form class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events\Gravity;
 
 defined( 'ABSPATH' ) || exit;
 
-use FORMNOTIFY\APIs\E8d\Every8d;
+use FORMNOTIFY\APIs\Sms\Every8d;
 use FORMNOTIFY\Options\History;
 
+/**
+ * Gravity form class
+ */
 class Form {
 
 	/**
@@ -29,7 +37,7 @@ class Form {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init(): void {
 		if ( in_array( 'gravityforms/gravityforms.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 			$class = new self();
 			add_filter( 'form_notify_trigger_event_options', array( $class, 'add_trigger_event_options' ) );
@@ -47,15 +55,20 @@ class Form {
 	 *
 	 * @return array $options event options.
 	 */
-	public function add_trigger_event_options( $options ) {
+	public function add_trigger_event_options( array $options ): array {
 		$options['by_gravity_form'] = __( 'After Gravity Form submitted', 'form-notify' );
 
 		return $options;
 	}
 
-	public function add_form_select( $trigger ) {
+	/**
+	 * Add form select
+	 *
+	 * @param object $trigger Trigger object.
+	 */
+	public function add_form_select( object $trigger ): void {
 		$options = array();
-		$forms   = \GFAPI::get_forms();
+		$forms   = \GFAPI::get_forms(); // phpcs:ignore
 		if ( $forms ) {
 			foreach ( $forms as $form ) {
 				$options[ rgar( $form, 'id' ) ] = rgar( $form, 'title' );
@@ -80,8 +93,8 @@ class Form {
 	 *
 	 * @param object $param Options' param.
 	 */
-	public function add_form_params( $param ) {
-		$forms = \GFAPI::get_forms();
+	public function add_form_params( object $param ) {
+		$forms = \GFAPI::get_forms(); // phpcs:ignore
 
 		if ( ! $forms ) {
 			return false;
@@ -124,7 +137,15 @@ class Form {
 		);
 	}
 
-	public function push( $entry, $form ) {
+	/**
+	 * Push notify
+	 *
+	 * @param array $entry entry.
+	 * @param array $form  form.
+	 *
+	 * @return void
+	 */
+	public function push( array $entry, array $form ): void {
 		$notify_ids = $this->notify->get_notify_ids( rgar( $form, 'id' ) );
 		$form_data  = array();
 		foreach ( $form['fields'] as $field ) {
@@ -156,7 +177,7 @@ class Form {
 	 * @param string $batch_id   批次編號.
 	 * @param string $history_id 紀錄編號.
 	 */
-	public function check_sms_status( $phone, $batch_id, $history_id ) {
+	public function check_sms_status( string $phone, string $batch_id, string $history_id ): void {
 		$sdk    = new Every8d();
 		$result = $sdk->check_status( $batch_id );
 
@@ -166,4 +187,10 @@ class Form {
 	}
 }
 
-Form::init();
+add_action(
+	'init',
+	function () {
+		Form::init();
+	}
+);
+

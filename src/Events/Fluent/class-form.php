@@ -1,12 +1,20 @@
 <?php
+/**
+ * Fluent Form class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events\Fluent;
 
 defined( 'ABSPATH' ) || exit;
 
-use FORMNOTIFY\APIs\E8d\Every8d;
+use FORMNOTIFY\APIs\Sms\Every8d;
 use FORMNOTIFY\Options\History;
 
+/**
+ * Fluent Form class
+ */
 class Form {
 
 	/**
@@ -14,7 +22,7 @@ class Form {
 	 *
 	 * @var object $notify Notify object.
 	 */
-	private $notify;
+	private object $notify;
 
 	/**
 	 * Construct
@@ -54,7 +62,12 @@ class Form {
 		return $options;
 	}
 
-	public function add_form_select( $trigger ) {
+	/**
+	 * Add form select
+	 *
+	 * @param object $trigger Trigger object.
+	 */
+	public function add_form_select( object $trigger ): void {
 		$options = array();
 		$forms   = $this->get_forms();
 		if ( $forms ) {
@@ -79,9 +92,9 @@ class Form {
 	/**
 	 * Add form params
 	 *
-	 * @param object $param Options' param.
+	 * @param object $param Options param.
 	 */
-	public function add_form_params( $param ) {
+	public function add_form_params( object $param ) {
 		$forms = $this->get_forms();
 
 		if ( ! $forms ) {
@@ -91,7 +104,7 @@ class Form {
 		$html = '';
 
 		foreach ( $forms as $form ) {
-			$form_api  = fluentFormApi( 'forms' )->form( $formId = $form->id );
+			$form_api  = fluentFormApi( 'forms' )->form( $formId = $form->id ); // phpcs:ignore.
 			$form_name = $form->title;
 			$labels    = $form_api->labels();
 			$html     .= '<div class="p:5|10 bg:white form-notify-params-toggle min-h:140">';
@@ -131,7 +144,7 @@ class Form {
 	 * @param array  $form_notify_action_module Action module.
 	 * @param object $action                    Action Object.
 	 */
-	public function add_form_action_module( $form_notify_action_module, $action ) {
+	public function add_form_action_module( array $form_notify_action_module, object $action ): void {
 		$form_notify_action_module[] = $action->addText(
 			array(
 				'id'          => 'form_notify_action_module_receiver',
@@ -144,8 +157,13 @@ class Form {
 		);
 	}
 
-	private function get_forms() {
-		$form_api = fluentFormApi( 'forms' );
+	/**
+	 * Get forms
+	 *
+	 * @return array $forms Forms.
+	 */
+	private function get_forms(): array {
+		$form_api = fluentFormApi( 'forms' ); // phpcs:ignore
 		$atts     = array(
 			'status'      => 'all',
 			'sort_column' => 'id',
@@ -153,22 +171,30 @@ class Form {
 			'per_page'    => 9999,
 		);
 
-		return $form_api->forms( $atts, $withFields = false )['data'];
+		return $form_api->forms( $atts, $withFields = false )['data']; // phpcs:ignore
 	}
 
-	public function push( $entry_id, $form_data, $form ) {
+	/**
+	 * Push
+	 *
+	 * @param array  $form_data form data.
+	 * @param object $form      form object.
+	 *
+	 * @return void
+	 */
+	public function push( array $form_data, object $form ): void {
 		$notify_ids = $this->notify->get_notify_ids( $form->id );
 		$this->notify->send_notify( $notify_ids, $form_data );
 	}
 
 	/**
-	 * 發送狀態查詢
+	 * Sms status
 	 *
-	 * @param string $phone      手機號碼.
-	 * @param string $batch_id   批次編號.
-	 * @param string $history_id 紀錄編號.
+	 * @param string $phone      phone.
+	 * @param string $batch_id   batch_id.
+	 * @param string $history_id history_id.
 	 */
-	public function check_sms_status( $phone, $batch_id, $history_id ) {
+	public function check_sms_status( string $phone, string $batch_id, string $history_id ): void {
 		$sdk    = new Every8d();
 		$result = $sdk->check_status( $batch_id );
 
@@ -178,5 +204,9 @@ class Form {
 	}
 }
 
-
-// Form::init();
+add_action(
+	'init',
+	function () {
+		Form::init();
+	}
+);

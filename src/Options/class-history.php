@@ -53,7 +53,8 @@ class History {
 						<div id="post-body" class="metabox-holder">
 							<div id="post-body-content">
 								<div class="meta-box-sortables ui-sortable">
-									<form method="post">
+									<form method="get" action="<?php echo esc_html( admin_url() ); ?>admin.php?edit_php?post_type=form-notify&page=form-notify-history">
+										<input type="hidden" name="page" value="form-notify-history"/>
 										<?php
 										$this->list_obj->views();
 										$this->list_obj->prepare_items();

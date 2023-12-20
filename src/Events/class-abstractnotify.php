@@ -1,4 +1,9 @@
 <?php
+/**
+ * Abstract Notify class
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\Events;
 
@@ -6,8 +11,6 @@ defined( 'ABSPATH' ) || exit;
 
 use FORMNOTIFY\Options\History;
 use FORMNOTIFY\APIs\Line\Message;
-use FORMNOTIFY\APIs\E8d\Every8d;
-use FORMNOTIFY\APIs\Mitake\Mitake;
 
 /**
  * Notify abstract class
@@ -19,28 +22,35 @@ abstract class AbstractNotify {
 	 *
 	 * @var string $slug Plugin slug.
 	 */
-	private $slug;
+	private string $slug;
 
 	/**
 	 * String show in history
 	 *
 	 * @var string $history_text String show in history.
 	 */
-	private $history_text;
+	private string $history_text;
 
 	/**
 	 * Field Key
 	 *
 	 * @var string $trigger_key Field Key.
 	 */
-	private $trigger_key;
+	private string $trigger_key;
 
 	/**
 	 * Event Value for non form plugin
 	 *
 	 * @var string $trigger_event_value Event Value.
 	 */
-	private $trigger_event_value;
+	private string $trigger_event_value;
+
+	/**
+	 * Trigger form key
+	 *
+	 * @var string $trigger_form_key Trigger form key.
+	 */
+	private string $trigger_form_key;
 
 	/**
 	 * Construct
@@ -48,7 +58,7 @@ abstract class AbstractNotify {
 	 * @param string $slug   Plugin slug.
 	 * @param string $string String show in history.
 	 */
-	public function __construct( $slug, $string ) {
+	public function __construct( string $slug, string $string ) {
 		$this->slug             = $slug;
 		$this->history_text     = $string;
 		$this->trigger_form_key = ( 'gravity' === $slug ) ? 'form_notify_trigger_form' : 'form_notify_trigger_form_' . $slug;
@@ -59,7 +69,7 @@ abstract class AbstractNotify {
 	 *
 	 * @param string $value Event value.
 	 */
-	public function set_trigger_key( $value ) {
+	public function set_trigger_key( string $value ): void {
 		$this->trigger_key = 'form_notify_' . $value;
 	}
 
@@ -79,10 +89,11 @@ abstract class AbstractNotify {
 	 *
 	 * @return array $notify_ids Notify Post IDs.
 	 */
-	public function get_notify_ids( $value ) {
+	public function get_notify_ids( int $value ): array {
 		$notify_ids = array();
-		$args_post  = array(
-			'posts_per_page' => '999',
+		// @codingStandardsIgnoreStart
+		$args_post = array(
+			'posts_per_page' => '100',
 			'post_type'      => 'form-notify',
 			'meta_query'     => array(
 				array(
@@ -97,6 +108,7 @@ abstract class AbstractNotify {
 				),
 			),
 		);
+		// @codingStandardsIgnoreEnd
 
 		$query_post = new \WP_Query( $args_post );
 		if ( $query_post->have_posts() ) {
@@ -115,7 +127,7 @@ abstract class AbstractNotify {
 	 * @param string $content Message content.
 	 * @param array  $data    Form data.
 	 */
-	abstract public function replace_message_content( $content, $data );
+	abstract public function replace_message_content( string $content, array $data );
 
 	/**
 	 * Send notify
@@ -123,7 +135,7 @@ abstract class AbstractNotify {
 	 * @param array $notify_ids Notify IDs.
 	 * @param array $form_data  Form data.
 	 */
-	public function send_notify( $notify_ids, $form_data ) {
+	public function send_notify( array $notify_ids, array $form_data ): void {
 		if ( $notify_ids ) {
 			foreach ( $notify_ids as $notify_id ) {
 				$actions = get_post_meta( $notify_id, 'form_notify_action_module', true );
@@ -184,7 +196,7 @@ abstract class AbstractNotify {
 	 *
 	 * @param int $user_id User ID.
 	 */
-	private function get_line_user_id( $user_id ) {
+	private function get_line_user_id( int $user_id ) {
 
 		if ( ! $user_id ) {
 			return false;
@@ -192,32 +204,40 @@ abstract class AbstractNotify {
 
 		$user_email = get_userdata( $user_id )->user_email;
 
-		// Form Notify
+		// Form Notify.
 		if ( get_user_meta( $user_id, 'form_notify_line_user_id', true ) ) {
 			return get_user_meta( $user_id, 'form_notify_line_user_id', true );
 		}
 
-		// LINE for WordPress
+		// LINE for WordPress.
 		if ( get_user_meta( $user_id, 'line_user_id', true ) ) {
 			return get_user_meta( $user_id, 'line_user_id', true );
 		}
 
-		// Super Socializer
-		if ( strpos( $user_email, '@line.com' ) !== false ) {
+		// Super Socializer.
+		if ( str_contains( $user_email, '@line.com' ) ) {
 			return explode( '@', $user_email )[0];
 		}
 
-		// HB LINE Login
+		// HB LINE Login.
 		if ( get_user_meta( $user_id, '_heiblack_social_line_id', true ) ) {
 			return get_user_meta( $user_id, '_heiblack_social_line_id', true );
 		}
 
-		// Nextend Social Login
+		// Nextend Social Login.
 		global $wpdb;
-		$sql    = $wpdb->prepare( "SELECT identifier FROM `{$wpdb->prefix}social_users` WHERE `ID` = {$user_id} " );
-		$result = $wpdb->get_results( $sql );
-		if ( $result ) {
-			return $result[0]->identifier;
+		$sql = $wpdb->prepare( "SELECT identifier FROM `{$wpdb->prefix}social_users` WHERE `ID` = %d ", $user_id );
+
+		$cache = wp_cache_get( 'form_notify_identifier' );
+
+		if ( ! $cache ) {
+			// @codingStandardsIgnoreStart
+			$result = $wpdb->get_results( $sql );
+			$cache  = $result[0]->identifier;
+			wp_cache_set( 'form_notify_identifier', $cache );
+			// @codingStandardsIgnoreEnd
 		}
+
+		return $cache;
 	}
 }
