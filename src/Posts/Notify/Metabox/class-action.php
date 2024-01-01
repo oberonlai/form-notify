@@ -5,7 +5,7 @@
  * @package FORMNOTIFY
  */
 
-namespace FORMNOTIFY\Posts\Notify\Metabox\Action;
+namespace FORMNOTIFY\Posts\Notify\Metabox;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -57,7 +57,7 @@ class Action {
 		( 'yes' === get_option( 'form_notify_mitake_enable' ) ) ? $options['mitake'] = __( 'Mitake SMS', 'form-notify' ) : '';
 		( 'yes' === get_option( 'form_notify_easygo_enable' ) ) ? $options['easygo'] = __( 'easyGo SMS', 'form-notify' ) : '';
 
-		$form_notify_action_module[] = $action->addSelect(
+		$form_notify_action_module[] = $action->add_select(
 			array(
 				'id'    => 'form_notify_action_module_type',
 				'class' => 'form_notify_action_module_type',
@@ -67,7 +67,7 @@ class Action {
 			true
 		);
 
-		$form_notify_action_module[] = $action->addText(
+		$form_notify_action_module[] = $action->add_text(
 			array(
 				'id'         => 'form_notify_action_module_subject',
 				'label'      => __( 'Email Subject', 'form-notify' ),
@@ -77,7 +77,7 @@ class Action {
 			true
 		);
 
-		$form_notify_action_module[] = $action->addTextarea(
+		$form_notify_action_module[] = $action->add_textarea(
 			array(
 				'id'    => 'form_notify_action_module_content',
 				'label' => __( 'Notify content', 'form-notify' ),
@@ -85,7 +85,7 @@ class Action {
 			true
 		);
 
-		$form_notify_action_module[] = $action->addText(
+		$form_notify_action_module[] = $action->add_text(
 			array(
 				'id'          => 'form_notify_action_module_receiver',
 				'class'       => 'receiver-field',
@@ -99,7 +99,7 @@ class Action {
 		// FIX: Hook not work.
 		do_action( 'form_notify_action_module', $form_notify_action_module, $action );
 
-		$action->addRepeaterBlock(
+		$action->add_repeater_block(
 			array(
 				'id'           => 'form_notify_action_module',
 				'class'        => 'form_notify_action_module',

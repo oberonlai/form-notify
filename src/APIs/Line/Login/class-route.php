@@ -1,17 +1,35 @@
 <?php
+/**
+ * Line Login Route
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\APIs\Line\Login;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Line Login Route class
+ */
 class Route {
 
-	public static function register() {
+	/**
+	 * Register
+	 *
+	 * @return void
+	 */
+	public static function register(): void {
 		$class = new self();
 		add_action( 'rest_api_init', array( $class, 'register_api_route' ) );
 	}
 
-	public function register_api_route() {
+	/**
+	 * Register API Route
+	 *
+	 * @return void
+	 */
+	public function register_api_route(): void {
 
 		register_rest_route(
 			'form-notify/v1',
@@ -39,9 +57,9 @@ class Route {
 	}
 
 	/**
-	 * 產生 LINE Login 網址
+	 * Get api login
 	 */
-	public function get_api_login( $data ) {
+	public function get_api_login() {
 
 		$ts    = time();
 		$state = md5( $ts );
@@ -56,14 +74,16 @@ class Route {
 	}
 
 	/**
-	 * 處理登入後的跳轉事件
+	 * Get api callback
+	 *
+	 * @param object $request Request.
 	 */
-	public function get_api_callback( $request ) {
+	public function get_api_callback( object $request ): void {
 
 		$line = new SDK();
 
-		$code          = $_GET['code'];
-		$state         = $_GET['state'];
+		$code          = form_notify_get_params( 'code' );
+		$state         = form_notify_get_params( 'state' );
 		$session_state = get_transient( 'form_notify_line_state_' . $state );
 
 		if ( empty( $session_state ) ) {
@@ -83,7 +103,7 @@ class Route {
 
 		$token = $line->get_access_token( $code );
 
-		setcookie( 'access_token', $token['access_token'], time() + 3600 * 24 * 14 ); // 有抓到 access_token 只需要 SSO
+		setcookie( 'access_token', $token['access_token'], time() + 3600 * 24 * 14 );
 
 		$user = $line->get_line_profile( $token['access_token'], $token['id_token'] );
 
@@ -92,7 +112,10 @@ class Route {
 			$user_raw_id  = $user->sub;
 			$user_display = $user->name;
 			$user_avatar  = $user->picture;
-			$user_email   = ( $user->email ) ? $user->email : wp_unslash( $_COOKIE['form_notify_line_email'] );
+			if ( isset( $_COOKIE['form_notify_line_email'] ) ) {
+				$line_email = sanitize_text_field( wp_unslash( $_COOKIE['form_notify_line_email'] ) );
+			}
+			$user_email = ( $user->email ) ? $user->email : $line_email;
 
 			if ( empty( $user_email ) ) {
 				$redirect_url = ( get_option( 'form_notify_line_btn_redirect' ) ) ? get_option( 'form_notify_line_btn_redirect' ) : home_url();

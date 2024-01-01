@@ -1,11 +1,16 @@
 <?php
+/**
+ * LINE Notify API
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\APIs\Line;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * LINE Notify API
+ * LINE Notify API class
  */
 class Notify {
 
@@ -14,13 +19,13 @@ class Notify {
 	 *
 	 * @var string
 	 */
-	private $token;
+	private string $token;
 	/**
 	 * LINE Notify api url
 	 *
 	 * @var string
 	 */
-	private $endpoint;
+	private string $endpoint;
 
 	/**
 	 * Construct
@@ -35,9 +40,9 @@ class Notify {
 	 *
 	 * @param object $messages LINE message object.
 	 *
-	 * @return mixed $resp
+	 * @return object $resp LINE api response.
 	 */
-	private function request( $messages ) {
+	private function request( object $messages ): object {
 		$options = array(
 			'method'  => 'POST',
 			'timeout' => 60,
@@ -52,6 +57,8 @@ class Notify {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
+
+			return (object) array( 'message' => $error_message );
 		} else {
 			$resp = json_decode( wp_remote_retrieve_body( $response ) );
 		}
@@ -60,13 +67,13 @@ class Notify {
 	}
 
 	/**
-	 * Exceute push api
+	 * Execute push api
 	 *
 	 * @param object $messages LINE message object.
 	 *
-	 * @return object $result request result.
+	 * @return string $result request result.
 	 */
-	public function push( $messages ) {
+	public function push( object $messages ): string {
 		if ( ! $this->token ) {
 			return __( 'Please set LINE Notify access token first.', 'form-notify' );
 		}

@@ -1,12 +1,24 @@
 <?php
+/**
+ * Line Login SDK
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\APIs\Line\Login;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Line Login SDK class
+ */
 class SDK {
-
-	public function get_login_url( $state ) {
+	/**
+	 * Get login url
+	 *
+	 * @param string $state State.
+	 */
+	public function get_login_url( string $state ): string {
 
 		$parameter = array(
 			'response_type' => 'code',
@@ -22,9 +34,13 @@ class SDK {
 	}
 
 	/**
-	 * 取得 access_token 跟 id_token
+	 * Get access token
+	 *
+	 * @param string $code Code.
+	 *
+	 * @return array $token Token.
 	 */
-	public function get_access_token( $code ) {
+	public function get_access_token( string $code ): array {
 		$body    = array(
 			'grant_type'    => 'authorization_code',
 			'code'          => $code,
@@ -45,20 +61,27 @@ class SDK {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
+
+			return array();
 		} else {
-			$resp  = json_decode( wp_remote_retrieve_body( $response ) );
-			$token = array(
+			$resp = json_decode( wp_remote_retrieve_body( $response ) );
+
+			return array(
 				'access_token' => $resp->access_token,
 				'id_token'     => $resp->id_token,
 			);
-			return $token;
 		}
 	}
 
 	/**
-	 * 取得使用者資訊
+	 * Get Line profile
+	 *
+	 * @param string $access_token Access token.
+	 * @param string $id_token     Id token.
+	 *
+	 * @return object $resp Response.
 	 */
-	public function get_line_profile( $access_token, $id_token ) {
+	public function get_line_profile( string $access_token, string $id_token ): object {
 		$body    = array(
 			'id_token'  => $id_token,
 			'client_id' => get_option( 'form_notify_line_login_channel_id' ),
@@ -73,9 +96,10 @@ class SDK {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
+
+			return (object) array();
 		} else {
-			$resp = json_decode( wp_remote_retrieve_body( $response ) );
-			return $resp;
+			return json_decode( wp_remote_retrieve_body( $response ) );
 		}
 	}
 }

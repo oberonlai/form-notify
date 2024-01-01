@@ -5,7 +5,7 @@
  * @package FORMNOTIFY
  */
 
-namespace FORMNOTIFY\Posts\Notify\Metabox\Param;
+namespace FORMNOTIFY\Posts\Notify\Metabox;
 
 defined( 'ABSPATH' ) || exit;
 

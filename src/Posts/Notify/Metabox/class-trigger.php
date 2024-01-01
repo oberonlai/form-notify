@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 use FORMNOTIFY\APIs\Metabox\Metabox as FormMetabox;
 
 /**
- * Notify Metabox
+ * Notify Metabox class
  */
 class Trigger {
 	/**
@@ -47,7 +47,7 @@ class Trigger {
 
 		$trigger_event_options = apply_filters( 'form_notify_trigger_event_options', $trigger_event_options );
 
-		$trigger->addSelect(
+		$trigger->add_select(
 			array(
 				'id'    => 'form_notify_trigger_event',
 				'class' => 'form-notify-trigger-event',

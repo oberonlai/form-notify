@@ -1,4 +1,5 @@
-<?php
+<?php // phpcs:ignore
+
 /**
  * Abstract Notify class
  *

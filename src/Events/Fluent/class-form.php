@@ -76,7 +76,7 @@ class Form {
 			}
 		}
 
-		$trigger->addSelect(
+		$trigger->add_select(
 			array(
 				'id'         => 'form_notify_trigger_form_fluent',
 				'class'      => 'form-notify-trigger-form',
@@ -128,7 +128,7 @@ class Form {
 			$html .= '</div>';
 		}
 
-		$param->addHtml(
+		$param->add_html(
 			array(
 				'id'         => 'metabox_fluent_form_field',
 				'html'       => '<div class="data-show">' . $html . '</div>',
@@ -145,7 +145,7 @@ class Form {
 	 * @param object $action                    Action Object.
 	 */
 	public function add_form_action_module( array $form_notify_action_module, object $action ): void {
-		$form_notify_action_module[] = $action->addText(
+		$form_notify_action_module[] = $action->add_text(
 			array(
 				'id'          => 'form_notify_action_module_receiver',
 				'class'       => 'by_fluent_form',
@@ -210,3 +210,4 @@ add_action(
 		Form::init();
 	}
 );
+// Form::init();

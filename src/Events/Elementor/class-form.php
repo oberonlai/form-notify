@@ -118,7 +118,7 @@ class Form {
 			$html .= '</div>';
 		}
 
-		$param->addHtml(
+		$param->add_html(
 			array(
 				'id'         => 'metabox_elementor_form_field',
 				'html'       => '<div class="data-show">' . $html . '</div>',
@@ -220,10 +220,5 @@ class Form {
 	}
 }
 
-add_action(
-	'init',
-	function () {
-		Form::init();
-	}
-);
+Form::init();
 

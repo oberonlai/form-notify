@@ -1,11 +1,16 @@
 <?php
+/**
+ * LINE Messaging API
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\APIs\Line;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * LINE Messagin API
+ * LINE Messaging API class
  */
 class Message {
 
@@ -14,13 +19,13 @@ class Message {
 	 *
 	 * @var string
 	 */
-	private $token;
+	private string $token;
 	/**
 	 * LINE messaging api url
 	 *
 	 * @var string
 	 */
-	private $endpoint;
+	private string $endpoint;
 
 	/**
 	 * Construct
@@ -36,9 +41,9 @@ class Message {
 	 * @param string $to       LINE user id.
 	 * @param object $messages LINE message object.
 	 *
-	 * @return mixed $resp
+	 * @return object $resp request result.
 	 */
-	private function request( $to, $messages ) {
+	private function request( string $to, object $messages ): object {
 		$body = array(
 			'to'       => $to,
 			'messages' => array(
@@ -64,6 +69,8 @@ class Message {
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message();
+
+			return (object) array( 'message' => $error_message );
 		} else {
 			$resp = json_decode( wp_remote_retrieve_body( $response ) );
 		}
@@ -72,14 +79,14 @@ class Message {
 	}
 
 	/**
-	 * Exceute push api
+	 * Execute push api
 	 *
 	 * @param string $uid      LINE user id.
 	 * @param object $messages LINE message object.
 	 *
-	 * @return object $result request result.
+	 * @return string $result request result.
 	 */
-	public function push( $uid, $messages ) {
+	public function push( string $uid, object $messages ): string {
 		$result = $this->request( $uid, $messages );
 		if ( is_object( $result ) && count( (array) $result ) > 0 ) {
 			return $result->message;

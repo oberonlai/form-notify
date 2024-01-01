@@ -8,7 +8,7 @@
 namespace FORMNOTIFY\APIs\Metabox;
 
 /**
- * Metabox API
+ * Metabox API class
  */
 class Metabox {
 
@@ -17,18 +17,32 @@ class Metabox {
 	const REPEATER_ITEM_NUMBER_PLACEHOLDER = 'ItemNumber';
 
 	/**
-	 * Stores the metabox config that
-	 * is supplied to the constructor.
+	 * Stores the metabox configuration.
 	 *
 	 * @var array
 	 */
-	private $_meta_box;
+	private array $meta_box;
 
-	private $_folder_name;
+	/**
+	 * Stores the folder name.
+	 *
+	 * @var string
+	 */
+	private string $folder_name;
 
-	private $_path;
+	/**
+	 * Stores the path.
+	 *
+	 * @var string
+	 */
+	private string $path;
 
-	private $_nonce_name;
+	/**
+	 * Stores the nonce name.
+	 *
+	 * @var string
+	 */
+	private string $nonce_name;
 
 	/**
 	 * Stores the fields supplied to the
@@ -36,56 +50,64 @@ class Metabox {
 	 *
 	 * @var array
 	 */
-	private $_fields;
+	private array $fields;
 
 	/**
 	 * Class constructor.
 	 *
-	 * @param array Should be an associative array with the following keys:
-	 * 'title', 'screen', 'context', 'priority'
+	 * @param array $meta_box_config The metabox configuration.
 	 *
 	 * @return void
 	 */
-	public function __construct( $meta_box_config ) {
+	public function __construct( array $meta_box_config ) {
 
 		$defaults = array(
 			'context'  => 'advanced',
 			'priority' => 'default',
 		);
 
-		$this->_meta_box    = array_merge( $defaults, $meta_box_config );
-		$this->_nonce_name  = $meta_box_config['id'] . '_nonce';
-		$this->_folder_name = 'Metabox-constructor-class';
-		$this->_path        = plugins_url( $this->_folder_name, plugin_basename( dirname( __FILE__ ) ) );
+		$this->meta_box    = array_merge( $defaults, $meta_box_config );
+		$this->nonce_name  = $meta_box_config['id'] . '_nonce';
+		$this->folder_name = 'Metabox-constructor-class';
+		$this->path        = plugins_url( $this->folder_name, plugin_basename( dirname( __FILE__ ) ) );
 
 		add_action( 'add_meta_boxes', array( $this, 'add' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts' ) );
 	}
 
-	public function scripts() {
+	/**
+	 * Enqueues the scripts and stylesheets.
+	 *
+	 * @return void
+	 */
+	public function scripts(): void {
 		global $typenow;
 
 		wp_enqueue_media();
 
 		if (
-			( is_array( $this->_meta_box['screen'] ) && in_array( $typenow, $this->_meta_box['screen'] ) ) ||
-			( is_string( $this->_meta_box['screen'] ) && $typenow == $this->_meta_box['screen'] )
+			( is_array( $this->meta_box['screen'] ) && in_array( $typenow, $this->meta_box['screen'], true ) ) ||
+			( is_string( $this->meta_box['screen'] ) && $typenow === $this->meta_box['screen'] )
 		) {
 			wp_enqueue_style( 'Metabox-style', plugin_dir_url( __FILE__ ) . 'assets/style.css', array(), '1.0.1', null );
-			wp_enqueue_script( 'Metabox-script', plugin_dir_url( __FILE__ ) . 'assets/script.js', array( 'jquery' ), '1.-.0', true );
+			wp_enqueue_script( 'Metabox-script', plugin_dir_url( __FILE__ ) . 'assets/script.js', array( 'jquery' ), '1.0.0', true );
 		}
 	}
 
-
-	public function add() {
+	/**
+	 * Adds the metabox to the post editor.
+	 *
+	 * @return void
+	 */
+	public function add(): void {
 		add_meta_box(
-			$this->_meta_box['id'],
-			$this->_meta_box['title'],
-			array( $this, 'show' ), // callback
-			$this->_meta_box['screen'],
-			$this->_meta_box['context'],
-			$this->_meta_box['priority']
+			$this->meta_box['id'],
+			$this->meta_box['title'],
+			array( $this, 'show' ),
+			$this->meta_box['screen'],
+			$this->meta_box['context'],
+			$this->meta_box['priority']
 		);
 	}
 
@@ -96,13 +118,13 @@ class Metabox {
 	 *
 	 * @return void
 	 */
-	public function show() {
+	public function show(): void {
 		global $post;
 
-		wp_nonce_field( basename( __FILE__ ), $this->_nonce_name );
-		echo sprintf( '<div class="%s">', self::BLOCK_NAMESPACE );
-		if ( $this->_fields ) {
-			foreach ( $this->_fields as $field ) {
+		wp_nonce_field( basename( __FILE__ ), $this->nonce_name );
+		echo sprintf( '<div class="%s">', esc_attr( self::BLOCK_NAMESPACE ) );
+		if ( $this->fields ) {
+			foreach ( $this->fields as $field ) {
 				$meta = get_post_meta( $post->ID, $field['id'], true );
 				call_user_func( array( $this, 'show_field_' . $field['type'] ), $field, $meta );
 			}
@@ -115,26 +137,26 @@ class Metabox {
 	 *
 	 * @return void
 	 */
-	public function save() {
+	public function save(): void {
 		global $post_id, $post;
 
 		if (
-			( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || // prevent the data from being auto-saved
-			( ! current_user_can( 'edit_post', $post_id ) ) || // check user permissions
-			( ( ! isset( $_POST[ $this->_nonce_name ] ) ) ) || // verify nonce (same with below)
-			( ! wp_verify_nonce( $_POST[ $this->_nonce_name ], basename( __FILE__ ) ) )
+			( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || // prevent the data from being auto-saved.
+			( ! current_user_can( 'edit_post', $post_id ) ) || // check user permissions.
+			( ( ! isset( $_POST[ $this->nonce_name ] ) ) ) || // verify nonce (same with below).
+			( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $this->nonce_name ] ) ), basename( __FILE__ ) ) )
 		) {
 			return;
 		}
 
-		foreach ( $this->_fields as $field ) {
+		foreach ( $this->fields as $field ) {
 			if ( isset( $_POST[ $field['id'] ] ) ) {
-				if ( $field['type'] == 'text' || $field['type'] == 'textarea' ) {
-					update_post_meta( $post->ID, $field['id'], sanitize_text_field( $_POST[ $field['id'] ] ) );
+				if ( 'text' === $field['type'] || 'textarea' === $field['type'] ) {
+					update_post_meta( $post->ID, $field['id'], $_POST[ $field['id'] ] ); // phpcs:ignore
 				} elseif ( 'multiselect' === $field['type'] ) {
-					update_post_meta( $post->ID, $field['id'], wp_json_encode( $_POST[ $field['id'] ] ) );
+					update_post_meta( $post->ID, $field['id'], wp_json_encode( $_POST[ $field['id'] ] ) ); // phpcs:ignore
 				} else {
-					update_post_meta( $post->ID, $field['id'], $_POST[ $field['id'] ] );
+					update_post_meta( $post->ID, $field['id'], $_POST[ $field['id'] ] ); // phpcs:ignore
 				}
 			} else {
 				delete_post_meta( $post->ID, $field['id'] );
@@ -142,7 +164,15 @@ class Metabox {
 		}
 	}
 
-	public function column( $width, $contents ) {
+	/**
+	 * Returns a formatted string for a column class name.
+	 *
+	 * @param int   $width    The width of the column.
+	 * @param mixed $contents The contents of the column.
+	 *
+	 * @return string
+	 */
+	public function column( int $width, mixed $contents ): string {
 		if ( isset( $width, $contents ) ) {
 			return sprintf(
 				'<div class="%s %s">%s</div>',
@@ -151,17 +181,19 @@ class Metabox {
 				esc_html( $contents )
 			);
 		}
+
+		return '';
 	}
 
 	/**
 	 * Returns a formatted string for a block-element (block__element) class name.
 	 *
-	 * @param string $block
-	 * @param string $element
+	 * @param string $block   The block name.
+	 * @param string $element The element name.
 	 *
 	 * @return string
 	 */
-	public function get_block_element_class( $block, $element ) {
+	public function get_block_element_class( string $block, string $element ): string {
 		if ( isset( $block, $element ) ) {
 			return trim( sprintf( '%s__%s', $block, $element ) );
 		}
@@ -171,21 +203,21 @@ class Metabox {
 	 * Returns a formatted string for a block-element (block__element) class name
 	 * of a field element or non-field element prefixed with the namespace.
 	 *
-	 * @param string  $element
-	 * @param boolean $isField
+	 * @param string  $element  The element name.
+	 * @param boolean $is_field Whether the element is a field element or not.
 	 *
 	 * @return string
 	 */
-	public function get_block_element_class_with_namespace( $element, $isField = true ) {
+	public function get_block_element_class_with_namespace( string $element, bool $is_field = true ): string {
 		if ( isset( $element ) ) {
 			return trim(
 				sprintf(
 					'%s %s%s',
-					( $isField
+					( $is_field
 						? ( sprintf( '%s__%s', self::BLOCK_NAMESPACE, 'field' ) )
 						: ''
 					),
-					sprintf( '%s__%s', self::BLOCK_NAMESPACE, ( $isField ? 'field-' : '' ) ),
+					sprintf( '%s__%s', self::BLOCK_NAMESPACE, ( $is_field ? 'field-' : '' ) ),
 					$element
 				)
 			);
@@ -196,11 +228,11 @@ class Metabox {
 	 * Returns a formatted string for a class name prefixed with
 	 * the namespace.
 	 *
-	 * @param string $suffix
+	 * @param string $suffix The suffix of the class name.
 	 *
 	 * @return string
 	 */
-	public function get_element_class_with_namespace( $suffix ) {
+	public function get_element_class_with_namespace( string $suffix ): string {
 		if ( isset( $suffix ) ) {
 			return trim(
 				sprintf(
@@ -210,15 +242,17 @@ class Metabox {
 				)
 			);
 		}
+
+		return '';
 	}
 
 	/**
-	 * Echos some HTML that preceeds a field (container, label, description, etc.)
+	 * Echos some HTML that precedes a field (container, label, description, etc.)
 	 *
-	 * @param array         $field
-	 * @param string | null $meta
+	 * @param array         $field The field configuration.
+	 * @param string | null $meta  The meta value of the field.
 	 */
-	public function before_field( $field, $meta = null ) {
+	public function before_field( array $field, string $meta = null ): void {
 
 		$class = array_key_exists( 'class', $field ) ? $field['class'] : '';
 
@@ -240,7 +274,7 @@ class Metabox {
 
 		echo '<div>';
 
-		if ( $field['type'] == 'image' ) {
+		if ( 'image' === $field['type'] ) {
 			$this->get_image_preview( $field, $meta );
 		}
 	}
@@ -248,9 +282,9 @@ class Metabox {
 	/**
 	 * Echos HTML that comes after a field (container, description, etc).
 	 *
-	 * @param array | null $field
+	 * @param array | null $field The field configuration.
 	 */
-	public function after_field( $field = null ) {
+	public function after_field( array $field = null ): void {
 		if ( isset( $field['desc'] ) ) {
 			$this->get_field_description( $field['desc'] );
 		}
@@ -261,9 +295,9 @@ class Metabox {
 	 * Echos a paragraph element with some description text that
 	 * serves as an assistant to the operator of the metabox.
 	 *
-	 * @param string $desc
+	 * @param string $desc The description text.
 	 */
-	public function get_field_description( $desc ) {
+	public function get_field_description( string $desc ): void {
 		echo sprintf(
 			'<p class="%s">%s</p>',
 			esc_attr( $this->get_block_element_class_with_namespace( 'description', false ) ),
@@ -274,10 +308,10 @@ class Metabox {
 	/**
 	 * Echos an image tag that serves as preview.
 	 *
-	 * @param array  $field
-	 * @param string $meta
+	 * @param array  $field The field configuration.
+	 * @param string $meta  The meta value of the field.
 	 */
-	public function get_image_preview( $field, $meta ) {
+	public function get_image_preview( array $field, string $meta ): void {
 		global $post;
 
 		echo sprintf(
@@ -289,92 +323,174 @@ class Metabox {
 		);
 	}
 
-	public function addHtml( $args, $repeater = false ) {
+	/**
+	 * Add html field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_html( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'html' ), $args );
-		if ( false == $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+		if ( ! $repeater ) {
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addText( $args, $repeater = false ) {
+	/**
+	 * Add text field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_text( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'text' ), $args );
-		if ( false == $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+		if ( ! $repeater ) {
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addTextArea( $args, $repeater = false ) {
+	/**
+	 * Add textarea field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_textarea( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'textarea' ), $args );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addCheckbox( $args, $repeater = false ) {
+	/**
+	 * Add checkbox field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_checkbox( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'checkbox' ), $args );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addImage( $args, $repeater = false ) {
+	/**
+	 * Add image field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_image( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'image' ), $args );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addEditor( $args, $repeater = false ) {
+	/**
+	 * Add editor field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_editor( array $args, bool $repeater = false ): array {
 		$field = array_merge( array( 'type' => 'Editor' ), $args );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addRadio( $args, $options, $repeater = false ) {
+	/**
+	 * Add radio field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param array $options  Field options.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_radio( array $args, array $options, bool $repeater = false ): array {
 		$options = array( 'options' => $options );
 		$field   = array_merge( array( 'type' => 'radio' ), $args, $options );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addSelect( $args, $options, $repeater = false ) {
+	/**
+	 * Add select field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param array $options  Field options.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_select( array $args, array $options, bool $repeater = false ): array {
 		$options = array( 'options' => $options );
 		$field   = array_merge( array( 'type' => 'select' ), $args, $options );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addMultiSelect( $args, $options, $repeater = false ) {
+	/**
+	 * Add multi select field
+	 *
+	 * @param array $args     Field arguments.
+	 * @param array $options  Field options.
+	 * @param bool  $repeater Whether the field is a repeater or not.
+	 *
+	 * @return array
+	 */
+	public function add_multi_select( array $args, array $options, bool $repeater = false ): array {
 		$options = array( 'options' => $options );
 		$field   = array_merge( array( 'type' => 'multiselect' ), $args, $options );
 		if ( ! $repeater ) {
-			$this->_fields[] = $field;
-		} else {
-			return $field;
+			$this->fields[] = $field;
 		}
+
+		return $field;
 	}
 
-	public function addRepeaterBlock( $args ) {
-		$field           = array_merge(
+	/**
+	 * Add repeater block
+	 *
+	 * @param array $args Field arguments.
+	 *
+	 * @return void
+	 */
+	public function add_repeater_block( array $args ): void {
+		$field          = array_merge(
 			array(
 				'type'         => 'repeater',
 				'single_label' => 'Item',
@@ -382,10 +498,18 @@ class Metabox {
 			),
 			$args
 		);
-		$this->_fields[] = $field;
+		$this->fields[] = $field;
 	}
 
-	public function show_field_html( $field, $meta ) {
+	/**
+	 * Show html field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_html( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		if ( ! empty( $field['show_value'] ) && ! empty( $field['show_by'] ) ) {
 			echo '<div data-show-by="' . esc_attr( $field['show_by'] ) . '" data-show-value="' . esc_attr( $field['show_value'] ) . '">' . wp_kses_post( $field['html'] ) . '</div>';
@@ -395,7 +519,15 @@ class Metabox {
 		$this->after_field();
 	}
 
-	public function show_field_text( $field, $meta ) {
+	/**
+	 * Show text field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_text( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		$class = ( array_key_exists( 'class', $field ) ) ? $field['class'] : '';
 		if ( ! empty( $field['show_value'] ) && ! empty( $field['show_by'] ) ) {
@@ -421,7 +553,15 @@ class Metabox {
 		$this->after_field();
 	}
 
-	public function show_field_textarea( $field, $meta ) {
+	/**
+	 * Show textarea field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_textarea( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		echo sprintf(
 			'<textarea class="%1$s" id="%2$s" name="%2$s">%3$s</textarea>',
@@ -432,7 +572,15 @@ class Metabox {
 		$this->after_field();
 	}
 
-	public function show_field_checkbox( $field, $meta ) {
+	/**
+	 * Show checkbox field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_checkbox( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		echo sprintf(
 			'<input type="checkbox" class="%1$s" id="%2$s" name="%2$s" %3$s>',
@@ -440,16 +588,24 @@ class Metabox {
 			esc_attr( $field['id'] ),
 			checked( ! empty( $meta ), true, false )
 		);
-		$this->after_field( $field ); // pass in $field to render desc below input
+		$this->after_field( $field );
 	}
 
-	public function show_field_image( $field, $meta ) {
-		$this->before_field( $field, $meta ); // pass in $meta for preview image
+	/**
+	 * Show image field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_image( array $field, array|string $meta ): void {
+		$this->before_field( $field, $meta );
 		echo sprintf(
 			'<input type="hidden" id="%s" name="%s" value="%s">',
 			esc_attr( 'image-' . $field['id'] ),
 			esc_attr( $field['id'] ),
-			( isset( $meta ) ? $meta : '' )
+			esc_attr( $meta )
 		);
 		echo sprintf(
 			'<a class="%s button" data-hidden-input="%s">%s</a>',
@@ -460,13 +616,29 @@ class Metabox {
 		$this->after_field();
 	}
 
-	public function show_field_Editor( $field, $meta ) {
+	/**
+	 * Show editor field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_editor( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		wp_editor( $meta, $field['id'] );
 		$this->after_field();
 	}
 
-	public function show_field_radio( $field, $meta ) {
+	/**
+	 * Show radio field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_radio( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		foreach ( $field['options'] as $key => $value ) {
 			echo sprintf(
@@ -479,13 +651,21 @@ class Metabox {
 				esc_attr( $this->get_block_element_class_with_namespace( $field['type'] ) ),
 				esc_attr( $field['id'] ),
 				esc_attr( $key ),
-				checked( $key == $meta, true, false )
+				checked( $key === $meta, true, false )
 			);
 		}
-		$this->after_field( $field ); // pass in $field to render desc below input
+		$this->after_field( $field );
 	}
 
-	public function show_field_select( $field, $meta ) {
+	/**
+	 * Show select field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_select( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		if ( ! empty( $field['show_value'] ) && ! empty( $field['show_by'] ) ) {
 			echo '<select name="' . esc_attr( $field['id'] ) . '" class="wc-enhanced-select" data-show-by="' . esc_attr( $field['show_by'] ) . '" data-show-value="' . esc_attr( $field['show_value'] ) . '">';
@@ -502,14 +682,22 @@ class Metabox {
 				esc_attr( $this->get_block_element_class_with_namespace( $field['type'] ) ),
 				esc_attr( $field['id'] ),
 				esc_attr( $key ),
-				selected( $key == $meta, true, false )
+				selected( (int) $key === (int) $meta, true, false )
 			);
 		}
 		echo '</select>';
-		$this->after_field( $field ); // pass in $field to render desc below input
+		$this->after_field( $field );
 	}
 
-	public function show_field_multiselect( $field, $meta ) {
+	/**
+	 * Show multi select field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_multiselect( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 		$meta = json_decode( $meta );
 		if ( ! empty( $field['show_value'] ) && ! empty( $field['show_by'] ) ) {
@@ -528,14 +716,22 @@ class Metabox {
 				esc_attr( $this->get_block_element_class_with_namespace( $field['type'] ) ),
 				esc_attr( $field['id'] ),
 				esc_attr( $key ),
-				( is_array( $meta ) ) ? selected( in_array( $key, $meta ), true, false ) : selected( $key === $meta, true, false ),
+				esc_attr( ( is_array( $meta ) ) ? selected( in_array( $key, $meta, true ), true, false ) : selected( $key === $meta, true, false ) ),
 			);
 		}
 		echo '</select>';
-		$this->after_field( $field ); // pass in $field to render desc below input
+		$this->after_field( $field );
 	}
 
-	public function show_field_repeater( $field, $meta ) {
+	/**
+	 * Show repeater field
+	 *
+	 * @param array        $field Field arguments.
+	 * @param array|string $meta  Field meta value.
+	 *
+	 * @return void
+	 */
+	public function show_field_repeater( array $field, array|string $meta ): void {
 		$this->before_field( $field );
 
 		if ( ! empty( $field['show_value'] ) && ! empty( $field['show_by'] ) ) {
@@ -579,7 +775,6 @@ class Metabox {
 
 		$this->after_field();
 
-		// create a repeater block to use for the "add" functionality
 		ob_start();
 
 		sprintf( '<div>%s</div>', esc_html( $this->get_repeated_block( $field, $meta, null, true ) ) );
@@ -592,30 +787,46 @@ class Metabox {
 		/**
 		 * JS to add another repeated block
 		 */
-		echo '<script> 
-                    jQuery(document).ready(function($) {
-                        var count = ' . max( 1, $count ) . '; // we use max() because we want count to be at least 1
+		$count       = max( 1, $count );
+		$field_id    = $field['id'];
+		$index       = self::REPEATER_INDEX_PLACEHOLDER;
+		$item_number = self::REPEATER_ITEM_NUMBER_PLACEHOLDER;
+		?>
+		<script>
+			jQuery(document).ready(function ($) {
+				var count = '<?php echo esc_html( $count ); ?>';
 
-                        $("#js-' . $field['id'] . '-add").on("click", function() {
-                            var repeater = \'' . $js_code . '\'
-                                .replace(/' . self::REPEATER_INDEX_PLACEHOLDER . '/g, count)
-                                .replace(/' . self::REPEATER_ITEM_NUMBER_PLACEHOLDER . '/g, count + 1);
-                            $("#js-' . $field['id'] . '-repeated-blocks").append(repeater);
-                            count++;
-                            return false;
-                        });
-                    });
-            </script>';
+				$("#js-<?php echo esc_html( $field_id ); ?>-add").on("click", function () {
+                    var repeater = `<?php echo $js_code;  // phpcs:ignore ?>`
+						.replace(/<?php echo esc_html( $index ); ?>/g, count)
+						.replace(/<?php echo esc_html( $item_number ); ?>/g, count + 1);
+
+							$("#js-<?php echo esc_html( $field_id ); ?>-repeated-blocks").append(repeater);
+					count++;
+					return false;
+				});
+			});
+		</script>
+		<?php
 	}
 
-	public function get_repeated_block( $field, $meta, $index, $isTemplate = false ) {
+	/**
+	 * Show repeated block
+	 *
+	 * @param array        $field       Field arguments.
+	 * @param array|string $meta        Field meta value.
+	 * @param int          $index       The index of the repeated block.
+	 * @param bool         $is_template Whether the block is a template or not.
+	 *
+	 * @return void
+	 */
+	public function get_repeated_block( $field, $meta, $index, $is_template = false ) {
 
 		echo sprintf(
 			'<div class="%s">',
 			esc_attr( $this->get_block_element_class_with_namespace( 'repeated', false ) )
 		);
 
-		// block header
 		echo sprintf(
 			'<div class="%s %s">
                     <p class="%s">%s</p>
@@ -635,7 +846,7 @@ class Metabox {
 			esc_attr( $this->get_element_class_with_namespace( 'repeated-header', false ) ),
 			esc_attr( $this->get_element_class_with_namespace( 'clearfix' ) ),
 			esc_attr( sprintf( '%s %s %s', $this->get_block_element_class( 'repeated-header', 'title' ), $this->get_element_class_with_namespace( 'col' ), $this->get_element_class_with_namespace( 'col-6' ) ) ),
-			esc_html( sprintf( '%s ' . ( $isTemplate ? '%s' : '%d' ), $field['single_label'], ( $isTemplate ? self::REPEATER_ITEM_NUMBER_PLACEHOLDER : $index + 1 ) ) ),
+			esc_html( sprintf( '%s ' . ( $is_template ? '%s' : '%d' ), $field['single_label'], ( $is_template ? self::REPEATER_ITEM_NUMBER_PLACEHOLDER : $index + 1 ) ) ),
 			esc_attr( sprintf( '%s %s %s', $this->get_block_element_class( 'repeated-header', 'nav' ), $this->get_element_class_with_namespace( 'col' ), $this->get_element_class_with_namespace( 'col-6' ) ) ),
 			esc_attr( $this->get_block_element_class_with_namespace( 'repeater-button', false ) ),
 			esc_attr( $this->get_block_element_class_with_namespace( 'remove', false ) ),
@@ -645,18 +856,18 @@ class Metabox {
 		);
 
 		echo sprintf( '<div class="%s is-hidden">', esc_attr( $this->get_block_element_class_with_namespace( 'repeated-content', false ) ) );
-		// populate block with fields
+
 		foreach ( $field['fields'] as $child_field ) {
 			$old_id = $child_field['id'];
 
 			$child_field['id'] = sprintf(
 				'%s[%s][%s]',
 				$field['id'],
-				( $isTemplate ? self::REPEATER_INDEX_PLACEHOLDER : $index ),
+				( $is_template ? self::REPEATER_INDEX_PLACEHOLDER : $index ),
 				$child_field['id']
 			);
 
-			$child_meta = isset( $meta[ $old_id ] ) && ! $isTemplate ? $meta[ $old_id ] : '';
+			$child_meta = isset( $meta[ $old_id ] ) && ! $is_template ? $meta[ $old_id ] : '';
 
 			call_user_func( array( $this, 'show_field_' . $child_field['type'] ), $child_field, $child_meta );
 		}

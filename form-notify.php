@@ -30,6 +30,14 @@ define( 'FORMNOTIFY_PLUGIN_FILE', __FILE__ );
 require_once FORMNOTIFY_PLUGIN_DIR . 'vendor/autoload.php';
 \A7\autoload( FORMNOTIFY_PLUGIN_DIR . 'src' );
 
+new ODS\Updater(
+	array(
+		'plugin_slug' => 'form-notify',
+		'version'     => FORMNOTIFY_VERSION,
+		'json_url'    => 'https://oberonlai.blog/form-notify.json',
+	)
+);
+
 
 /**
  * I18n
@@ -70,14 +78,6 @@ add_action(
 			$enqueue->enqueue( 'app', 'admin', array() );
 		}
 	}
-);
-
-new ODS\Updater(
-	array(
-		'plugin_slug' => 'form-notify',
-		'version'     => FORMNOTIFY_VERSION,
-		'json_url'    => 'https://oberonlai.blog/form-notify.json',
-	)
 );
 
 add_action(

@@ -1,15 +1,39 @@
 <?php
+/**
+ * Line Login User
+ *
+ * @package FORMNOTIFY
+ */
 
 namespace FORMNOTIFY\APIs\Line\Login;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Line Login User class
+ */
 class User {
 
-	private $user;
-	private $roles;
+	/**
+	 * User
+	 *
+	 * @var object $user User.
+	 */
+	private object $user;
 
-	public static function register() {
+	/**
+	 * Roles
+	 *
+	 * @var array $roles Roles.
+	 */
+	private array $roles;
+
+	/**
+	 * Register
+	 *
+	 * @return void
+	 */
+	public static function register(): void {
 		$class = new self();
 		add_action( 'init', array( $class, 'set_login_redirect_url' ) );
 		add_action( 'wp_footer', array( $class, 'add_email_form' ) );
@@ -18,9 +42,14 @@ class User {
 	}
 
 	/**
-	 * 判斷是否為網站會員
+	 * Check is member
+	 *
+	 * @param string $user_email  User email.
+	 * @param string $user_avatar User avatar.
+	 *
+	 * @return bool
 	 */
-	public function is_member( $user_email, $user_avatar ) {
+	public function is_member( string $user_email, string $user_avatar ): bool {
 		$this->user    = get_user_by( 'email', $user_email );
 		$this->roles[] = $this->user->roles;
 		if ( ! is_wp_error( $this->user ) && $this->user ) {
@@ -31,9 +60,16 @@ class User {
 	}
 
 	/**
-	 * 登入網站會員
+	 * Login
+	 *
+	 * @param string $user_raw_id  User raw id.
+	 * @param string $user_email   User email.
+	 * @param string $user_display User display.
+	 * @param string $user_avatar  User avatar.
+	 *
+	 * @return void
 	 */
-	public function login( $user_raw_id, $user_email, $user_display, $user_avatar ) {
+	public function login( string $user_raw_id, string $user_email, string $user_display, string $user_avatar ): void {
 		if ( ! is_user_logged_in() ) {
 
 			wp_clear_auth_cookie();
@@ -54,23 +90,18 @@ class User {
 	}
 
 	/**
-	 * 註冊網站會員
+	 * Sign up
+	 *
+	 * @param string $user_raw_id  User raw id.
+	 * @param string $user_email   User email.
+	 * @param string $user_display User display.
+	 * @param string $user_avatar  User avatar.
+	 *
+	 * @return void
 	 */
-	public function sign_up( $user_raw_id, $user_email, $user_display, $user_avatar ) {
+	public function sign_up( string $user_raw_id, string $user_email, string $user_display, string $user_avatar ): void {
 
 		if ( ! is_user_logged_in() ) {
-
-			function role_check() {
-				if ( get_option( 'form_notify_line_btn_user_role' ) ) {
-					return get_option( 'form_notify_line_btn_user_role' );
-				} else {
-					if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
-						return 'customer';
-					} else {
-						return 'subscriber';
-					}
-				}
-			}
 
 			if ( username_exists( strstr( $user_email, '@', true ) ) ) {
 				$user_login = strstr( $user_email, '@', true ) . '-' . wp_rand( 1, 10 );
@@ -84,7 +115,7 @@ class User {
 				'user_email'   => $user_email,
 				'display_name' => $user_display,
 				'nickname'     => $user_display,
-				'role'         => role_check(),
+				'role'         => $this->role_check(),
 			);
 
 			$user_id = wp_insert_user( $userdata );
@@ -94,7 +125,7 @@ class User {
 			update_user_meta( $user_id, 'billing_email', $user_email );
 
 			if ( function_exists( 'add_user_to_blog' ) ) {
-				add_user_to_blog( get_current_blog_id(), $user_id, role_check() );
+				add_user_to_blog( get_current_blog_id(), $user_id, $this->role_check() );
 			}
 
 			wp_clear_auth_cookie();
@@ -107,23 +138,46 @@ class User {
 	}
 
 	/**
+	 * Role check
+	 *
+	 * @return string
+	 */
+	private function role_check(): string {
+		if ( get_option( 'form_notify_line_btn_user_role' ) ) {
+			return get_option( 'form_notify_line_btn_user_role' );
+		} else {
+			if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+				return 'customer';
+			} else {
+				return 'subscriber';
+			}
+		}
+	}
+
+	/**
 	 * Set LINE login redirect action
 	 */
-	public function set_login_redirect_url() {
-		if ( isset( $_GET['lgmode'] ) ) {
+	public function set_login_redirect_url(): void {
+		$lgmode = form_notify_get_params( 'lgmode' );
 
-			if ( 'check-email' === $_GET['lgmode'] ) {
-				// wc_add_notice( __( 'Please enter your emaill address to login with LINE.', 'form-notify' ), 'error' );
-			} else {
+		if ( $lgmode ) {
+
+			if ( 'check-email' !== $lgmode ) {
 				session_start();
 
 				$line  = new SDK();
 				$state = md5( time() );
 
-				if ( 'true' === $_GET['lgmode'] ) {
-					$redirect_url = preg_replace( '~(\?|&)lgmode=[^&]*~', '$1', 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
-				} elseif ( strpos( $_GET['lgmode'], 'http' ) !== false ) {
-					$redirect_url = wp_unslash( $_GET['lgmode'] );
+				$redirect_url = '';
+
+				if ( 'true' === $lgmode ) {
+					if ( isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ) {
+						$http_post    = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+						$request_uri  = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+						$redirect_url = preg_replace( '~(\?|&)lgmode=[^&]*~', '$1', 'https://' . $http_post . $request_uri );
+					}
+				} elseif ( str_contains( $lgmode, 'http' ) ) {
+					$redirect_url = wp_unslash( $lgmode );
 				}
 
 				setcookie( 'login_redirect_url', $redirect_url, time() + 3600, '/' );
@@ -141,12 +195,12 @@ class User {
 	 *
 	 * @param string $type login or signup.
 	 */
-	public function set_logged_redirect( $type ) {
+	public function set_logged_redirect( string $type ): void {
 
-		$login_redirect_url = isset( $_COOKIE['login_redirect_url'] ) ? $_COOKIE['login_redirect_url'] : '';
+		$login_redirect_url = isset( $_COOKIE['login_redirect_url'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['login_redirect_url'] ) ) : '';
 		$admin_roles        = array( 'administrator', 'shop_manager' );
 		$is_admin           = ( count( array_intersect( $admin_roles, $this->roles ) ) > 0 ) ? true : false;
-		$is_wp_login        = ( strpos( $login_redirect_url, 'wp-login.php' ) !== false ) ? true : false;
+		$is_wp_login        = str_contains( $login_redirect_url, 'wp-login.php' );
 
 		if ( $login_redirect_url && ! get_option( 'form_notify_line_btn_redirect' ) ) {
 			header( 'Location:' . $login_redirect_url );
@@ -193,9 +247,14 @@ class User {
 	}
 
 	/**
-	 * 替換頭像網址
+	 * Replace avatar url
+	 *
+	 * @param array $args        Avatar args.
+	 * @param mixed $id_or_email User id or email.
+	 *
+	 * @return array
 	 */
-	public function replace_avatar_url( $args, $id_or_email ) {
+	public function replace_avatar_url( array $args, mixed $id_or_email ): array {
 
 		$user_id = '';
 
@@ -226,10 +285,11 @@ class User {
 	}
 
 	/**
-	 * 補填 Email 表單
+	 * Add email form
 	 */
 	public function add_email_form() {
-		if ( isset( $_GET['lgmode'] ) && 'check-email' === $_GET['lgmode'] ) {
+		$lgmode = form_notify_get_params( 'lgmode' );
+		if ( 'check-email' === $lgmode ) {
 			?>
 			<div class="fixed top:0 left:0 w:100% h:100vh bg:rgba(0,0,0,.5) z:1234"></div>
 			<div class="fixed w:400@sm w:90% top:50% left:50% translate(-50%,-50%) bg:#fff r:5 z:5678">
@@ -270,12 +330,13 @@ class User {
 	}
 
 	/**
-	 * 補填 Email 表單
+	 * Add email
 	 */
-	public function add_email() {
+	public function add_email(): void {
 		if ( isset( $_POST['form_notify_user_email'] ) && ! empty( $_POST['form_notify_user_email'] ) ) {
 			setcookie( 'form_notfify_line_email', sanitize_email( $_POST['form_notify_user_email'] ), time() + 3600, '/' );
 			wp_safe_redirect( home_url() . '?lgmode=true' );
+			exit;
 		}
 	}
 }
