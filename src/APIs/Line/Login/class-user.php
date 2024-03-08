@@ -313,6 +313,7 @@ class User {
 				<form action="<?php echo esc_attr( get_the_permalink() ); ?>" method="post" class="p:20|30|20">
 					<div>
 						<input class="w:100% f:16 b:1px|solid|#ccc r:5 p:10|15 box:border appearance:none bg:#f2f2f2 f:#222" type="email" name="form_notify_user_email" placeholder="<?php echo esc_attr( __( 'your@email.com' ) ); ?>" required>
+						<input type="hidden" name="form_notify_user_email_nonce" value="<?php echo esc_attr( wp_create_nonce( 'email_nonce' ) ); ?>">
 					</div>
 					<div class="mt:10 rel d:flex">
 						<button class="w:100% r:5 appearance:none border:0 outline:0 p:7|0|12! f:16 bg:#02d534! f:white! cursor:pointer ~background|.2s|ease bg:#12b83a:hover!" type="submit">
@@ -333,8 +334,11 @@ class User {
 	 * Add email
 	 */
 	public function add_email(): void {
-		if ( isset( $_POST['form_notify_user_email'] ) && ! empty( $_POST['form_notify_user_email'] ) ) {
-			setcookie( 'form_notfify_line_email', sanitize_email( $_POST['form_notify_user_email'] ), time() + 3600, '/' );
+		if ( isset( $_POST['form_notify_user_email'] ) && ! empty( $_POST['form_notify_user_email'] && ! empty( $_POST['form_notify_user_email_nonce'] ) ) ) {
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['form_notify_user_email_nonce'] ) ), 'email_nonce' ) ) {
+				wp_die( 'Security check' );
+			}
+			setcookie( 'form_notify_line_email', sanitize_email( wp_unslash( $_POST['form_notify_user_email'] ) ), time() + 3600, '/' );
 			wp_safe_redirect( home_url() . '?lgmode=true' );
 			exit;
 		}

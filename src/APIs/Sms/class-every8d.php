@@ -17,6 +17,7 @@ use WP_REST_Response;
  * Every8d SMS API class
  */
 class Every8d {
+	private $enable;
 	/**
 	 * Sms host
 	 *
@@ -76,6 +77,7 @@ class Every8d {
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->enable         = 'yes' === get_option( 'form_notify_e8d_enable' );
 		$this->user_id        = get_option( 'form_notify_e8d_user_id' );
 		$this->password       = get_option( 'form_notify_e8d_password' );
 		$this->sms_host       = 'api.e8d.tw';
@@ -85,6 +87,11 @@ class Every8d {
 		$this->batch_id       = '';
 		$this->credit         = 0.0;
 		$this->process_msg    = '';
+
+		if ( ! $this->enable ) {
+			return;
+		}
+
 		if ( ! $this->check_token() ) {
 			$this->get_token();
 		}

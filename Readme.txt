@@ -1,11 +1,11 @@
-=== Receive Notifications After Form Submitting - Form Notify for WP Form Plugins ===
+=== Receive Notifications After Form Submitting - Form Notify for WP Forms ===
 Contributors: oberonlai
 Donate link: https://paypal.me/oberonlai
 Tags: notification, email, alert, message, notify, LINE Login, LINE Notify, LINE Messaging API, SMS, Elementor Form, Gravity Form, Fluent Form
 Requires at least: 4.8
 Tested up to: 6.4.1
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

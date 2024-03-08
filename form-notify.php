@@ -10,7 +10,7 @@
  * Plugin Name:       Form Notify
  * Plugin URI:        https://oberonlai.blog/form-notify
  * Description:       Notification for WordPress form plugins.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Oberon Lai
  * Author URI:        https://oberonlai.blog/about
  * License:           GPL-2.0+
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FORMNOTIFY_VERSION', '1.0.1' );
+define( 'FORMNOTIFY_VERSION', '1.0.2' );
 define( 'FORMNOTIFY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -30,19 +30,10 @@ define( 'FORMNOTIFY_PLUGIN_FILE', __FILE__ );
 require_once FORMNOTIFY_PLUGIN_DIR . 'vendor/autoload.php';
 \A7\autoload( FORMNOTIFY_PLUGIN_DIR . 'src' );
 
-new ODS\Updater(
-	array(
-		'plugin_slug' => 'form-notify',
-		'version'     => FORMNOTIFY_VERSION,
-		'json_url'    => 'https://oberonlai.blog/form-notify.json',
-	)
-);
-
-
 /**
  * I18n
  */
-function form_notify_load_plugin_i18n() {
+function form_notify_load_plugin_i18n(): void {
 	load_plugin_textdomain( 'form-notify', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
@@ -69,9 +60,9 @@ add_action(
 	'admin_init',
 	function () {
 		global $pagenow;
-		$current_post = sanitize_text_field( wp_unslash( $_GET['post'] ?? '' ) );
-		$current_page = sanitize_text_field( wp_unslash( $_GET['page'] ?? '' ) );
-		$post_type    = sanitize_text_field( wp_unslash( $_GET['post_type'] ?? '' ) );
+		$current_post = form_notify_get_params( 'post' );
+		$current_page = form_notify_get_params( 'page' );
+		$post_type    = form_notify_get_params( 'post_type' );
 
 		if ( ( $current_post && 'post.php' === $pagenow ) || ( $current_post && 'shop_order' === get_post_type( $current_post ) ) || ( $current_post && 'form-notify' === get_post_type( $current_post ) ) || ( $post_type && 'form-notify' === $post_type && 'post-new.php' === $pagenow ) || ( $current_page && 'form-notify-setting' === $current_page ) ) {
 			$enqueue = new \WPackio\Enqueue( 'formNotify', 'assets/dist', '1.0.0', 'plugin', __FILE__ );
@@ -130,14 +121,5 @@ add_action(
 			)
 		);
 
-	}
-);
-
-add_action(
-	'before_woocommerce_init',
-	function () {
-		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-		}
 	}
 );

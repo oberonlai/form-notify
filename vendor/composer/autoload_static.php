@@ -45,7 +45,6 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         'ODS\\' => 
         array (
             0 => __DIR__ . '/..' . '/oberonlai/wp-option/src',
-            1 => __DIR__ . '/..' . '/oberonlai/wp-updater/src',
         ),
     );
 

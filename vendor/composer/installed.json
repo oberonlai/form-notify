@@ -142,51 +142,6 @@
             "install-path": "../oberonlai/wp-option"
         },
         {
-            "name": "oberonlai/wp-updater",
-            "version": "v1.0.2",
-            "version_normalized": "1.0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oberonlai/wp-updater.git",
-                "reference": "14815030a152da36720ad1da14be9284a28b60be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oberonlai/wp-updater/zipball/14815030a152da36720ad1da14be9284a28b60be",
-                "reference": "14815030a152da36720ad1da14be9284a28b60be",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "time": "2023-08-18T09:38:23+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "ODS\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oberon Lai",
-                    "email": "m615926@gmail.com",
-                    "homepage": "https://oberonlai.blog"
-                }
-            ],
-            "description": "Self hosted WordPress plugin update server",
-            "homepage": "https://github.com/oberonlai/wp-updater",
-            "support": {
-                "issues": "https://github.com/oberonlai/wp-updater/issues",
-                "source": "https://github.com/oberonlai/wp-updater/tree/v1.0.2"
-            },
-            "install-path": "../oberonlai/wp-updater"
-        },
-        {
             "name": "snicco/better-wpdb",
             "version": "v1.9.0",
             "version_normalized": "1.9.0.0",

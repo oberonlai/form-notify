@@ -9,5 +9,5 @@ return array(
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
     'Snicco\\Component\\BetterWPDB\\' => array($vendorDir . '/snicco/better-wpdb/src'),
     'PostTypes\\' => array($vendorDir . '/jjgrainger/posttypes/src'),
-    'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src', $vendorDir . '/oberonlai/wp-updater/src'),
+    'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src'),
 );
