@@ -66,6 +66,7 @@ class Metabox {
 			'priority' => 'default',
 		);
 
+		$this->fields      = array();
 		$this->meta_box    = array_merge( $defaults, $meta_box_config );
 		$this->nonce_name  = $meta_box_config['id'] . '_nonce';
 		$this->folder_name = 'Metabox-constructor-class';
@@ -682,9 +683,10 @@ class Metabox {
 				esc_attr( $this->get_block_element_class_with_namespace( $field['type'] ) ),
 				esc_attr( $field['id'] ),
 				esc_attr( $key ),
-				selected( (int) $key === (int) $meta, true, false )
+				selected( $key == $meta, true, false )
 			);
 		}
+
 		echo '</select>';
 		$this->after_field( $field );
 	}

@@ -5,7 +5,7 @@ Tags: notification, email, alert, message, notify, LINE Login, LINE Notify, LINE
 Requires at least: 4.8
 Tested up to: 6.4.1
 Requires PHP: 8.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

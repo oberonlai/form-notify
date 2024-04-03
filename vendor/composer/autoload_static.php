@@ -27,6 +27,10 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         array (
             'ODS\\' => 4,
         ),
+        'F' => 
+        array (
+            'FORMNOTIFY\\' => 11,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -46,10 +50,60 @@ class ComposerStaticInitd09b880c2582110a9242264be15a2f2a
         array (
             0 => __DIR__ . '/..' . '/oberonlai/wp-option/src',
         ),
+        'FORMNOTIFY\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'FORMNOTIFY\\APIs\\HistoryTable' => __DIR__ . '/../..' . '/src/APIs/HistoryTable.php',
+        'FORMNOTIFY\\APIs\\Line\\Login\\Button' => __DIR__ . '/../..' . '/src/APIs/Line/Login/Button.php',
+        'FORMNOTIFY\\APIs\\Line\\Login\\Route' => __DIR__ . '/../..' . '/src/APIs/Line/Login/Route.php',
+        'FORMNOTIFY\\APIs\\Line\\Login\\User' => __DIR__ . '/../..' . '/src/APIs/Line/Login/User.php',
+        'FORMNOTIFY\\APIs\\Line\\Message' => __DIR__ . '/../..' . '/src/APIs/Line/Message.php',
+        'FORMNOTIFY\\APIs\\Line\\Notify' => __DIR__ . '/../..' . '/src/APIs/Line/Notify.php',
+        'FORMNOTIFY\\APIs\\Metabox\\Metabox' => __DIR__ . '/../..' . '/src/APIs/Metabox/Metabox.php',
+        'FORMNOTIFY\\APIs\\Sms\\Easygo' => __DIR__ . '/../..' . '/src/APIs/Sms/Easygo.php',
+        'FORMNOTIFY\\APIs\\Sms\\Every8d' => __DIR__ . '/../..' . '/src/APIs/Sms/Every8d.php',
+        'FORMNOTIFY\\APIs\\Sms\\Mitake' => __DIR__ . '/../..' . '/src/APIs/Sms/Mitake.php',
+        'FORMNOTIFY\\Assets' => __DIR__ . '/../..' . '/src/Assets.php',
+        'FORMNOTIFY\\Events\\AbstractNotify' => __DIR__ . '/../..' . '/src/Events/AbstractNotify.php',
+        'FORMNOTIFY\\Events\\Elementor\\Form' => __DIR__ . '/../..' . '/src/Events/Elementor/Form.php',
+        'FORMNOTIFY\\Events\\Elementor\\Notify' => __DIR__ . '/../..' . '/src/Events/Elementor/Notify.php',
+        'FORMNOTIFY\\Events\\Fluent\\Form' => __DIR__ . '/../..' . '/src/Events/Fluent/Form.php',
+        'FORMNOTIFY\\Events\\Fluent\\Notify' => __DIR__ . '/../..' . '/src/Events/Fluent/Notify.php',
+        'FORMNOTIFY\\Events\\Gravity\\Form' => __DIR__ . '/../..' . '/src/Events/Gravity/Form.php',
+        'FORMNOTIFY\\Events\\Gravity\\Notify' => __DIR__ . '/../..' . '/src/Events/Gravity/Notify.php',
+        'FORMNOTIFY\\Options\\E8d' => __DIR__ . '/../..' . '/src/Options/E8d.php',
+        'FORMNOTIFY\\Options\\Easygo' => __DIR__ . '/../..' . '/src/Options/Easygo.php',
+        'FORMNOTIFY\\Options\\History' => __DIR__ . '/../..' . '/src/Options/History.php',
+        'FORMNOTIFY\\Options\\LineButton' => __DIR__ . '/../..' . '/src/Options/LineButton.php',
+        'FORMNOTIFY\\Options\\LineChannel' => __DIR__ . '/../..' . '/src/Options/LineChannel.php',
+        'FORMNOTIFY\\Options\\LineNotify' => __DIR__ . '/../..' . '/src/Options/LineNotify.php',
+        'FORMNOTIFY\\Options\\Mitake' => __DIR__ . '/../..' . '/src/Options/Mitake.php',
+        'FORMNOTIFY\\Options\\Option' => __DIR__ . '/../..' . '/src/Options/Option.php',
+        'FORMNOTIFY\\Posts\\Notify\\Cpt' => __DIR__ . '/../..' . '/src/Posts/Notify/Cpt.php',
+        'FORMNOTIFY\\Posts\\Notify\\Metabox\\Action' => __DIR__ . '/../..' . '/src/Posts/Notify/Metabox/Action.php',
+        'FORMNOTIFY\\Posts\\Notify\\Metabox\\Param' => __DIR__ . '/../..' . '/src/Posts/Notify/Metabox/Param.php',
+        'FORMNOTIFY\\Posts\\Notify\\Metabox\\Trigger' => __DIR__ . '/../..' . '/src/Posts/Notify/Metabox/Trigger.php',
+        'ODS\\Helper' => __DIR__ . '/..' . '/oberonlai/wp-option/src/Helper.php',
+        'ODS\\Option' => __DIR__ . '/..' . '/oberonlai/wp-option/src/Option.php',
+        'PostTypes\\Columns' => __DIR__ . '/..' . '/jjgrainger/posttypes/src/Columns.php',
+        'PostTypes\\PostType' => __DIR__ . '/..' . '/jjgrainger/posttypes/src/PostType.php',
+        'PostTypes\\Taxonomy' => __DIR__ . '/..' . '/jjgrainger/posttypes/src/Taxonomy.php',
+        'Snicco\\Component\\BetterWPDB\\BetterWPDB' => __DIR__ . '/..' . '/snicco/better-wpdb/src/BetterWPDB.php',
+        'Snicco\\Component\\BetterWPDB\\Exception\\NoMatchingRowFound' => __DIR__ . '/..' . '/snicco/better-wpdb/src/Exception/NoMatchingRowFound.php',
+        'Snicco\\Component\\BetterWPDB\\Exception\\QueryException' => __DIR__ . '/..' . '/snicco/better-wpdb/src/Exception/QueryException.php',
+        'Snicco\\Component\\BetterWPDB\\KeysetPagination\\LeftOff' => __DIR__ . '/..' . '/snicco/better-wpdb/src/KeysetPagination/LeftOff.php',
+        'Snicco\\Component\\BetterWPDB\\KeysetPagination\\Lock' => __DIR__ . '/..' . '/snicco/better-wpdb/src/KeysetPagination/Lock.php',
+        'Snicco\\Component\\BetterWPDB\\KeysetPagination\\Query' => __DIR__ . '/..' . '/snicco/better-wpdb/src/KeysetPagination/Query.php',
+        'Snicco\\Component\\BetterWPDB\\KeysetPagination\\ResultSet' => __DIR__ . '/..' . '/snicco/better-wpdb/src/KeysetPagination/ResultSet.php',
+        'Snicco\\Component\\BetterWPDB\\MysqliFactory' => __DIR__ . '/..' . '/snicco/better-wpdb/src/MysqliFactory.php',
+        'Snicco\\Component\\BetterWPDB\\QueryInfo' => __DIR__ . '/..' . '/snicco/better-wpdb/src/QueryInfo.php',
+        'Snicco\\Component\\BetterWPDB\\QueryLogger' => __DIR__ . '/..' . '/snicco/better-wpdb/src/QueryLogger.php',
+        'WPackio\\Enqueue' => __DIR__ . '/..' . '/wpackio/enqueue/inc/Enqueue.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -10,7 +10,7 @@
  * Plugin Name:       Form Notify
  * Plugin URI:        https://oberonlai.blog/form-notify
  * Description:       Notification for WordPress form plugins.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Oberon Lai
  * Author URI:        https://oberonlai.blog/about
  * License:           GPL-2.0+
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FORMNOTIFY_VERSION', '1.0.2' );
+define( 'FORMNOTIFY_VERSION', '1.0.3' );
 define( 'FORMNOTIFY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -29,6 +29,7 @@ define( 'FORMNOTIFY_PLUGIN_FILE', __FILE__ );
 
 require_once FORMNOTIFY_PLUGIN_DIR . 'vendor/autoload.php';
 \A7\autoload( FORMNOTIFY_PLUGIN_DIR . 'src' );
+
 
 /**
  * I18n

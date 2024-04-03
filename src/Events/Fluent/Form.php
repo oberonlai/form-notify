@@ -177,12 +177,13 @@ class Form {
 	/**
 	 * Push
 	 *
+	 * @param int    $insert_id inset.
 	 * @param array  $form_data form data.
 	 * @param object $form      form object.
 	 *
 	 * @return void
 	 */
-	public function push( array $form_data, object $form ): void {
+	public function push( int $insert_id, array $form_data, object $form ): void {
 		$notify_ids = $this->notify->get_notify_ids( $form->id );
 		$this->notify->send_notify( $notify_ids, $form_data );
 	}
@@ -204,10 +205,4 @@ class Form {
 	}
 }
 
-add_action(
-	'init',
-	function () {
-		Form::init();
-	}
-);
-// Form::init();
+Form::init();

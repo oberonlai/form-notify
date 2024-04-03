@@ -38,11 +38,11 @@ class Notify {
 	/**
 	 * Remote api request
 	 *
-	 * @param object $messages LINE message object.
+	 * @param string $messages LINE message text.
 	 *
 	 * @return object $resp LINE api response.
 	 */
-	private function request( object $messages ): object {
+	private function request( string $messages ): object {
 		$options = array(
 			'method'  => 'POST',
 			'timeout' => 60,
@@ -69,11 +69,11 @@ class Notify {
 	/**
 	 * Execute push api
 	 *
-	 * @param object $messages LINE message object.
+	 * @param string $messages LINE message object.
 	 *
 	 * @return string $result request result.
 	 */
-	public function push( object $messages ): string {
+	public function push( string $messages ): string {
 		if ( ! $this->token ) {
 			return __( 'Please set LINE Notify access token first.', 'form-notify' );
 		}

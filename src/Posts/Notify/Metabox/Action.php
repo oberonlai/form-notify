@@ -114,3 +114,4 @@ class Action {
 }
 
 Action::register();
+

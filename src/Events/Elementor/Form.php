@@ -67,7 +67,7 @@ class Form {
 	 * @param object $trigger Trigger object.
 	 */
 	public function add_form_select( object $trigger ): void {
-		$trigger->addSelect(
+		$trigger->add_select(
 			array(
 				'id'         => 'form_notify_trigger_form_elementor',
 				'class'      => 'form-notify-trigger-form',
@@ -221,4 +221,5 @@ class Form {
 }
 
 Form::init();
+
 

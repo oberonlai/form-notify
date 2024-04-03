@@ -10,4 +10,5 @@ return array(
     'Snicco\\Component\\BetterWPDB\\' => array($vendorDir . '/snicco/better-wpdb/src'),
     'PostTypes\\' => array($vendorDir . '/jjgrainger/posttypes/src'),
     'ODS\\' => array($vendorDir . '/oberonlai/wp-option/src'),
+    'FORMNOTIFY\\' => array($baseDir . '/src'),
 );

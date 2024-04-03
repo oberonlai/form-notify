@@ -86,11 +86,11 @@ abstract class AbstractNotify {
 	/**
 	 * Get Notify post ids
 	 *
-	 * @param int $value notify meta value.
+	 * @param int|string $value notify meta value.
 	 *
 	 * @return array $notify_ids Notify Post IDs.
 	 */
-	public function get_notify_ids( int $value ): array {
+	public function get_notify_ids( int|string $value ): array {
 		$notify_ids = array();
 		// @codingStandardsIgnoreStart
 		$args_post = array(
