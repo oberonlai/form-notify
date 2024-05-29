@@ -101,6 +101,15 @@ class Form {
 			return false;
 		}
 
+		$has_booking  = false;
+		$booking_args = array(
+			'timezone'   => __( 'Booking timezone', 'wc-notify' ),
+			'duration'   => __( 'Booking duration', 'wc-notify' ),
+			'start_time' => __( 'Booking start time', 'wc-notify' ),
+			'address'    => __( 'Booking address', 'wc-notify' ),
+			'end_time'   => __( 'Booking end time', 'wc-notify' ),
+		);
+
 		$html = '';
 
 		foreach ( $forms as $form ) {
@@ -124,6 +133,19 @@ class Form {
 					</button>
 				</li>';
 			}
+
+			if ( $has_booking ) {
+				foreach ( $booking_args as $input => $label ) {
+					$html .= '<li class="mr:10">
+					<button class="btn-copy cursor:pointer rel border:0 p:5|8 r:4 bg:#eee bg:#ddd:hover" data-clipboard-text="{{' . $input . '}}">' . ucwords( str_replace( '_', ' ', $label ) ) . '
+						<span class="opacity:0 pointer-events:none abs bottom:-20 bg:#2271b1 f:white p:3|5 f:12 r:2 left:50% translate(-50%,0) z:10 white-space:nowrap">' . __( 'Copied!', 'wc-notify' ) . '
+							<i class="abs bottom:18 left:50% translate(-50%,0) w:0 h:0 border-style:solid; border-width:0|8px|10px|8px border-color:transparent|transparent|#2271b1|transparent z:5"></i>
+						</span>
+					</button>
+				</li>';
+				}
+			}
+
 			$html .= '</ul></div>';
 			$html .= '</div>';
 		}
