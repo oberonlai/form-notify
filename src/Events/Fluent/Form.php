@@ -124,6 +124,10 @@ class Form {
 			<div>
 				<ul class="d:flex flex-wrap:wrap mb:0" data-show-by="form_notify_trigger_form_fluent" data-show-value="' . $form->id . '">';
 			foreach ( $labels as $input => $label ) {
+				if ( 'fcal_booking' === $input ) {
+					$has_booking = true;
+					continue;
+				}
 				$html .= '
 				<li class="mr:10">
 					<button class="btn-copy cursor:pointer rel border:0 p:5|8 r:4 bg:#eee bg:#ddd:hover" data-clipboard-text="{{' . $input . '}}">' . ucwords( str_replace( '_', ' ', $label ) ) . '
