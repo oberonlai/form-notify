@@ -48,15 +48,6 @@ class E8d {
 				),
 			),
 		);
-		$config->addHtml(
-			$tab_id,
-			array(
-				'id'    => 'e8d_points',
-				'label' => __( 'Current Points', 'form-notify' ),
-				'desc'  => '<div class="flex align-items:center" x-data="{points:\'' . __( 'Check Points', 'form-notify' ) . '\'}"><span class="cursor:pointer button button-primary" x-text="points" @click.prevent="points=\'' . __( 'Loading...', 'form-notify' ) . '\';fetch(`' . home_url() . '/wp-json/e8d/v1/get-points`).then(response => response.json()).then((data) => { points = data })">' . __( 'Check Points', 'form-notify' ) . '</span></div><p class="description">' . __( 'Make sure you have enough points to send SMS.', 'form-notify' ) . '</p>',
-				'class' => '',
-			),
-		);
 		$config->addText(
 			$tab_id,
 			array(
@@ -93,5 +84,16 @@ class E8d {
 				'size'         => 'regular',
 			),
 		);
+		if ( get_option( 'form_notify_e8d_user_id' ) && get_option( 'form_notify_e8d_password' ) ) {
+			$config->addHtml(
+				$tab_id,
+				array(
+					'id'    => 'e8d_points',
+					'label' => __( 'Current Points', 'form-notify' ),
+					'desc'  => '<div class="flex align-items:center" x-data="{points:\'' . __( 'Check Points', 'form-notify' ) . '\'}"><span class="cursor:pointer button button-primary" x-text="points" @click.prevent="points=\'' . __( 'Loading...', 'form-notify' ) . '\';fetch(`' . home_url() . '/wp-json/e8d/v1/get-points`).then(response => response.json()).then((data) => { points = data })">' . __( 'Check Points', 'form-notify' ) . '</span></div><p class="description">' . __( 'Make sure you have enough points to send SMS.', 'form-notify' ) . '</p>',
+					'class' => '',
+				),
+			);
+		}
 	}
 }

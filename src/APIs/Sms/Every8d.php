@@ -92,9 +92,6 @@ class Every8d {
 			return;
 		}
 
-		if ( ! $this->check_token() ) {
-			$this->get_token();
-		}
 		add_action( 'form_notify_action_module_type_events', array( $this, 'send_notify_events' ), 10, 5 );
 		add_action( 'rest_api_init', array( $this, 'register_points_api_route' ) );
 	}
@@ -170,6 +167,9 @@ class Every8d {
 	 * @return string $batch_id
 	 */
 	public function send_sms( string $phone, string $message ): string {
+		if ( ! $this->check_token() ) {
+			$this->get_token();
+		}
 		$body    = array(
 			'DEST' => $phone,
 			'MSG'  => $message,
