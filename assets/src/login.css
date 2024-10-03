@@ -1,0 +1,35 @@
+.form-notify-line-wrap {
+    padding: .3rem 0 1.2rem;
+}
+
+.form-notify-line-wrap.aligncenter,
+.form-notify-line-wrap.center {
+    text-align: center
+}
+
+.form-notify-line-wrap a {
+    display: block;
+    background: #02d534 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-align: center;
+    border-radius: 5px;
+    padding: .2rem 1rem .6rem;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.form-notify-line-wrap a img {
+    display: inline;
+    position: relative;
+    top: 6px;
+    left: -5px;
+    vertical-align: baseline !important;
+}
+
+.form-notify-line-wrap a svg {
+    position: relative;
+    top: 6px;
+    left: -5px;
+    vertical-align: baseline !important;
+}

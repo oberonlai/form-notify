@@ -1,0 +1,28 @@
+{
+  "lineLoginButton.css": "blocks/lineLoginButton-d605b671.css",
+  "lineLoginButton.css.map": "blocks/lineLoginButton-d605b671.css.map",
+  "lineLoginButton.js": "blocks/lineLoginButton-994d55ac.js",
+  "lineLoginButton.js.map": "blocks/lineLoginButton-994d55ac.js.map",
+  "runtime.js": "blocks/runtime-931d6724.js",
+  "runtime.js.map": "blocks/runtime-931d6724.js.map",
+  "wpackioEp": {
+    "lineLoginButton": {
+      "assets": {
+        "js": [
+          "blocks/runtime-931d6724.js",
+          "blocks/lineLoginButton-994d55ac.js"
+        ],
+        "js.map": [
+          "blocks/runtime-931d6724.js.map",
+          "blocks/lineLoginButton-994d55ac.js.map"
+        ],
+        "css": [
+          "blocks/lineLoginButton-d605b671.css"
+        ],
+        "css.map": [
+          "blocks/lineLoginButton-d605b671.css.map"
+        ]
+      }
+    }
+  }
+}

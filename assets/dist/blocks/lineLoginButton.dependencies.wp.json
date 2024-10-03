@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "wp-block-editor",
+    "wp-blocks",
+    "wp-data",
+    "wp-i18n"
+  ],
+  "version": "1ee8f8f7085634e0f8d89a3c9339536f"
+}

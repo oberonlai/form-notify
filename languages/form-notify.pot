@@ -1,0 +1,649 @@
+# Copyright (C) 2023 Oberon Lai
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Form Notify 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/form-notify\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-08-18T09:03:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: form-notify\n"
+
+#. Plugin Name of the plugin
+#: src/Posts/Notify/Cpt.php:23
+msgid "Form Notify"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://oberonlai.blog"
+msgstr ""
+
+#. Description of the plugin
+msgid "Notification for WordPress form plugins."
+msgstr ""
+
+#. Author of the plugin
+msgid "Oberon Lai"
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:151
+#: src/APIs/Easygo/Easygo.php:69
+#: src/APIs/Line/Message.php:88
+#: src/APIs/Line/Notify.php:78
+#: src/Events/AbstractNotify.php:167
+msgid "Success"
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:155
+msgid "Occur error when connecting API. Please try later."
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:223
+#: src/APIs/Easygo/Easygo.php:79
+#: src/APIs/Mitake/Mitake.php:78
+msgid "Enter the username and password first"
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:253
+#: src/APIs/E8d/Every8d.php:265
+#: src/Posts/Notify/Metabox/Action.php:41
+msgid "Every8d SMS"
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:253
+#: src/APIs/Mitake/Mitake.php:193
+msgid "Processing"
+msgstr ""
+
+#: src/APIs/E8d/Every8d.php:265
+msgid "Form Notify Every8d Sending Result: Points are not enough."
+msgstr ""
+
+#: src/APIs/Easygo/Easygo.php:139
+#: src/APIs/Easygo/Easygo.php:142
+#: src/APIs/Easygo/Easygo.php:155
+#: src/APIs/Easygo/Easygo.php:164
+#: src/Posts/Notify/Metabox/Action.php:43
+msgid "easyGo SMS"
+msgstr ""
+
+#: src/APIs/Easygo/Easygo.php:142
+#: src/APIs/Easygo/Easygo.php:162
+#: src/APIs/Easygo/Easygo.php:164
+msgid "Form Notify easyGo Sending Result: Points are not enough."
+msgstr ""
+
+#: src/APIs/Easygo/Easygo.php:159
+msgid "Form Notify easyGo Sending Result: Success"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:20
+#: src/APIs/HistoryTable.php:21
+#: src/Options/History.php:29
+msgid "Notify History"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:103
+msgid "No Data"
+msgstr ""
+
+#. Translators: %s: all.
+#: src/APIs/HistoryTable.php:127
+msgid "<a href=\"%s\">All</a>"
+msgstr ""
+
+#. Translators: %s: week.
+#: src/APIs/HistoryTable.php:129
+msgid "<a href=\"%s\">Week</a>"
+msgstr ""
+
+#. Translators: %s: month.
+#: src/APIs/HistoryTable.php:131
+msgid "<a href=\"%s\">Month</a>"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:143
+msgid "Start Date"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:144
+msgid "End Date"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:145
+msgid "Filter"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:146
+msgid "Clear"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:166
+msgid "Delete History"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:188
+msgid "Trigger Event"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:189
+#: src/Posts/Notify/Metabox/Action.php:49
+msgid "Notify Type"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:190
+msgid "Notify Content"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:191
+msgid "Status"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:192
+msgid "Notify Time"
+msgstr ""
+
+#: src/APIs/HistoryTable.php:232
+msgid "Delete"
+msgstr ""
+
+#: src/APIs/Line/Login/Button.php:47
+#: src/APIs/Line/Login/Button.php:56
+#: src/APIs/Line/Login/Button.php:101
+msgid "Login"
+msgstr ""
+
+#: src/APIs/Line/Login/Button.php:47
+#: src/APIs/Line/Login/Button.php:99
+#: src/APIs/Line/Login/User.php:260
+msgid "Register"
+msgstr ""
+
+#: src/APIs/Line/Login/Button.php:135
+msgid "Button Text"
+msgstr ""
+
+#: src/APIs/Line/Login/User.php:250
+msgid "Register Failed."
+msgstr ""
+
+#: src/APIs/Line/Login/User.php:252
+msgid "You have to enter your emaill address."
+msgstr ""
+
+#: src/APIs/Line/Login/User.php:264
+msgid "Close"
+msgstr ""
+
+#: src/APIs/Line/Notify.php:71
+msgid "Please set LINE Notify access token first."
+msgstr ""
+
+#: src/APIs/Mitake/Mitake.php:192
+#: src/APIs/Mitake/Mitake.php:195
+#: src/Posts/Notify/Metabox/Action.php:42
+msgid "Mitake SMS"
+msgstr ""
+
+#: src/APIs/Mitake/Mitake.php:195
+msgid "Form Notify Mitake Sending Result: Points are not enough."
+msgstr ""
+
+#: src/Events/AbstractNotify.php:139
+#: src/Options/Option.php:33
+#: src/Posts/Notify/Metabox/Action.php:36
+msgid "LINE Notify"
+msgstr ""
+
+#: src/Events/AbstractNotify.php:152
+#: src/Events/AbstractNotify.php:155
+msgid "Not found LINE user id"
+msgstr ""
+
+#: src/Events/AbstractNotify.php:158
+msgid "LINE Messaging API"
+msgstr ""
+
+#: src/Events/AbstractNotify.php:167
+#: src/Posts/Notify/Metabox/Action.php:38
+msgid "Email"
+msgstr ""
+
+#: src/Events/Elementor/Form.php:26
+msgid "Via Elementor Form"
+msgstr ""
+
+#: src/Events/Elementor/Form.php:54
+msgid "After Elementor Form submitted"
+msgstr ""
+
+#: src/Events/Elementor/Form.php:64
+#: src/Events/Fluent/Form.php:70
+#: src/Events/Gravity/Form.php:69
+msgid "Form"
+msgstr ""
+
+#: src/Events/Elementor/Form.php:65
+#: src/Events/Fluent/Form.php:71
+#: src/Events/Gravity/Form.php:70
+msgid "Select the form."
+msgstr ""
+
+#: src/Events/Elementor/Form.php:101
+#: src/Events/Fluent/Form.php:108
+#: src/Events/Gravity/Form.php:107
+#: src/Posts/Notify/Metabox/Param.php:57
+msgid "Copied!"
+msgstr ""
+
+#: src/Events/Fluent/Form.php:23
+msgid "Via Fluent Form"
+msgstr ""
+
+#: src/Events/Fluent/Form.php:52
+msgid "After Fluent Form submitted"
+msgstr ""
+
+#: src/Events/Fluent/Form.php:139
+msgid "Fluent Form Receiver Field"
+msgstr ""
+
+#: src/Events/Fluent/Form.php:141
+msgid "Copy the field parameters by notify type. Use case:<br>1.Using the parameter {{phone}} if you want to notify via SMS.<br>2.Using the parameter {{email}} which is from LINE Login if you want to notify via LINE Messaging API."
+msgstr ""
+
+#: src/Events/Gravity/Form.php:23
+msgid "Via Gravity Form"
+msgstr ""
+
+#: src/Events/Gravity/Form.php:51
+msgid "After Gravity Form submitted"
+msgstr ""
+
+#: src/Options/E8d.php:23
+msgid "Every8d SMS Settings"
+msgstr ""
+
+#: src/Options/E8d.php:31
+#: src/Options/Easygo.php:31
+#: src/Options/Mitake.php:31
+msgid "Enable"
+msgstr ""
+
+#: src/Options/E8d.php:38
+#: src/Options/Easygo.php:38
+#: src/Options/LineButton.php:38
+#: src/Options/Mitake.php:38
+msgid "Yes"
+msgstr ""
+
+#: src/Options/E8d.php:39
+#: src/Options/Easygo.php:39
+#: src/Options/LineButton.php:39
+#: src/Options/Mitake.php:39
+msgid "No"
+msgstr ""
+
+#: src/Options/E8d.php:47
+#: src/Options/Easygo.php:47
+#: src/Options/Mitake.php:47
+msgid "Current Points"
+msgstr ""
+
+#: src/Options/E8d.php:48
+#: src/Options/Easygo.php:48
+#: src/Options/Mitake.php:48
+msgid "Check Points"
+msgstr ""
+
+#: src/Options/E8d.php:48
+#: src/Options/Easygo.php:48
+#: src/Options/Mitake.php:48
+msgid "Loading..."
+msgstr ""
+
+#: src/Options/E8d.php:48
+#: src/Options/Easygo.php:48
+#: src/Options/Mitake.php:48
+msgid "Make sure you have enough points to send SMS."
+msgstr ""
+
+#: src/Options/E8d.php:56
+#: src/Options/Easygo.php:56
+#: src/Options/Mitake.php:56
+msgid "User Id"
+msgstr ""
+
+#: src/Options/E8d.php:57
+msgid "The login user id of every8d"
+msgstr ""
+
+#: src/Options/E8d.php:68
+#: src/Options/Easygo.php:68
+#: src/Options/Mitake.php:68
+msgid "Password"
+msgstr ""
+
+#: src/Options/E8d.php:69
+msgid "The password of every8d"
+msgstr ""
+
+#: src/Options/E8d.php:80
+msgid "Token"
+msgstr ""
+
+#: src/Options/E8d.php:81
+msgid "The access token of every8d. It generates automatically."
+msgstr ""
+
+#: src/Options/Easygo.php:23
+msgid "easyGo SMS Settings"
+msgstr ""
+
+#: src/Options/Easygo.php:57
+msgid "The login user id of easyGo"
+msgstr ""
+
+#: src/Options/Easygo.php:69
+msgid "The password of easyGo"
+msgstr ""
+
+#: src/Options/History.php:23
+#: src/Options/History.php:24
+msgid "History"
+msgstr ""
+
+#: src/Options/History.php:60
+msgid "Posts Per Page"
+msgstr ""
+
+#: src/Options/LineButton.php:23
+msgid "WordPress Login / Register Form Settings"
+msgstr ""
+
+#: src/Options/LineButton.php:31
+msgid "Display in WordPress login form"
+msgstr ""
+
+#: src/Options/LineButton.php:32
+msgid "Show LINE Login button in WordPress admin login / register form."
+msgstr ""
+
+#: src/Options/LineButton.php:48
+msgid "Other Settings"
+msgstr ""
+
+#: src/Options/LineButton.php:57
+msgid "Redirect Page URL"
+msgstr ""
+
+#: src/Options/LineButton.php:58
+msgid "The redirect page after LINE Login."
+msgstr ""
+
+#: src/Options/LineButton.php:70
+msgid "User Role"
+msgstr ""
+
+#: src/Options/LineButton.php:71
+msgid "The user role after LINE Login."
+msgstr ""
+
+#: src/Options/LineButton.php:85
+msgid "User Email Permission"
+msgstr ""
+
+#: src/Options/LineButton.php:86
+msgid "The solution when users do not allow email permission."
+msgstr ""
+
+#: src/Options/LineButton.php:93
+msgid "Force enter email address"
+msgstr ""
+
+#: src/Options/LineButton.php:94
+msgid "Generate fake email with LINE user id"
+msgstr ""
+
+#: src/Options/LineChannel.php:14
+msgid "LINE Login Setting - <a target=\"_blank\" class=\"t:none:hover\" href=\"https://oberonlai.blog/line-login-setting/\">Tutorial for LINE Login</a>"
+msgstr ""
+
+#: src/Options/LineChannel.php:22
+msgid "Channel ID for Login"
+msgstr ""
+
+#: src/Options/LineChannel.php:23
+msgid "LINE Login Channel ID."
+msgstr ""
+
+#: src/Options/LineChannel.php:35
+msgid "Channel Secret for Login"
+msgstr ""
+
+#: src/Options/LineChannel.php:36
+msgid "LINE Login Channel secret."
+msgstr ""
+
+#: src/Options/LineChannel.php:48
+msgid "Callback URL for Login"
+msgstr ""
+
+#: src/Options/LineChannel.php:49
+msgid "copied!"
+msgstr ""
+
+#: src/Options/LineChannel.php:49
+msgid "Copy the callback url to paste in LINE developer console."
+msgstr ""
+
+#: src/Options/LineChannel.php:61
+msgid "Email Address Permission"
+msgstr ""
+
+#: src/Options/LineChannel.php:62
+msgid "You have to access the email permission for LINE Login."
+msgstr ""
+
+#: src/Options/LineChannel.php:74
+msgid "LINE Messaging API Setting - <a target=\"_blank\" class=\"t:none:hover\" href=\"https://oberonlai.blog/line-messaging-api-setting/\">Tutorial for LINE Messaging API</a>"
+msgstr ""
+
+#: src/Options/LineChannel.php:83
+msgid "Channel access token"
+msgstr ""
+
+#: src/Options/LineChannel.php:84
+msgid "LINE Messaging API access token."
+msgstr ""
+
+#: src/Options/LineChannel.php:96
+msgid "Testing User ID"
+msgstr ""
+
+#: src/Options/LineChannel.php:97
+msgid "The User ID of Messaging API for testing."
+msgstr ""
+
+#: src/Options/LineNotify.php:14
+msgid "LINE Notify Setting - <a target=\"_blank\" class=\"t:none:hover\" href=\"https://oberonlai.blog/line-notify-setting/\">Tutorial for LINE Notify</a>"
+msgstr ""
+
+#: src/Options/LineNotify.php:23
+msgid "Access token"
+msgstr ""
+
+#: src/Options/LineNotify.php:24
+msgid "LINE Notify access token."
+msgstr ""
+
+#: src/Options/Mitake.php:23
+msgid "Mitake SMS Settings"
+msgstr ""
+
+#: src/Options/Mitake.php:57
+msgid "The login user id of Mitake"
+msgstr ""
+
+#: src/Options/Mitake.php:69
+msgid "The password of Mitake"
+msgstr ""
+
+#: src/Options/Mitake.php:80
+msgid "API URL"
+msgstr ""
+
+#: src/Options/Mitake.php:81
+msgid "The URL of Mitake API "
+msgstr ""
+
+#: src/Options/Option.php:19
+msgid "Notify Settings"
+msgstr ""
+
+#: src/Options/Option.php:20
+msgid "Settings"
+msgstr ""
+
+#: src/Options/Option.php:34
+msgid "LINE Notify setting"
+msgstr ""
+
+#: src/Options/Option.php:38
+msgid "LINE Channel"
+msgstr ""
+
+#: src/Options/Option.php:39
+msgid "LINE Channel setting for Login and Messaging API"
+msgstr ""
+
+#: src/Options/Option.php:43
+msgid "LINE Login button"
+msgstr ""
+
+#: src/Options/Option.php:44
+msgid "Set LINE Login button position and appearence."
+msgstr ""
+
+#: src/Options/Option.php:48
+msgid "Every8d"
+msgstr ""
+
+#: src/Options/Option.php:52
+msgid "Mitake"
+msgstr ""
+
+#: src/Options/Option.php:56
+msgid "easyGo"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:38
+msgid "All items"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:39
+msgid "Add new"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:40
+msgid "Add new item"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:41
+msgid "Edit item"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:42
+msgid "New item"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:43
+msgid "View item"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:44
+msgid "View items"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:45
+msgid "Search items"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:46
+msgid "Not found"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:47
+msgid "Not found in trash"
+msgstr ""
+
+#: src/Posts/Notify/Cpt.php:54
+msgid "Notify Genre"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:27
+msgid "Notify Action"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:35
+#: src/Posts/Notify/Metabox/Trigger.php:30
+msgid "Choose"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:37
+msgid "BOT"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:58
+msgid "Email Subject"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:68
+msgid "Notify content"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:77
+msgid "Custom Receiver Field"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:78
+msgid "ex:{{email}}"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:79
+msgid "Copy the field parameters by notify type. For example:<br>1.Using the parameter {{phone}} if you want to notify via SMS.<br>2.Using the parameter {{email}} if you want to notify via email address.<br>3.Using the parameter {{email}} which is from LINE Login if you want to notify via LINE Messaging API."
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:92
+msgid "Notify action."
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:93
+msgid "Action"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Action.php:94
+msgid "Add"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Param.php:28
+msgid "Notify Params"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Trigger.php:22
+msgid "Notify Trigger"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Trigger.php:39
+msgid "Event"
+msgstr ""
+
+#: src/Posts/Notify/Metabox/Trigger.php:40
+msgid "Select the trigger event of sending notifications."
+msgstr ""

@@ -1,0 +1,98 @@
+/*frontend*/
+.logged-in .form-notify-line-login {
+  display: none;
+}
+
+.form-notify-line-login {
+  .wp-block-button {
+    width: 100%;
+  }
+
+  .wp-block-button__width-25 a {
+    width: 25%;
+  }
+
+  .wp-block-button__width-50 a {
+    width: 50%;
+  }
+
+  .wp-block-button__width-75 a {
+    width: 75%;
+  }
+
+  .wp-block-button__width-100 a {
+    width: 100%;
+  }
+
+  .wp-block-button__link {
+    color: #fff;
+    transition: all .2s ease;
+  }
+
+  .wp-block-button__link span img {
+    width: auto;
+    display: inline;
+    position: relative;
+    top: 3px;
+    margin-right: 7px;
+  }
+
+  .wp-block-button__link:hover {
+    filter: brightness(1.1);
+  }
+
+  .wp-block-button__link:not(.has-background),
+  .wp-block-button__link:not(.has-background):hover {
+    background-color: #03c34c;
+  }
+
+  .wp-block-button__link:not(.has-text-color),
+  .wp-block-button__link:not(.has-text-color):hover {
+    color: #fff;
+  }
+
+  .alignright {
+    text-align: right;
+  }
+}
+
+
+/*backend*/
+.editor-styles-wrapper {
+
+  .form-notify-line-login {
+    .wp-block-button {
+      width: 100%;
+    }
+
+    .wp-block-button.wp-block-button__width-25 > div {
+      width: 25%;
+    }
+
+    .wp-block-button.wp-block-button__width-50 > div {
+      width: 50%;
+    }
+
+    .wp-block-button.wp-block-button__width-75 > div {
+      width: 75%;
+    }
+
+    .wp-block-button.wp-block-button__width-100 > div {
+      width: 100%;
+    }
+
+    .wp-block-button__link {
+      background-color: #03c34c;
+      color: #fff;
+      transition: all .2s ease;
+    }
+
+    .wp-block-button__link span img {
+      width: auto;
+      display: inline;
+      position: relative;
+      top: 3px;
+      margin-right: 7px;
+    }
+  }
+}

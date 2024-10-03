@@ -1,0 +1,15 @@
+{
+  "require": {
+    "snicco/better-wpdb": "^1.9",
+    "wpackio/enqueue": "^3.5",
+    "a7/autoload": "^2.1",
+    "jjgrainger/posttypes": "^2.2",
+    "oberonlai/wp-option": "^1.0",
+    "oberonlai/wp-updater": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "FORMNOTIFY\\": "src/"
+    }
+  }
+}

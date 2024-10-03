@@ -1,0 +1,1336 @@
+# Copyright (C) 2022 Oberon Lai
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Notify 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/form-notify\n"
+"POT-Creation-Date: 2023-08-18T09:03:02+00:00\n"
+"PO-Revision-Date: 2023-08-18 17:04+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Domain: wc-notify\n"
+
+#. Plugin Name of the plugin
+#: src/Posts/Notify/Cpt.php:23
+msgid "Form Notify"
+msgstr "表單推播通知"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://oberonlai.blog"
+msgstr "https://oberonlai.blog"
+
+#. Description of the plugin
+msgid "Notification for WordPress form plugins."
+msgstr "提供 WordPress 表單發送通知功能，包含 LINE 推播與手機簡訊。"
+
+#. Author of the plugin
+msgid "Oberon Lai"
+msgstr "Oberon Lai"
+
+#: src/APIs/E8d/Every8d.php:151 src/APIs/Easygo/Easygo.php:69
+#: src/APIs/Line/Message.php:88 src/APIs/Line/Notify.php:78
+#: src/Events/AbstractNotify.php:167
+msgid "Success"
+msgstr "成功"
+
+#: src/APIs/E8d/Every8d.php:155
+msgid "Occur error when connecting API. Please try later."
+msgstr "連接API時發生錯誤。請稍後再試。"
+
+#: src/APIs/E8d/Every8d.php:223 src/APIs/Easygo/Easygo.php:79
+#: src/APIs/Mitake/Mitake.php:78
+msgid "Enter the username and password first"
+msgstr "請先輸入帳號與密碼"
+
+#: src/APIs/E8d/Every8d.php:253 src/APIs/E8d/Every8d.php:265
+#: src/Posts/Notify/Metabox/Action.php:41
+msgid "Every8d SMS"
+msgstr "Every8d 簡訊服務"
+
+#: src/APIs/E8d/Every8d.php:253 src/APIs/Mitake/Mitake.php:193
+msgid "Processing"
+msgstr "處理中"
+
+#: src/APIs/E8d/Every8d.php:265
+msgid "Form Notify Every8d Sending Result: Points are not enough."
+msgstr "Every8d 推播結果：剩餘點數不足。"
+
+#: src/APIs/Easygo/Easygo.php:139 src/APIs/Easygo/Easygo.php:142
+#: src/APIs/Easygo/Easygo.php:155 src/APIs/Easygo/Easygo.php:164
+#: src/Posts/Notify/Metabox/Action.php:43
+msgid "easyGo SMS"
+msgstr "easyGo 簡訊服務"
+
+#: src/APIs/Easygo/Easygo.php:142 src/APIs/Easygo/Easygo.php:162
+#: src/APIs/Easygo/Easygo.php:164
+msgid "Form Notify easyGo Sending Result: Points are not enough."
+msgstr "EasyGo 簡訊發送結果：剩餘點數不足。"
+
+#: src/APIs/Easygo/Easygo.php:159
+msgid "Form Notify easyGo Sending Result: Success"
+msgstr "EasyGo 簡訊發送結果：成功"
+
+#: src/APIs/HistoryTable.php:20 src/APIs/HistoryTable.php:21
+#: src/Options/History.php:29
+msgid "Notify History"
+msgstr "推播紀錄"
+
+#: src/APIs/HistoryTable.php:103
+msgid "No Data"
+msgstr "無資料"
+
+#. Translators: %s: all.
+#: src/APIs/HistoryTable.php:127
+msgid "<a href=\"%s\">All</a>"
+msgstr "<a href=\"%s\">全部</a>"
+
+#. Translators: %s: week.
+#: src/APIs/HistoryTable.php:129
+msgid "<a href=\"%s\">Week</a>"
+msgstr "<a href=\"%s\">本週</a>"
+
+#. Translators: %s: month.
+#: src/APIs/HistoryTable.php:131
+msgid "<a href=\"%s\">Month</a>"
+msgstr "<a href=\"%s\">本月</a>"
+
+#: src/APIs/HistoryTable.php:143
+msgid "Start Date"
+msgstr "起始日期"
+
+#: src/APIs/HistoryTable.php:144
+msgid "End Date"
+msgstr "結束日期"
+
+#: src/APIs/HistoryTable.php:145
+msgid "Filter"
+msgstr "篩選"
+
+#: src/APIs/HistoryTable.php:146
+msgid "Clear"
+msgstr "清除"
+
+#: src/APIs/HistoryTable.php:166
+msgid "Delete History"
+msgstr "刪除紀錄"
+
+#: src/APIs/HistoryTable.php:188
+msgid "Trigger Event"
+msgstr "推播類型"
+
+#: src/APIs/HistoryTable.php:189 src/Posts/Notify/Metabox/Action.php:49
+msgid "Notify Type"
+msgstr "類型"
+
+#: src/APIs/HistoryTable.php:190
+msgid "Notify Content"
+msgstr "推播內文"
+
+#: src/APIs/HistoryTable.php:191
+msgid "Status"
+msgstr "推播狀態"
+
+#: src/APIs/HistoryTable.php:192
+msgid "Notify Time"
+msgstr "推播時間"
+
+#: src/APIs/HistoryTable.php:232
+msgid "Delete"
+msgstr "刪除"
+
+#: src/APIs/Line/Login/Button.php:47 src/APIs/Line/Login/Button.php:56
+#: src/APIs/Line/Login/Button.php:101
+msgid "Login"
+msgstr "登入"
+
+#: src/APIs/Line/Login/Button.php:47 src/APIs/Line/Login/Button.php:99
+#: src/APIs/Line/Login/User.php:260
+msgid "Register"
+msgstr "註冊"
+
+#: src/APIs/Line/Login/Button.php:135
+msgid "Button Text"
+msgstr "按鈕文字"
+
+#: src/APIs/Line/Login/User.php:250
+msgid "Register Failed."
+msgstr "註冊失敗。"
+
+#: src/APIs/Line/Login/User.php:252
+msgid "You have to enter your emaill address."
+msgstr "請輸入您的電子郵件地址。"
+
+#: src/APIs/Line/Login/User.php:264
+msgid "Close"
+msgstr "關閉"
+
+#: src/APIs/Line/Notify.php:71
+msgid "Please set LINE Notify access token first."
+msgstr "請前往設定頁輸入 LINE Notify Token。"
+
+#: src/APIs/Mitake/Mitake.php:192 src/APIs/Mitake/Mitake.php:195
+#: src/Posts/Notify/Metabox/Action.php:42
+msgid "Mitake SMS"
+msgstr "三竹簡訊服務"
+
+#: src/APIs/Mitake/Mitake.php:195
+msgid "Form Notify Mitake Sending Result: Points are not enough."
+msgstr "三竹簡訊推播結果：剩餘點數不足。"
+
+#: src/Events/AbstractNotify.php:139 src/Options/Option.php:33
+#: src/Posts/Notify/Metabox/Action.php:36
+msgid "LINE Notify"
+msgstr "LINE Notify"
+
+#: src/Events/AbstractNotify.php:152 src/Events/AbstractNotify.php:155
+msgid "Not found LINE user id"
+msgstr "未推播，沒有取得 LINE User ID"
+
+#: src/Events/AbstractNotify.php:158
+msgid "LINE Messaging API"
+msgstr "LINE Messaging API"
+
+#: src/Events/AbstractNotify.php:167 src/Posts/Notify/Metabox/Action.php:38
+msgid "Email"
+msgstr "電子郵件"
+
+#: src/Events/Elementor/Form.php:26
+msgid "Via Elementor Form"
+msgstr "透過 Elementor Form"
+
+#: src/Events/Elementor/Form.php:54
+msgid "After Elementor Form submitted"
+msgstr "Elementor Form 表單送出後"
+
+#: src/Events/Elementor/Form.php:64 src/Events/Fluent/Form.php:70
+#: src/Events/Gravity/Form.php:69
+msgid "Form"
+msgstr "表單"
+
+#: src/Events/Elementor/Form.php:65 src/Events/Fluent/Form.php:71
+#: src/Events/Gravity/Form.php:70
+msgid "Select the form."
+msgstr "選擇表單。"
+
+#: src/Events/Elementor/Form.php:101 src/Events/Fluent/Form.php:108
+#: src/Events/Gravity/Form.php:107 src/Posts/Notify/Metabox/Param.php:57
+msgid "Copied!"
+msgstr "已複製！"
+
+#: src/Events/Fluent/Form.php:23
+msgid "Via Fluent Form"
+msgstr "透過 Fluent Form"
+
+#: src/Events/Fluent/Form.php:52
+msgid "After Fluent Form submitted"
+msgstr "Fluent Form 表單送出後"
+
+#: src/Events/Fluent/Form.php:139
+msgid "Fluent Form Receiver Field"
+msgstr "Fluent Form 接收推播欄位"
+
+#: src/Events/Fluent/Form.php:141
+msgid ""
+"Copy the field parameters by notify type. Use case:<br>1.Using the parameter "
+"{{phone}} if you want to notify via SMS.<br>2.Using the parameter {{email}} "
+"which is from LINE Login if you want to notify via LINE Messaging API."
+msgstr ""
+"根據通知類型從右側欄複製表單中的欄位後貼上，譬如：<br>1. 如果希望透過簡訊通"
+"知，則使用表單中的 {{phone}} 參數。<br>2. 如果希望透過 LINE 推播通知，則使用"
+"表單中的 {{email}} 參數，並確保該電子郵件是使用 LINE 登入。"
+
+#: src/Events/Gravity/Form.php:23
+msgid "Via Gravity Form"
+msgstr "透過 Gravity Form"
+
+#: src/Events/Gravity/Form.php:51
+msgid "After Gravity Form submitted"
+msgstr "Gravity Form 表單送出後"
+
+#: src/Options/E8d.php:23
+msgid "Every8d SMS Settings"
+msgstr ""
+"Every8d 簡訊設定（需先<a href='https://www.teamplus.tech/new-customer/' "
+"target='_blank'>申請帳號</a>）"
+
+#: src/Options/E8d.php:31 src/Options/Easygo.php:31 src/Options/Mitake.php:31
+msgid "Enable"
+msgstr "啟用"
+
+#: src/Options/E8d.php:38 src/Options/Easygo.php:38
+#: src/Options/LineButton.php:38 src/Options/Mitake.php:38
+msgid "Yes"
+msgstr "是"
+
+#: src/Options/E8d.php:39 src/Options/Easygo.php:39
+#: src/Options/LineButton.php:39 src/Options/Mitake.php:39
+msgid "No"
+msgstr "否"
+
+#: src/Options/E8d.php:47 src/Options/Easygo.php:47 src/Options/Mitake.php:47
+msgid "Current Points"
+msgstr "剩餘點數"
+
+#: src/Options/E8d.php:48 src/Options/Easygo.php:48 src/Options/Mitake.php:48
+msgid "Check Points"
+msgstr "檢查剩餘點數"
+
+#: src/Options/E8d.php:48 src/Options/Easygo.php:48 src/Options/Mitake.php:48
+msgid "Loading..."
+msgstr "讀取中..."
+
+#: src/Options/E8d.php:48 src/Options/Easygo.php:48 src/Options/Mitake.php:48
+msgid "Make sure you have enough points to send SMS."
+msgstr "發送前請先確認簡訊剩餘點數。"
+
+#: src/Options/E8d.php:56 src/Options/Easygo.php:56 src/Options/Mitake.php:56
+msgid "User Id"
+msgstr "登入帳號"
+
+#: src/Options/E8d.php:57
+msgid "The login user id of every8d"
+msgstr "Every8d 簡訊服務登入帳號"
+
+#: src/Options/E8d.php:68 src/Options/Easygo.php:68 src/Options/Mitake.php:68
+msgid "Password"
+msgstr "登入密碼"
+
+#: src/Options/E8d.php:69
+msgid "The password of every8d"
+msgstr "Every8d 簡訊服務登入密碼"
+
+#: src/Options/E8d.php:80
+msgid "Token"
+msgstr "授權憑證"
+
+#: src/Options/E8d.php:81
+msgid "The access token of every8d. It generates automatically."
+msgstr "Every8d 簡訊服務授權憑證，由 API 自動產生。"
+
+#: src/Options/Easygo.php:23
+msgid "easyGo SMS Settings"
+msgstr ""
+"easyGo 簡訊設定（需先<a href='https://www.easy-go.com.tw/' target='_blank'>申"
+"請帳號</a>）"
+
+#: src/Options/Easygo.php:57
+msgid "The login user id of easyGo"
+msgstr "EasyGo 簡訊服務登入帳號"
+
+#: src/Options/Easygo.php:69
+msgid "The password of easyGo"
+msgstr "EasyGo 簡訊服務登入密碼"
+
+#: src/Options/History.php:23 src/Options/History.php:24
+msgid "History"
+msgstr "推播紀錄"
+
+#: src/Options/History.php:60
+msgid "Posts Per Page"
+msgstr "每頁顯示筆數"
+
+#: src/Options/LineButton.php:23
+msgid "WordPress Login / Register Form Settings"
+msgstr "WordPress LINE 登入 / 註冊表單設定"
+
+#: src/Options/LineButton.php:31
+msgid "Display in WordPress login form"
+msgstr "顯示於 WordPress 登入表單"
+
+#: src/Options/LineButton.php:32
+msgid "Show LINE Login button in WordPress admin login / register form."
+msgstr "設定 WordPress 管理員登入 / 註冊表單中是否顯示 LINE Login 按鈕。"
+
+#: src/Options/LineButton.php:48
+msgid "Other Settings"
+msgstr "其他設定"
+
+#: src/Options/LineButton.php:57
+msgid "Redirect Page URL"
+msgstr "登入後重新導向網址"
+
+#: src/Options/LineButton.php:58
+msgid "The redirect page after LINE Login."
+msgstr "LINE登入後的重新導向網址。"
+
+#: src/Options/LineButton.php:70
+msgid "User Role"
+msgstr "使用者角色"
+
+#: src/Options/LineButton.php:71
+msgid "The user role after LINE Login."
+msgstr "LINE登入後的使用者角色。"
+
+#: src/Options/LineButton.php:85
+msgid "User Email Permission"
+msgstr "未取得電子郵件"
+
+#: src/Options/LineButton.php:86
+msgid "The solution when users do not allow email permission."
+msgstr "當 LINE 登入未取得電子郵件的處理方式。"
+
+#: src/Options/LineButton.php:93
+msgid "Force enter email address"
+msgstr "強制使用者輸入電子郵件"
+
+#: src/Options/LineButton.php:94
+msgid "Generate fake email with LINE user id"
+msgstr "使用 LINE user id 自動產生電子郵件"
+
+#: src/Options/LineChannel.php:14
+msgid ""
+"LINE Login Setting - <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-login-setting/\">Tutorial for LINE Login</"
+"a>"
+msgstr ""
+"LINE Login 設定 -  <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-login-setting/\">查看教學</a>"
+
+#: src/Options/LineChannel.php:22
+msgid "Channel ID for Login"
+msgstr "Channel ID"
+
+#: src/Options/LineChannel.php:23
+msgid "LINE Login Channel ID."
+msgstr "LINE Login Channel ID."
+
+#: src/Options/LineChannel.php:35
+msgid "Channel Secret for Login"
+msgstr "Channel Secret"
+
+#: src/Options/LineChannel.php:36
+msgid "LINE Login Channel secret."
+msgstr "LINE Login Channel secret."
+
+#: src/Options/LineChannel.php:48
+msgid "Callback URL for Login"
+msgstr "回呼網址"
+
+#: src/Options/LineChannel.php:49
+msgid "copied!"
+msgstr "已複製！"
+
+#: src/Options/LineChannel.php:49
+msgid "Copy the callback url to paste in LINE developer console."
+msgstr "複製回呼網址貼到 LINE 的開發者後台。"
+
+#: src/Options/LineChannel.php:61
+msgid "Email Address Permission"
+msgstr "電子郵件權限"
+
+#: src/Options/LineChannel.php:62
+msgid "You have to access the email permission for LINE Login."
+msgstr "您必須取得 LINE Login 的電子郵件權限。"
+
+#: src/Options/LineChannel.php:74
+msgid ""
+"LINE Messaging API Setting - <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-messaging-api-setting/\">Tutorial for "
+"LINE Messaging API</a>"
+msgstr ""
+"LINE Messaging API 設定 -  <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-messaging-api-setting/\">查看教學</a>"
+
+#: src/Options/LineChannel.php:83
+msgid "Channel access token"
+msgstr "Channel access token"
+
+#: src/Options/LineChannel.php:84
+msgid "LINE Messaging API access token."
+msgstr "LINE Messaging API 的授權憑證。"
+
+#: src/Options/LineChannel.php:96
+msgid "Testing User ID"
+msgstr "測試 ID"
+
+#: src/Options/LineChannel.php:97
+msgid "The User ID of Messaging API for testing."
+msgstr "LINE Messaging API 的測試使用者 ID。"
+
+#: src/Options/LineNotify.php:14
+msgid ""
+"LINE Notify Setting - <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-notify-setting/\">Tutorial for LINE "
+"Notify</a>"
+msgstr ""
+"LINE Notify 設定 -  <a target=\"_blank\" class=\"t:none:hover\" "
+"href=\"https://oberonlai.blog/line-notify-setting/\">查看教學</a>"
+
+#: src/Options/LineNotify.php:23
+msgid "Access token"
+msgstr "Access token"
+
+#: src/Options/LineNotify.php:24
+msgid "LINE Notify access token."
+msgstr "LINE Notify API 的授權憑證。"
+
+#: src/Options/Mitake.php:23
+msgid "Mitake SMS Settings"
+msgstr "三竹簡訊設定"
+
+#: src/Options/Mitake.php:57
+msgid "The login user id of Mitake"
+msgstr "三竹簡訊服務登入帳號"
+
+#: src/Options/Mitake.php:69
+msgid "The password of Mitake"
+msgstr "三竹簡訊服務登入密碼"
+
+#: src/Options/Mitake.php:80
+msgid "API URL"
+msgstr "API 網址"
+
+#: src/Options/Mitake.php:81
+msgid "The URL of Mitake API "
+msgstr "三竹簡訊服務 API 網址 "
+
+#: src/Options/Option.php:19
+msgid "Notify Settings"
+msgstr "推播設定"
+
+#: src/Options/Option.php:20
+msgid "Settings"
+msgstr "設定"
+
+#: src/Options/Option.php:34
+msgid "LINE Notify setting"
+msgstr "LINE Notify 推播設定"
+
+#: src/Options/Option.php:38
+msgid "LINE Channel"
+msgstr "LINE Channel"
+
+#: src/Options/Option.php:39
+msgid "LINE Channel setting for Login and Messaging API"
+msgstr "設定 LINE Login 與 Messaging API"
+
+#: src/Options/Option.php:43
+msgid "LINE Login button"
+msgstr "LINE Login 按鈕"
+
+#: src/Options/Option.php:44
+msgid "Set LINE Login button position and appearence."
+msgstr "設定 LINE Login 按鈕的位置和外觀。"
+
+#: src/Options/Option.php:48
+msgid "Every8d"
+msgstr "Every8d 簡訊服務"
+
+#: src/Options/Option.php:52
+msgid "Mitake"
+msgstr "三竹簡訊服務"
+
+#: src/Options/Option.php:56
+msgid "easyGo"
+msgstr "easyGo 簡訊服務"
+
+#: src/Posts/Notify/Cpt.php:38
+msgid "All items"
+msgstr "所有"
+
+#: src/Posts/Notify/Cpt.php:39
+msgid "Add new"
+msgstr "新增"
+
+#: src/Posts/Notify/Cpt.php:40
+msgid "Add new item"
+msgstr "新增"
+
+#: src/Posts/Notify/Cpt.php:41
+msgid "Edit item"
+msgstr "編輯"
+
+#: src/Posts/Notify/Cpt.php:42
+msgid "New item"
+msgstr "新增"
+
+#: src/Posts/Notify/Cpt.php:43
+msgid "View item"
+msgstr "檢視"
+
+#: src/Posts/Notify/Cpt.php:44
+msgid "View items"
+msgstr "檢視"
+
+#: src/Posts/Notify/Cpt.php:45
+msgid "Search items"
+msgstr "搜尋"
+
+#: src/Posts/Notify/Cpt.php:46
+msgid "Not found"
+msgstr "無結果"
+
+#: src/Posts/Notify/Cpt.php:47
+msgid "Not found in trash"
+msgstr "無結果"
+
+#: src/Posts/Notify/Cpt.php:54
+msgid "Notify Genre"
+msgstr "分類"
+
+#: src/Posts/Notify/Metabox/Action.php:27
+msgid "Notify Action"
+msgstr "通知方式"
+
+#: src/Posts/Notify/Metabox/Action.php:35
+#: src/Posts/Notify/Metabox/Trigger.php:30
+msgid "Choose"
+msgstr "請選擇"
+
+#: src/Posts/Notify/Metabox/Action.php:37
+msgid "BOT"
+msgstr "LINE 推播"
+
+#: src/Posts/Notify/Metabox/Action.php:58
+msgid "Email Subject"
+msgstr "郵件主旨"
+
+#: src/Posts/Notify/Metabox/Action.php:68
+msgid "Notify content"
+msgstr "通知內文"
+
+#: src/Posts/Notify/Metabox/Action.php:77
+msgid "Custom Receiver Field"
+msgstr "自訂接收推播欄位"
+
+#: src/Posts/Notify/Metabox/Action.php:78
+msgid "ex:{{email}}"
+msgstr "ex:{{email}}"
+
+#: src/Posts/Notify/Metabox/Action.php:79
+msgid ""
+"Copy the field parameters by notify type. For example:<br>1.Using the "
+"parameter {{phone}} if you want to notify via SMS.<br>2.Using the parameter "
+"{{email}} if you want to notify via email address.<br>3.Using the parameter "
+"{{email}} which is from LINE Login if you want to notify via LINE Messaging "
+"API."
+msgstr ""
+"根據通知類型從右側欄複製表單中的欄位後貼上，譬如：<br>1. 如果希望透過簡訊通"
+"知，則使用表單中的 {{phone}} 參數。<br>2. 如果希望透過電子郵件推播，則使用表"
+"單中的 {{email}} 參數。<br>3. 如果希望透過 LINE 推播通知，則使用表單中的 "
+"{{email}} 參數，並確保該電子郵件已使用 LINE 登入註冊為網站會員。"
+
+#: src/Posts/Notify/Metabox/Action.php:92
+msgid "Notify action."
+msgstr "通知方式。"
+
+#: src/Posts/Notify/Metabox/Action.php:93
+msgid "Action"
+msgstr "方式"
+
+#: src/Posts/Notify/Metabox/Action.php:94
+msgid "Add"
+msgstr "新增"
+
+#: src/Posts/Notify/Metabox/Param.php:28
+msgid "Notify Params"
+msgstr "可帶入參數"
+
+#: src/Posts/Notify/Metabox/Trigger.php:22
+msgid "Notify Trigger"
+msgstr "觸發通知"
+
+#: src/Posts/Notify/Metabox/Trigger.php:39
+msgid "Event"
+msgstr "事件"
+
+#: src/Posts/Notify/Metabox/Trigger.php:40
+msgid "Select the trigger event of sending notifications."
+msgstr "選擇發送通知的觸發事件。"
+
+#~ msgid "Please enter your emaill address to login with LINE."
+#~ msgstr "請輸入您的電子郵件地址。"
+
+#~ msgid ""
+#~ "The redirect page after LINE Login. Default page is WooCommerce My "
+#~ "Account."
+#~ msgstr "LINE登入後的跳轉頁面。預設是 WooCommerce 我的帳號頁。"
+
+#~ msgid "Via Back In Stock Notification"
+#~ msgstr "透過商品到貨通知"
+
+#~ msgid "Back In Stock Notification"
+#~ msgstr "商品到貨通知"
+
+#~ msgid "Timing"
+#~ msgstr "類型"
+
+#~ msgid "Select the trigger timing."
+#~ msgstr "選擇商品到貨通知類型。"
+
+#~ msgid "Product Back in Stock"
+#~ msgstr "當商品到貨時進行通知"
+
+#~ msgid "After Subscribing Instock Notification "
+#~ msgstr "當顧客訂閱商品到貨狀態時通知 "
+
+#~ msgid "Back In Stock Params"
+#~ msgstr "商品到貨通知參數"
+
+#~ msgid "Subscriber's Email"
+#~ msgstr "訂閱者電子郵件"
+
+#~ msgid "Subscriber's Phone"
+#~ msgstr "訂閱者手機號碼"
+
+#~ msgid "Subscriber's Name"
+#~ msgstr "訂閱者姓名"
+
+#~ msgid "Product Name"
+#~ msgstr "商品名稱"
+
+#~ msgid "Product URL"
+#~ msgstr "商品連結"
+
+#~ msgid "Add to Cart URL"
+#~ msgstr "加入購物車網址"
+
+#~ msgid "WooCommerce Notify"
+#~ msgstr "WooCommerce 推播通知"
+
+#~ msgid "WooCommerce Notify Every8d is sending."
+#~ msgstr "Every8d 推播結果：訊息傳送中。"
+
+#~ msgid "User ID"
+#~ msgstr "使用者 ID"
+
+#~ msgid "User Info"
+#~ msgstr "使用者資訊"
+
+#~ msgid "Order ID"
+#~ msgstr "訂單 ID"
+
+#~ msgid "WooCommerce Notify Mitake Sending Result: Success."
+#~ msgstr "三竹簡訊發送結果：成功。"
+
+#~ msgid "WooCommerce Form Settings"
+#~ msgstr "WooCommerce 表單設定"
+
+#~ msgid "Display in WooCommerce form"
+#~ msgstr "顯示於 WooCommerce 表單"
+
+#~ msgid "Show LINE Login button in WooCommerce login/register form."
+#~ msgstr "設定 WooCommerce 登入 / 註冊表單中是否顯示 LINE Login 按鈕。"
+
+#~ msgid "Display in WooCommerce form position"
+#~ msgstr "LINE Login 按鈕位置"
+
+#~ msgid "Set LINE Login button in WooCommerce form below or above."
+#~ msgstr ""
+#~ "設定 WooCommerce 登入 / 註冊頁的 LINE Login 按鈕顯示於表單的上方或下方。"
+
+#~ msgid "Above"
+#~ msgstr "上方"
+
+#~ msgid "Below"
+#~ msgstr "下方"
+
+#~ msgid "Display in WooCommerce form size"
+#~ msgstr "LINE Login 按鈕尺寸"
+
+#~ msgid "Set LINE Login button size in WooCommerce form."
+#~ msgstr "設定 WooCommerce 表單中 LINE Login 按鈕的大小。"
+
+#~ msgid "Full width"
+#~ msgstr "滿版"
+
+#~ msgid "Large"
+#~ msgstr "大"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Small"
+#~ msgstr "小"
+
+#~ msgid "Display in WooCommerce form align"
+#~ msgstr "LINE Login 按鈕對齊方式"
+
+#~ msgid "Set LINE Login button align in WooCommerce form."
+#~ msgstr "設定 WooCommerce 表單中 LINE Login 按鈕的對齊方式。"
+
+#~ msgid "Left"
+#~ msgstr "置左"
+
+#~ msgid "Center"
+#~ msgstr "置中"
+
+#~ msgid "Right"
+#~ msgstr "置右"
+
+#~ msgid "WooCommerce Checkout Page Settings"
+#~ msgstr "WooCommerce 結帳頁設定"
+
+#~ msgid "Display in WooCommerce checkout"
+#~ msgstr "顯示於 WooCommerce 結帳頁"
+
+#~ msgid "Show Login Button in WooCommerce checkout page."
+#~ msgstr "設定 WooCommerce 結帳頁是否顯示 LINE Login 按鈕。"
+
+#~ msgid "Display in WooCommerce checkout position"
+#~ msgstr "LINE Login 按鈕位置"
+
+#~ msgid ""
+#~ "Set LINE Login button in WooCommerce checkout page billing field below or "
+#~ "above."
+#~ msgstr ""
+#~ "設定 WooCommerce 結帳頁的 LINE Login 按鈕顯示於帳單資訊的上方或下方。"
+
+#~ msgid "Above billing field"
+#~ msgstr "帳單資訊上方"
+
+#~ msgid "Below billing field"
+#~ msgstr "帳單資訊下方"
+
+#~ msgid "Display in WooCommerce checkout size"
+#~ msgstr "LINE Login 按鈕尺寸"
+
+#~ msgid "Set LINE Login button size in WooCommerce checkout page."
+#~ msgstr "設定 WooCommerce 結帳頁中 LINE Login 按鈕的大小。"
+
+#~ msgid "Display in WooCommerce checkout align"
+#~ msgstr "LINE Login 按鈕對齊方式"
+
+#~ msgid "Set LINE Login button align in WooCommerce checkout."
+#~ msgstr "設定 WooCommerce 結帳頁中 LINE Login 按鈕的對齊方式。"
+
+#~ msgid "Button text in WooCommerce checkout"
+#~ msgstr "LINE Login 按鈕文字"
+
+#~ msgid "Set LINE Login button text in WooCommerce checkout page."
+#~ msgstr "設定 WooCommerce 結帳頁中 LINE Login 按鈕的文字。"
+
+#~ msgid "LINE Login"
+#~ msgstr "登入"
+
+#~ msgid "Customer Params"
+#~ msgstr "顧客資料"
+
+#~ msgid "customer_email"
+#~ msgstr "電子郵件"
+
+#~ msgid "customer_first_name"
+#~ msgstr "名"
+
+#~ msgid "customer_last_name"
+#~ msgstr "姓"
+
+#~ msgid "customer_full_name"
+#~ msgstr "全名"
+
+#~ msgid "customer_order_count"
+#~ msgstr "訂單數量"
+
+#~ msgid "customer_total_spent"
+#~ msgstr "總花費"
+
+#~ msgid "customer_address_line_1"
+#~ msgstr "地址一"
+
+#~ msgid "customer_address_line_2"
+#~ msgstr "地址二"
+
+#~ msgid "customer_country"
+#~ msgstr "國家"
+
+#~ msgid "customer_state"
+#~ msgstr "州"
+
+#~ msgid "customer_city"
+#~ msgstr "城市"
+
+#~ msgid "customer_postcode"
+#~ msgstr "郵遞區號"
+
+#~ msgid "customer_phone"
+#~ msgstr "電話"
+
+#~ msgid "customer_company"
+#~ msgstr "公司"
+
+#~ msgid "customer_user_id"
+#~ msgstr "顧客 ID"
+
+#~ msgid "customer_username"
+#~ msgstr "帳號"
+
+#~ msgid "Order Params"
+#~ msgstr "訂單資料"
+
+#~ msgid "order_number"
+#~ msgstr "編號"
+
+#~ msgid "order_link"
+#~ msgstr "訂單連結"
+
+#~ msgid "order_status"
+#~ msgstr "狀態"
+
+#~ msgid "order_date"
+#~ msgstr "日期"
+
+#~ msgid "order_date_paid"
+#~ msgstr "付款日期"
+
+#~ msgid "order_date_completed"
+#~ msgstr "完成日期"
+
+#~ msgid "order_subtotal"
+#~ msgstr "小計金額"
+
+#~ msgid "order_total"
+#~ msgstr "總金額"
+
+#~ msgid "order_itemscount"
+#~ msgstr "品項數量"
+
+#~ msgid "order_items"
+#~ msgstr "品項"
+
+#~ msgid "order_view_url"
+#~ msgstr "訂單網址"
+
+#~ msgid "order_payment_url"
+#~ msgstr "付款網址"
+
+#~ msgid "order_reorder_url"
+#~ msgstr "重新訂購網址"
+
+#~ msgid "order_payment_method"
+#~ msgstr "付款方式"
+
+#~ msgid "order_customer_note"
+#~ msgstr "顧客備註"
+
+#~ msgid "woocommerce_bacs_accounts"
+#~ msgstr "銀行帳號"
+
+#~ msgid "order_shipping_method"
+#~ msgstr "運送方式"
+
+#~ msgid "order_shipping_first_name"
+#~ msgstr "運送人名"
+
+#~ msgid "order_shipping_last_name"
+#~ msgstr "運送人姓"
+
+#~ msgid "order_shipping_address_line_1"
+#~ msgstr "運送地址一"
+
+#~ msgid "order_shipping_address_line_2"
+#~ msgstr "運送地址二"
+
+#~ msgid "order_shipping_city"
+#~ msgstr "運送城市"
+
+#~ msgid "order_shipping_country"
+#~ msgstr "運送國家"
+
+#~ msgid "order_shipping_state"
+#~ msgstr "運送州"
+
+#~ msgid "order_shipping_postcode"
+#~ msgstr "運送郵遞區號"
+
+#~ msgid "order_shipping_company_name"
+#~ msgstr "運送人公司名"
+
+#~ msgid "Shop Params"
+#~ msgstr "商店資料"
+
+#~ msgid "shop_title"
+#~ msgstr "名稱"
+
+#~ msgid "shop_tagline"
+#~ msgstr "標語"
+
+#~ msgid "shop_url"
+#~ msgstr "網址"
+
+#~ msgid "shop_admin_email"
+#~ msgstr "管理者電子郵件"
+
+#~ msgid "shop_shop_url"
+#~ msgstr "商品頁網址"
+
+#~ msgid "%s Params"
+#~ msgstr "%s資料"
+
+#~ msgid "ATM BankCode"
+#~ msgstr "轉帳銀行代碼"
+
+#~ msgid "ATM vAccount"
+#~ msgstr "轉帳銀行帳號"
+
+#~ msgid "ATM ExpireDate"
+#~ msgstr "轉帳期限"
+
+#~ msgid "Barcode Barcode 1"
+#~ msgstr "超商條碼一"
+
+#~ msgid "Barcode Barcode 2"
+#~ msgstr "超商條碼二"
+
+#~ msgid "Barcode Barcode 3"
+#~ msgstr "超商條碼三"
+
+#~ msgid "Barcode Expire Date"
+#~ msgstr "超商繳費期限"
+
+#~ msgid "CVS Payment Number"
+#~ msgstr "超商付款代號"
+
+#~ msgid "CVS Expire Datd"
+#~ msgstr "超商付款期限"
+
+#~ msgid "CVS Store ID"
+#~ msgstr "超商門市ID"
+
+#~ msgid "CVS Store Name"
+#~ msgstr "超商門市名稱"
+
+#~ msgid "CVS Store Address"
+#~ msgstr "超商門市地址"
+
+#~ msgid "ECPay Shipping Number"
+#~ msgstr "綠界物流編號"
+
+#~ msgid "PayNow Params"
+#~ msgstr "PayNow 參數"
+
+#~ msgid "Transaction No"
+#~ msgstr "交易編號"
+
+#~ msgid "Bank Code"
+#~ msgstr "轉帳銀行代碼"
+
+#~ msgid "ATM Account"
+#~ msgstr "轉帳銀行帳號"
+
+#~ msgid "Due Date"
+#~ msgstr "轉帳期限"
+
+#~ msgid "Tran Status"
+#~ msgstr "訂單狀態"
+
+#~ msgid "Order status changed"
+#~ msgstr "當訂單狀態改變"
+
+#~ msgid "Order Status"
+#~ msgstr "訂單狀態"
+
+#~ msgid "Select the matched WooCommerce order status to send notifications."
+#~ msgstr "選擇符合的 WooCommerce 訂單狀態以發送通知。"
+
+#~ msgid "Order - by payment gateway"
+#~ msgstr "訂單 - 依付款方式"
+
+#~ msgid "Order - by shipping method"
+#~ msgstr "訂單 - 依運送方式"
+
+#~ msgid "is"
+#~ msgstr "是"
+
+#~ msgid "is not"
+#~ msgstr "否"
+
+#~ msgid "Rule"
+#~ msgstr "規則"
+
+#~ msgid "Trigger by order meta"
+#~ msgstr "根據訂單資料觸發"
+
+#~ msgid "Account Name: "
+#~ msgstr "帳號名稱： "
+
+#~ msgid "Account Number: "
+#~ msgstr "帳號： "
+
+#~ msgid "Bank Name: "
+#~ msgstr "銀行名稱： "
+
+#~ msgid "IBAN: "
+#~ msgstr "國際銀行帳號： "
+
+#~ msgid "BIC: "
+#~ msgstr "銀行卡： "
+
+#~ msgid "Notify Status"
+#~ msgstr "推播狀態"
+
+#~ msgid ""
+#~ "Notify status of order. You can choose ignore notify if you don't want to "
+#~ "trigger notification."
+#~ msgstr "訂單的推播狀態，只有在「待推播」狀態下才會進行推播通知。"
+
+#~ msgid "Ready for notify"
+#~ msgstr "待推播"
+
+#~ msgid "Has notifeid"
+#~ msgstr "已推播"
+
+#~ msgid "Ignore notification"
+#~ msgstr "不推播"
+
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#~ msgid "WooCommerce Notify LINE Notify Push Result: %s"
+#~ msgstr "LINE Notify 推播結果： %s"
+
+#~ msgid "WooCommerce Notify LINE Push Result: %s"
+#~ msgstr "LINE 推播結果： %s"
+
+#~ msgid "WooCommerce Notify Email Sending Result: Success"
+#~ msgstr "電子郵件推播結果：成功"
+
+#~ msgid "WooCommerce Notify Every8d Sending Result: %s"
+#~ msgstr "Every8d 推播結果：%s"
+
+#~ msgid "None"
+#~ msgstr "無"
+
+#~ msgid "License Settings"
+#~ msgstr "序號設定"
+
+#~ msgid ""
+#~ "Activate <strong>%s</strong> by your license key to get professional "
+#~ "support and automatic update from your WordPress dashboard."
+#~ msgstr ""
+#~ "請輸入購買序號【<a target=\"_blank\" href=\"https://oberonlai.blog/my-"
+#~ "account/my-licenses/\">查詢</a>】。"
+
+#~ msgid "Enter your license key to activate"
+#~ msgstr "輸入序號已啟用完整功能"
+
+#~ msgid "Activate License"
+#~ msgstr "啟用授權"
+
+#~ msgid "Deactivate License"
+#~ msgstr "停用授權"
+
+#~ msgid "Please add all information"
+#~ msgstr "請輸入相關資訊"
+
+#~ msgid "You don't have permission to manage license."
+#~ msgstr "你沒有足夠的權限管理授權。"
+
+#~ msgid "Activations Remaining"
+#~ msgstr "授權網站使用數量"
+
+#~ msgid "Unlimited"
+#~ msgstr "無限制"
+
+#~ msgid "%1$d out of %2$d"
+#~ msgstr "%1$d 共 %2$d"
+
+#~ msgid "Expires in"
+#~ msgstr "授權到期日"
+
+#~ msgid " days"
+#~ msgstr " 天"
+
+#~ msgid "Never"
+#~ msgstr "無期限限制"
+
+#~ msgid "Refresh License"
+#~ msgstr "重新取得授權"
+
+#~ msgid "The license key field is required."
+#~ msgstr "請填寫序號欄位。"
+
+#~ msgid "Unknown error occurred."
+#~ msgstr "發生未知錯誤。"
+
+#~ msgid "License activated successfully."
+#~ msgstr "授權啟用成功。"
+
+#~ msgid "License key not found."
+#~ msgstr "序號錯誤。"
+
+#~ msgid "License deactivated successfully."
+#~ msgstr "授權停用成功。"
+
+#~ msgid "License key not found"
+#~ msgstr "序號錯誤"
+
+#~ msgid "License refreshed successfully."
+#~ msgstr "重新取得授權成功。"
+
+#~ msgid "License Setting"
+#~ msgstr "序號管理"
+
+#~ msgid ""
+#~ "Error occured when active WooCommerce Notfiy plugin, install and active "
+#~ "WooCommerce 5.3 above first."
+#~ msgstr ""
+#~ "WooCommerce 推播通知外掛啟用失敗，需要安裝並啟用 WooCommerce 5.3 以上版"
+#~ "本。"
+
+#~ msgid ""
+#~ "<div class=\"notice notice-error\"><p>Please enter your purchared license "
+#~ "key to activate WooCommerce Notify. <a href=\"edit.php?post_type=wc-"
+#~ "notify&page=wc-notify-access\">Activate</a></p></div>"
+#~ msgstr ""
+#~ "<div class=\"notice notice-error\"><p>請輸入 WooCommerce 推播通知外掛的購"
+#~ "買序號以啟用完整功能，未啟用前<span style=\"color:red\">所有功能皆無法運作"
+#~ "</span>。<a href=\"edit.php?post_type=wc-notify&page=wc-notify-access\">前"
+#~ "往啟用</a></p></div>"
+
+#~ msgid "Back In Stock Receiver Field"
+#~ msgstr "自訂接收推播欄位"
+
+#~ msgid ""
+#~ "Copy the field parameters by notify type. For example, using the "
+#~ "parameter {{phone}} if you want to notify via SMS, "
+#~ msgstr ""
+#~ "根據通知類型從右側欄複製表單中的欄位，譬如：如果希望透過簡訊通知，則使用貼"
+#~ "上表單中的 {{phone}} 參數。 "
+
+#~ msgid "Unknown error occurred, Please try again."
+#~ msgstr "發生未知錯誤，請重試。"
+
+#~ msgid "Account Points"
+#~ msgstr "剩餘點數"
+
+#~ msgid "The access token of Mitake. It generates automatically."
+#~ msgstr "三竹簡訊服務授權憑證，由 API 自動產生。"
+
+#~ msgid "All"
+#~ msgstr "所有"
+
+#~ msgid "SMS History"
+#~ msgstr "簡訊紀錄"
+
+#~ msgid "Send Number"
+#~ msgstr "手機門號"
+
+#~ msgid "Send nums"
+#~ msgstr "發送通數"
+
+#~ msgid "Receive time"
+#~ msgstr "接收時間"
+
+#~ msgid "Points left"
+#~ msgstr "剩餘點數"
+
+#~ msgid "Batch ID"
+#~ msgstr "辨識碼"
+
+#~ msgid ""
+#~ "LINE Login Setting - <a target=\"_blank\" class=\"t:none:hover\" "
+#~ "href=\"https://oberonlai.blog/wordpress-line-login-plugin/\">Tutorial for "
+#~ "LINE Login</a>"
+#~ msgstr ""
+#~ "LINE Login 設定 -  <a target=\"_blank\" class=\"t:none:hover\" "
+#~ "href=\"https://oberonlai.blog/wordpress-line-login-plugin/\">查看教學</a>"
+
+#~ msgid ""
+#~ "LINE Messaging API Setting - <a target=\"_blank\" class=\"t:none:hover\" "
+#~ "href=\"https://oberonlai.blog/wordpress-line-bot/\">Tutorial for LINE "
+#~ "Messaging API</a>"
+#~ msgstr ""
+#~ "LINE Messaging API 設定 -  <a target=\"_blank\" class=\"t:none:hover\" "
+#~ "href=\"https://oberonlai.blog/wordpress-line-bot/\">查看教學</a>"
+
+#~ msgid "Shipping ID"
+#~ msgstr "超商門市ID"
+
+#~ msgid "Shipping Address"
+#~ msgstr "超商門市地址"
+
+#~ msgid "your@email.com"
+#~ msgstr "your@email.com"
+
+#~ msgid "Sort Code: "
+#~ msgstr "銀行代碼: "
+
+#~ msgid ""
+#~ "LINE Login Setting - <a target=\"_blank\" href=\"%s\">Tutorial for LINE "
+#~ "Login</a>"
+#~ msgstr "LINE Login 設定 -  <a target=“_blank” href=“%s”>查看教學</a>"
+
+#~ msgid ""
+#~ "LINE Messaging API Setting - <a target=\"_blank\" href=\"%s\">Tutorial "
+#~ "for LINE Messaging API</a>"
+#~ msgstr ""
+#~ "LINE Messaging API 設定 -  <a target=“_blank” href=“%s”>查看教學</a>"
+
+#~ msgid ""
+#~ "LINE Login Setting - <a target=\"_blank\" href=\"%s\">Tutorial for LINE "
+#~ "Messaging API</a>"
+#~ msgstr "LINE Login 設定 -  <a target=“_blank” href=“%s”>查看教學</a>"
+
+#~ msgid ""
+#~ "LINE Login Setting - <a taget=\"_blank\" href=\"%s\">Tutorial for LINE "
+#~ "Messaging API</a>"
+#~ msgstr "LINE Login 設定 <a taget=“_blank” href=“%s”>查看教學</a>"
+
+#~ msgid ""
+#~ "LINE Login Channel secret. <a href=\"https://oberonlai.blog/wordpress-"
+#~ "line-login-plugin/\">How to get it?</a>"
+#~ msgstr ""
+#~ "LINE Login 的 Channel secret。<a href=“https://oberonlai.blog/wordpress-"
+#~ "line-login-plugin/“>如何取得？</a>"
+
+#~ msgid ""
+#~ "Copy the callback url to paste in LINE developer console. <a "
+#~ "href=\"https://oberonlai.blog/wordpress-line-login-plugin/\">How to "
+#~ "config?</a>"
+#~ msgstr ""
+#~ "複製回呼網址貼到 LINE 的開發者後台。<a href=“https://oberonlai.blog/"
+#~ "wordpress-line-login-plugin/“>如何設定？</a>"
+
+#~ msgid ""
+#~ "You have to access the email permission for LINE Login. <a href=\"https://"
+#~ "oberonlai.blog/wordpress-line-login-plugin/\">How to config?</a>"
+#~ msgstr ""
+#~ "您必須取得 LINE Login 的電子郵件權限。<a href=\"https://oberonlai.blog/"
+#~ "wordpress-line-login-plugin/\">如何設定？</a>"
+
+#~ msgid ""
+#~ "The User ID of Messaging API for testing. <a href=\"https://oberonlai."
+#~ "blog/wordpress-line-bot-plugin/\">How to get it?</a>"
+#~ msgstr ""
+#~ "LINE Messaging API 的測試使用者 ID。<a href=“https://oberonlai.blog/"
+#~ "wordpress-line-login-plugin/“>如何取得？</a>"
+
+#~ msgid "SMS"
+#~ msgstr "手機簡訊"
+
+#~ msgid "order_billing_phone"
+#~ msgstr "帳單電話"
+
+#~ msgid "order_billing_address"
+#~ msgstr "帳單地址"
+
+#~ msgid "order_customer_details"
+#~ msgstr "顧客資料"
+
+#~ msgid "shop_current_datetime"
+#~ msgstr "日期時間"
+
+#~ msgid "shop_products"
+#~ msgstr "商品"
+
+#~ msgid "AND"
+#~ msgstr "且"
+
+#~ msgid "OR"
+#~ msgstr "或"
+
+#~ msgid "customer_meta"
+#~ msgstr "自訂"
+
+#~ msgid "Add rule"
+#~ msgstr "新增規則"
+
+#~ msgid "Add action"
+#~ msgstr "新增"
