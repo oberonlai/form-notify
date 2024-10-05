@@ -162,9 +162,9 @@ social plugins or the separately sold LINE Login plugin on our site.
 
 ## Screenshots
 
-- ![screenshot-1](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-1.png)
-- ![screenshot-2](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-2.png)
-- ![screenshot-3](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-3.png)
-- ![screenshot-4](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-4.png)
-- ![screenshot-5](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-5.png)
-- ![screenshot-6](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-6.png)
+![screenshot-1](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-1.png)
+![screenshot-2](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-2.png)
+![screenshot-3](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-3.png)
+![screenshot-4](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-4.png)
+![screenshot-5](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-5.png)
+![screenshot-6](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-6.png)
