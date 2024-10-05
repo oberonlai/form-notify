@@ -9,8 +9,6 @@ Stable tag: 1.1.04
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Supercharge your WordPress form plugins notifications using a WYSIWYG editor.
-
 == ⭐Description ==
 
 The plugin can assist website owners using form plugins by allowing form submitters to receive relevant submission result information through LINE official account, SMS, and email. Administrators can also receive notifications via LINE Notify for subsequent tracking and management purposes.
