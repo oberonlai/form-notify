@@ -5,13 +5,13 @@ Tags: LINE Login, LINE Notify, LINE Messaging API, SMS
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 1.1.03
+Stable tag: 1.1.04
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Supercharge your WordPress form plugins notifications using a WYSIWYG editor.
 
-== Description ==
+== ⭐Description ==
 
 The plugin can assist website owners using form plugins by allowing form submitters to receive relevant submission result information through LINE official account, SMS, and email. Administrators can also receive notifications via LINE Notify for subsequent tracking and management purposes.
 
@@ -27,9 +27,7 @@ The currently supported push notification channels are as follows:
 * Mitake SMS
 * easyGo SMS
 
-== Tutorial ==
-
-**Installing the Form Notify Plugin**
+== 🧰Installation ==
 
 First, download the plugin from the following link: https://wordpress.org/plugins/form-notify/
 
@@ -75,7 +73,7 @@ In the next step, add the message content for the notification. Select the type 
 
 After logging in via LINE on the front end and submitting the form, ensure that LINE receives the registration information.
 
-== Plugin Settings ==
+== ⚙️Plugin Settings ==
 
 The WordPress Form Notify plugin offers the following features:
 * Credential settings for LINE Login, LINE Notify, and LINE Messaging API.
@@ -128,7 +126,7 @@ Our plugin integrates with easyGo SMS, a third-party SMS gateway service that en
 [easyGo SMS](https://www.easy-go.com.tw/)
 [privacy policy](https://www.easy-go.com.tw/aboutys.php)
 
-== Pro version: OrderNotify for WooCommerce ==
+== 💎Pro version ==
 
 The OrderNotify for WooCommerce plugin is designed to streamline your WooCommerce order management by sending real-time notifications via LINE whenever there’s a change in the order status. This is particularly useful for online store owners in Taiwan who rely on quick updates to manage their orders efficiently.
 
@@ -165,7 +163,7 @@ This plugin helps store owners stay on top of their orders, improving customer s
 
 Please contact us if you need pro version: <a href="mailto:hi@oberonlai.blog">hi@oberonlai.blog</a>
 
-== Frequently Asked Questions ==
+== 🙋Frequently Asked Questions ==
 
 Q. Who needs the plugin?
 A. This plugin is designed for site managers, especially those using LINE as their communication platform with customers. Without the need to write a single line of code, you can integrate LINE Login, LINE Official Account messaging, and LINE Group notifications through a clear and intuitive settings interface.
@@ -182,11 +180,11 @@ A. Yes, we have the pro version called "OrderNotify for WooCommerce".
 Q. Does the FormNotify include LINE Login?
 A. Yes, this plugin has integrated the LINE Login feature, allowing you to implement LINE Login without using other social plugins or the separately sold LINE Login plugin on our site.
 
-== Changelog ==
+== 📔Changelog ==
 * v1.1.01 update readme
 * v1.0.0 first commit
 
-== Screenshots ==
+== 🖥️Screenshots ==
 
 - [](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-1.png)
 - [](https://oberonlai.blog/wp-content/uploads/form-notify/screenshot-2.png)
