@@ -5,7 +5,7 @@ Tags: LINE Login, LINE Notify, LINE Messaging API, SMS
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 1.1.02
+Stable tag: 1.1.03
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
