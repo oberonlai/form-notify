@@ -80,7 +80,7 @@ through SMS.
 - [easyGo SMS](https://www.easy-go.com.tw/)
 - [privacy policy](https://www.easy-go.com.tw/aboutys.php)
 
-## Pro version: OrderNotify for WooCommerce ==
+## Pro version: OrderNotify for WooCommerce
 
 The OrderNotify for WooCommerce plugin is designed to streamline your WooCommerce order management by sending real-time
 notifications via LINE whenever there’s a change in the order status. This is particularly useful for online store
