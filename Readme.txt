@@ -1,7 +1,7 @@
-=== Receive Notifications After Form Submitting - Form Notify for WP Forms ===
-Contributors: oberonlai
+=== Receive Notifications After Form Submitting - Form Notify for Any Forms ===
+Contributors: m615926
 Donate link: https://paypal.me/oberonlai
-Tags: notification, email, alert, message, notify, LINE Login, LINE Notify, LINE Messaging API, SMS, Elementor Form, Gravity Form, Fluent Form
+Tags: LINE Login, LINE Notify, LINE Messaging API, SMS, Fluent Form
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
@@ -27,7 +27,7 @@ The currently supported push notification channels are as follows:
 	- Mitake SMS
 	- easyGo SMS`
 
-= Tutorial =
+== Tutorial ==
 
 1. Installing the Form Notify Plugin
 
@@ -84,7 +84,7 @@ The WordPress Form Notify plugin offers the following features:
 	- LINE Login functionality settings, including whether to display the LINE login button in the WordPress login form, redirection URLs after login, customer roles, and handling cases where email authorization is not obtained.
 	- View history of push notifications, with filtering options for weekly and monthly data.
 
-= 3rd Party Integration =
+== 3rd Party Integration ==
 
 - LINE Login Integration
 
@@ -129,4 +129,72 @@ Our plugin integrates with easyGo SMS, a third-party SMS gateway service that en
 https://www.easy-go.com.tw/
 https://www.easy-go.com.tw/aboutys.php
 
+== Frequently Asked Questions ==
+
+Q. Who needs the plugin?
+A. This plugin is designed for site managers, especially those using LINE as their communication platform with customers. Without the need to write a single line of code, you can integrate LINE Login, LINE Official Account messaging, and LINE Group notifications through a clear and intuitive settings interface.
+
+Q. Are there any fees for LINE notifications?
+A. This plugin uses the LINE Messaging API to send messages. A free quota is provided by default, and once it’s used up, you can refer to the official pricing table for additional costs: https://tw.linebiz.com/column/LINEOA-2023-Price-Plan/
+
+Q. Could you help me to intergrate the plugin I am using? Like Twillo, WPForms?
+A. We are more than happy to integrate with other plugins. If you have such a request, please let us know through our technical support system. Our engineers will confirm the requirements with you, and once everything is clear, we will schedule the integration. The completion time will depend on the scope of the integration.
+
+Q. Do you support the notification of WooCommerce orders' status changing?
+A. Yes, we have the pro verison called "OrderNotify for WooCommerce".
+
+Q. Does the FormNotiy include LINE Login?
+A. Yes, this plugin has integrated the LINE Login feature, allowing you to implement LINE Login without using other social plugins or the separately sold LINE Login plugin on our site.
+
+== Changelog ==
+
+- v1.0.0 first commit
+
+== Screenshots ==
+
+- https://share.cleanshot.com/hLNdgsHt
+- https://share.cleanshot.com/rh0WSlTJ
+- https://share.cleanshot.com/Tk35D1RJ
+- https://share.cleanshot.com/FjL7vtwF
+- https://share.cleanshot.com/q5gwl55Y
+- https://share.cleanshot.com/DJ5gf6fQ
+
+== Pro version: OrderNotify for WooCommerce ==
+
+The OrderNotify for WooCommerce plugin is designed to streamline your WooCommerce order management by sending real-time notifications via LINE whenever there’s a change in the order status. This is particularly useful for online store owners in Taiwan who rely on quick updates to manage their orders efficiently.
+
+- Key features of the plugin include:
+
+	- Real-time Order Notifications: Receive instant LINE push notifications whenever an order’s status changes, keeping you informed about your store’s activities.
+	- Easy Integration: Seamlessly integrates with WooCommerce and LINE, requiring minimal setup to start receiving order notifications.
+	- Customizable Settings: Allows you to tailor notifications based on specific order statuses, providing flexibility according to your business needs.
+
+This plugin helps store owners stay on top of their orders, improving customer service and operational efficiency. All the features:
+
+	•	Display LINE login button during forced checkout login.
+	•	Parameters for billing and shipping contact phone numbers.
+	•	Trigger event when the user login.
+	•	Hide WooCommerce login fields for LINE login-only.
+	•	Mark users using LINE login.
+	•	Support for line breaks in order notes for flex message notifications.
+	•	Push notification for newly created pending payment orders.
+	•	Support for multiple LINE Messaging API credentials.
+	•	Support for multiple tokens for LINE Notify.
+	•	Support for parameters for FooEvents attendee data.
+	•	LINE login support for SUMO Reward Points.
+	•	Order notification status.
+	•	Alternative solution for orders without a LINE User ID.
+	•	Order field compatibility with high-performance order storage.
+	•	Support for custom order status in order notifications.
+	•	Integration of LINE login with Login/Signup Popup plugin.
+	•	Push notification for new user registration.
+	•	Parameters for item x quantity and trigger conditions for new orders.
+	•	Use SMS notification when LINE push fails.
+	•	Push event for order customer notes.
+	•	Support for custom user meta parameters.
+	•	Support for Flex Message JSON format.
+	•	Scheduled sending function.
+	•	Support for parameters in Fluent Booking.
+
+Please contact us if you need pro version: hi@oberonlai.blog
 
