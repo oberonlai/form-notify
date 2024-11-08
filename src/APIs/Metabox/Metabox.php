@@ -170,7 +170,7 @@ class Metabox {
 	public function sanitize_recursive( $data ) {
 		if ( is_array( $data ) ) {
 			foreach ( $data as $key => $value ) {
-				$data[ $key ] = $this->sanitize_recursive( $value );
+				$data[ $key ] = $value;
 			}
 		} else {
 			$data = sanitize_text_field( $data );

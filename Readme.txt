@@ -5,7 +5,7 @@ Tags: LINE Login, LINE Notify, LINE Messaging API, SMS
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 1.1.04
+Stable tag: 1.1.05
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,11 +13,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 The plugin can assist website owners using form plugins by allowing form submitters to receive relevant submission result information through LINE official account, SMS, and email. Administrators can also receive notifications via LINE Notify for subsequent tracking and management purposes.
 
-The currently supported form plugins are as follows:
+**The currently supported form plugins are as follows:**
 * Elementor Form
 * Fluent Form
 * Gravity Form
-The currently supported push notification channels are as follows:
+
+**The currently supported push notification channels are as follows:**
 * LINE Messaging API
 * LINE Notify
 * Email
@@ -179,6 +180,7 @@ Q. Does the FormNotify include LINE Login?
 A. Yes, this plugin has integrated the LINE Login feature, allowing you to implement LINE Login without using other social plugins or the separately sold LINE Login plugin on our site.
 
 == 📔Changelog ==
+* v1.1.05 fixed line break in message content
 * v1.1.01 update readme
 * v1.0.0 first commit
 
