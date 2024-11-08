@@ -19,7 +19,7 @@ class User {
 	 *
 	 * @var object $user User.
 	 */
-	private object $user;
+	private object|bool $user;
 
 	/**
 	 * Roles
