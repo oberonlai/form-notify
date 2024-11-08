@@ -5,7 +5,7 @@ Tags: LINE Login, LINE Notify, LINE Messaging API, SMS
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 1.1.05
+Stable tag: 1.1.06
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,8 @@ This plugin helps store owners stay on top of their orders, improving customer s
 
 Please contact us if you need pro version: <a href="mailto:hi@oberonlai.blog">hi@oberonlai.blog</a>
 
+繁體中文版請前往此處購買：<a href="https://oberonlai.blog/order-notify/">https://oberonlai.blog/order-notify/</a>
+
 == 🙋Frequently Asked Questions ==
 
 Q. Who needs the plugin?
@@ -180,6 +182,7 @@ Q. Does the FormNotify include LINE Login?
 A. Yes, this plugin has integrated the LINE Login feature, allowing you to implement LINE Login without using other social plugins or the separately sold LINE Login plugin on our site.
 
 == 📔Changelog ==
+* v1.1.06 fixed LINE Login redirection
 * v1.1.05 fixed line break in message content
 * v1.1.01 update readme
 * v1.0.0 first commit
