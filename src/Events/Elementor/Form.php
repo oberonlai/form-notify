@@ -173,6 +173,31 @@ class Form {
 										}
 										$params[] = $data;
 									}
+
+									// 內部段.
+									if ( $k->elements ) {
+										foreach ( $k->elements as $l ) {
+											foreach ( $l->elements as $m ) {
+												if ( 'options' === $type && is_object( $m->settings ) && property_exists( $m->settings, 'form_name' ) ) {
+													$options[ $m->settings->form_name ] = $m->settings->form_name;
+												}
+
+												if ( 'params' === $type && is_object( $m->settings ) && property_exists( $m->settings, 'form_fields' ) ) {
+													$fields = $m->settings->form_fields;
+													$data   = array(
+														'name' => $m->settings->form_name,
+													);
+													foreach ( $fields as $field ) {
+														$data['fields'][] = array(
+															'custom_id' => $field->custom_id,
+															'label'     => ( property_exists( $field, 'field_label' ) ) ? $field->field_label : $field->custom_id,
+														);
+													}
+													$params[] = $data;
+												}
+											}
+										}
+									}
 								}
 							}
 						}

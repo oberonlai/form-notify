@@ -125,6 +125,8 @@ the features:
 
 Please contact us if you need pro version: <a href="mailto:hi@oberonlai.blog">hi@oberonlai.blog</a>
 
+繁體中文版請前往此處購買：<a href="https://oberonlai.blog/order-notify/">https://oberonlai.blog/order-notify/</a>
+
 ## Frequently Asked Questions
 
 ### Q. Who needs the plugin?
@@ -157,6 +159,9 @@ social plugins or the separately sold LINE Login plugin on our site.
 
 ## Changelog
 
+- v1.1.07 fixed Elementor form detection
+- v1.1.06 fixed LINE Login redirection
+- v1.1.05 fixed line break in message content
 - v1.1.01 update readme
 - v1.0.0 first commit
 
