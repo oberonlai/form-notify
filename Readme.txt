@@ -5,7 +5,7 @@ Tags: LINE Login, LINE Notify, LINE Messaging API, SMS
 Requires at least: 4.8
 Tested up to: 6.6.2
 Requires PHP: 8.0
-Stable tag: 1.1.06
+Stable tag: 1.1.07
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,7 @@ Q. Does the FormNotify include LINE Login?
 A. Yes, this plugin has integrated the LINE Login feature, allowing you to implement LINE Login without using other social plugins or the separately sold LINE Login plugin on our site.
 
 == 📔Changelog ==
+* v1.1.07 fixed Elementor form detection
 * v1.1.06 fixed LINE Login redirection
 * v1.1.05 fixed line break in message content
 * v1.1.01 update readme

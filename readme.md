@@ -110,7 +110,7 @@ the features:
 - Support for parameters for FooEvents attendee data.
 - LINE login support for SUMO Reward Points.
 - Order notification status.
-- Alternative solution for orders without a LINE User ID.
+- Alternative solution for or``ders without a LINE User ID.
 - Order field compatibility with high-performance order storage.
 - Support for custom order status in order notifications.
 - Integration of LINE login with Login/Signup Popup plugin.
