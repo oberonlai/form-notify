@@ -159,7 +159,7 @@ social plugins or the separately sold LINE Login plugin on our site.
 
 ## Changelog
 
-- v1.1.07 fixed Elementor form detection
+- v1.1.08 fixed Elementor form detection
 - v1.1.06 fixed LINE Login redirection
 - v1.1.05 fixed line break in message content
 - v1.1.01 update readme
