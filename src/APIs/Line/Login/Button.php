@@ -21,7 +21,7 @@ class Button {
 	 */
 	public static function init(): void {
 		$class = new self();
-		add_shortcode( 'form_notify_linelogin', array( $class, 'register_login_button' ) );
+		add_shortcode( 'linelogin', array( $class, 'register_login_button' ) );
 		add_action( 'wp_enqueue_scripts', array( $class, 'custom_login_style' ) );
 		add_action(
 			'plugins_loaded',

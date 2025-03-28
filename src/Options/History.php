@@ -140,7 +140,7 @@ class History {
 	 *
 	 * @return int insert_id
 	 */
-	public static function insert( int|string $user_id, string $user_info, int $order_id, string $notify_type, string $notify_content, string $status ): int {
+	public static function insert( int|string $user_id, string $user_info, int $order_id, string $notify_type, string $notify_content, $status ): int {
 		global $wpdb;
 
 		$wpdb->insert(

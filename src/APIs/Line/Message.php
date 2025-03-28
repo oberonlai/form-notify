@@ -43,7 +43,7 @@ class Message {
 	 *
 	 * @return object $resp request result.
 	 */
-	private function request( string $to, object $messages ): object {
+	private function request( $to, $messages ) {
 		$body = array(
 			'to'       => $to,
 			'messages' => array(
@@ -86,7 +86,7 @@ class Message {
 	 *
 	 * @return string $result request result.
 	 */
-	public function push( string $uid, object $messages ): string {
+	public function push( $uid, $messages ) {
 		$result = $this->request( $uid, $messages );
 		if ( is_object( $result ) && count( (array) $result ) > 0 ) {
 			return $result->message;
