@@ -31,7 +31,7 @@ class Message {
 	 * Construct
 	 */
 	public function __construct() {
-		$this->token    = ( get_option( 'form_notify_line_message_token' ) ) ? get_option( 'form_notify_line_message_token' ) : 'xrTVdDn+qvmS/vl1wicjOt9zsonq1fquP78yb/EOAlXIR+BwmxQd11a5kJLPN3vE4eN0KYgbXook7qAreUVWm9JFBSulgU1UKpvvQgaHNjqMYoHSi1UCVvWzGWGkXSbAIl/o2M+mlibm9xpW4nW32AdB04t89/1O/w1cDnyilFU=';
+		$this->token    = ( get_option( 'form_notify_line_message_token' ) ) ? get_option( 'form_notify_line_message_token' ) : '';
 		$this->endpoint = 'https://api.line.me/v2/bot/message/push';
 	}
 

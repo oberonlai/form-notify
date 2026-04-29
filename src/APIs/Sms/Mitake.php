@@ -151,7 +151,7 @@ class Mitake {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_points_api_body' ),
 				'permission_callback' => function () {
-					return true;
+					return current_user_can( 'manage_options' );
 				},
 			)
 		);
@@ -165,11 +165,13 @@ class Mitake {
 	 * @return string
 	 */
 	public function get_callback_body( WP_REST_Request $request ): string {
-		$msgid      = $request['msgid'];
-		$phone      = $request['dstaddr'];
-		$code       = $request['statuscode'];
-		$statusstr  = $request['statusstr'];
-		$statusflag = $request['StatusFlag'];
+		$msgid     = is_string( $request['msgid'] ?? null ) ? sanitize_text_field( $request['msgid'] ) : '';
+		$statusstr = is_string( $request['statusstr'] ?? null ) ? sanitize_text_field( $request['statusstr'] ) : '';
+
+		if ( empty( $msgid ) ) {
+			return '';
+		}
+
 		$history_id = History::select( $msgid, 'notify_type' );
 
 		$status = match ( $statusstr ) {

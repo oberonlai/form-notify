@@ -344,29 +344,41 @@ class HistoryTable extends \WP_List_Table {
 	 */
 	public function process_bulk_action(): void {
 		if ( 'delete' === $this->current_action() ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'form-notify' ), '', array( 'response' => 403 ) );
+			}
+
 			$nonce = formnotify_get_params( '_wpnonce' );
 			$data  = formnotify_get_params( 'id' );
 
 			if ( ! wp_verify_nonce( $nonce, 'history_delete' ) ) {
-				die( '發生錯誤！' );
-			} else {
-				$this->delete_history( absint( $data ) );
-				wp_safe_redirect( admin_url( 'edit.php?post_type=form-notify&page=form-notify-history' ) );
-				exit;
+				wp_die( esc_html__( 'Invalid security token.', 'form-notify' ), '', array( 'response' => 403 ) );
 			}
+
+			$this->delete_history( absint( $data ) );
+			wp_safe_redirect( admin_url( 'edit.php?post_type=form-notify&page=form-notify-history' ) );
+			exit;
 		}
 
 		$action  = formnotify_get_params( 'action' );
 		$action2 = formnotify_get_params( 'action2' );
 
-		$bulk = isset( $_GET['bulk-delete'] ) ? sanitize_text_field( wp_unslash( $_GET['bulk-delete'] ) ) : array();
-
-		$sanitized_bulk = array_map( 'sanitize_text_field', $bulk );
-
 		if ( 'bulk-delete' === $action || 'bulk-delete' === $action2 ) {
-			$delete_ids = esc_sql( $sanitized_bulk );
-			foreach ( $delete_ids as $id ) {
-				$this->delete_history( $id );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'form-notify' ), '', array( 'response' => 403 ) );
+			}
+
+			// WP_List_Table generates this nonce via wp_nonce_field( 'bulk-' . $this->_args['plural'] ).
+			check_admin_referer( 'bulk-' . $this->_args['plural'] );
+
+			$bulk = isset( $_GET['bulk-delete'] ) && is_array( $_GET['bulk-delete'] )
+				? array_map( 'absint', wp_unslash( $_GET['bulk-delete'] ) )
+				: array();
+
+			foreach ( $bulk as $id ) {
+				if ( $id > 0 ) {
+					$this->delete_history( $id );
+				}
 			}
 			wp_safe_redirect( admin_url( 'edit.php?post_type=form-notify&page=form-notify-history' ) );
 			exit;

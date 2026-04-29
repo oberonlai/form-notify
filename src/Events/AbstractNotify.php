@@ -173,12 +173,21 @@ abstract class AbstractNotify {
 
 								break;
 							case 'email':
-								$subject = $this->replace_message_content( $action['form_notify_action_module_subject'], $form_data );
-								$headers = array( 'Content-Type: text/html; charset=UTF-8' );
-								$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><!--[if (gte mso 9)|(IE)]><style type="text/css">table{border-collapse: collapse;}</style><![endif]--><style type="text/css"> body{margin: 0 !important; padding: 0; background-color: #ffffff; font-family: "HanHei TC", "PingFang TC", "Helvetica Neue", "Helvetica", "STHeitiTC-Light", "Arial", sans-serif;}table{width:100%;border-spacing: 0; color: #4A4A4A;}td{padding: 0;}img{border: 0;}ul{margin: 0; padding: 0;}li{list-style: none; font-size: 14px; color: #4A4A4A; margin-bottom: 20px;}div[style*="margin: 16px 0"]{margin:0 !important;}.wrapper{width: 100%; table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}.webkit{max-width: 680px; width: 90%;}.inner{padding: 37px;}p{Margin: 0;}a{color: DodgerBlue; text-decoration: none;}.one-column .contents{text-align: left;}.one-column p{font-size: 14px; margin-bottom: 10px;}.content{background: #efefef;}.color{color: #FA666C;}.btn{position: relative; width: 100%; margin: 10px 0 0 0; display: inline-block; padding: 1rem 0; text-align: center; font-size: 1.2rem; white-space: nowrap;-webkit-border-radius: 100px;-moz-border-radius: 100px;-ms-border-radius: 100px;-o-border-radius: 100px;border-radius: 100px;-webkit-transition: all .2s ease;-o-transition: all .2s ease;transition: all .2s ease;}.btnorage{background: #ED6B00; color: #fff;}.btnorage:hover,.btnred:active{background: #F09F54;}.hr{display: block; width: 100%; height: 1px; margin: 20px 0; background: #ccc;}</style></head><body> <div class="wrapper"> <div class="webkit"><!--[if (gte mso 9)|(IE)]> <table width="375" align="center"> <tr> <td><![endif]--> <table class="outer" align="center"> <tbody> <tr class="psingle"> <td class="one-column"> <table width="100%"> <tbody> <tr> </tr></tbody> </table> </td></tr><tr class="psingle content"> <td class="one-column"> <table width="100%"> <tbody> <tr> <td class="inner contents"> <h3 style="text-align:center">' . $this->replace_message_content( $action['form_notify_action_module_subject'], $form_data ) . '</h3><div>' . nl2br( $this->replace_message_content( $action['form_notify_action_module_content'], $form_data ) ) . '</div><br><hr> <br><p style="text-align: center;">' . get_bloginfo( 'name' ) . '</p><p style="text-align: center;"><a href="' . home_url() . '">' . home_url() . '</a></p></td></tr></tbody> </table> </td></tr></tbody> </table><!--[if (gte mso 9)|(IE)]> </td></tr></table><![endif]--> </div></div> </body></html>';
+								if ( ! is_email( $receiver ) ) {
+									History::insert( 0, $receiver . ' - ' . $this->history_text, 0, __( 'Email', 'form-notify' ), '', __( 'Invalid email address.', 'form-notify' ) );
+									break;
+								}
+								$subject_raw = $this->replace_message_content( $action['form_notify_action_module_subject'], $form_data );
+								$content_raw = $this->replace_message_content( $action['form_notify_action_module_content'], $form_data );
+								$subject     = sanitize_text_field( $subject_raw );
+								$content     = wp_kses_post( $content_raw );
+								$site_name   = esc_html( get_bloginfo( 'name' ) );
+								$site_url    = esc_url( home_url() );
+								$headers     = array( 'Content-Type: text/html; charset=UTF-8' );
+								$message     = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><!--[if (gte mso 9)|(IE)]><style type="text/css">table{border-collapse: collapse;}</style><![endif]--><style type="text/css"> body{margin: 0 !important; padding: 0; background-color: #ffffff; font-family: "HanHei TC", "PingFang TC", "Helvetica Neue", "Helvetica", "STHeitiTC-Light", "Arial", sans-serif;}table{width:100%;border-spacing: 0; color: #4A4A4A;}td{padding: 0;}img{border: 0;}ul{margin: 0; padding: 0;}li{list-style: none; font-size: 14px; color: #4A4A4A; margin-bottom: 20px;}div[style*="margin: 16px 0"]{margin:0 !important;}.wrapper{width: 100%; table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}.webkit{max-width: 680px; width: 90%;}.inner{padding: 37px;}p{Margin: 0;}a{color: DodgerBlue; text-decoration: none;}.one-column .contents{text-align: left;}.one-column p{font-size: 14px; margin-bottom: 10px;}.content{background: #efefef;}.color{color: #FA666C;}.btn{position: relative; width: 100%; margin: 10px 0 0 0; display: inline-block; padding: 1rem 0; text-align: center; font-size: 1.2rem; white-space: nowrap;-webkit-border-radius: 100px;-moz-border-radius: 100px;-ms-border-radius: 100px;-o-border-radius: 100px;border-radius: 100px;-webkit-transition: all .2s ease;-o-transition: all .2s ease;transition: all .2s ease;}.btnorage{background: #ED6B00; color: #fff;}.btnorage:hover,.btnred:active{background: #F09F54;}.hr{display: block; width: 100%; height: 1px; margin: 20px 0; background: #ccc;}</style></head><body> <div class="wrapper"> <div class="webkit"><!--[if (gte mso 9)|(IE)]> <table width="375" align="center"> <tr> <td><![endif]--> <table class="outer" align="center"> <tbody> <tr class="psingle"> <td class="one-column"> <table width="100%"> <tbody> <tr> </tr></tbody> </table> </td></tr><tr class="psingle content"> <td class="one-column"> <table width="100%"> <tbody> <tr> <td class="inner contents"> <h3 style="text-align:center">' . esc_html( $subject ) . '</h3><div>' . nl2br( $content ) . '</div><br><hr> <br><p style="text-align: center;">' . $site_name . '</p><p style="text-align: center;"><a href="' . $site_url . '">' . $site_url . '</a></p></td></tr></tbody> </table> </td></tr></tbody> </table><!--[if (gte mso 9)|(IE)]> </td></tr></table><![endif]--> </div></div> </body></html>';
 								wp_mail( $receiver, $subject, $message, $headers );
 
-								History::insert( 0, $receiver . ' - ' . $this->history_text, 0, __( 'Email', 'form-notify' ), $this->replace_message_content( $action['form_notify_action_module_content'], $form_data ), __( 'Success', 'form-notify' ) );
+								History::insert( 0, $receiver . ' - ' . $this->history_text, 0, __( 'Email', 'form-notify' ), $content_raw, __( 'Success', 'form-notify' ) );
 								break;
 							default:
 								// code...
@@ -227,16 +236,16 @@ abstract class AbstractNotify {
 
 		// Nextend Social Login.
 		global $wpdb;
-		$sql = $wpdb->prepare( "SELECT identifier FROM `{$wpdb->prefix}social_users` WHERE `ID` = %d ", $user_id );
+		$cache_key = 'form_notify_identifier_' . $user_id;
+		$cache     = wp_cache_get( $cache_key );
 
-		$cache = wp_cache_get( 'form_notify_identifier' );
-
-		if ( ! $cache ) {
-			// @codingStandardsIgnoreStart
-			$result = $wpdb->get_results( $sql );
-			$cache  = $result[0]->identifier;
-			wp_cache_set( 'form_notify_identifier', $cache );
-			// @codingStandardsIgnoreEnd
+		if ( false === $cache ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- caching handled below.
+			$result = $wpdb->get_var(
+				$wpdb->prepare( "SELECT identifier FROM `{$wpdb->prefix}social_users` WHERE `ID` = %d", $user_id )
+			);
+			$cache  = $result ? $result : '';
+			wp_cache_set( $cache_key, $cache );
 		}
 
 		return $cache;

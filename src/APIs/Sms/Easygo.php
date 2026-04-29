@@ -161,7 +161,7 @@ class Easygo {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_points_api_body' ),
 				'permission_callback' => function () {
-					return true;
+					return current_user_can( 'manage_options' );
 				},
 			)
 		);

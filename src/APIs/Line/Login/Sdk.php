@@ -24,13 +24,12 @@ class SDK {
 			'response_type' => 'code',
 			'client_id'     => get_option( 'form_notify_line_login_channel_id' ),
 			'state'         => $state,
+			'scope'         => 'email openid profile',
+			'redirect_uri'  => rest_url( 'form-notify/v1/callback' ),
+			'bot_prompt'    => 'aggressive',
 		);
 
-		$host = 'https://access.line.me/oauth2/v2.1/authorize';
-
-		$url = $host . '?' . http_build_query( $parameter ) . '&scope=email%20openid%20profile&redirect_uri=' . home_url() . '/wp-json/form-notify/v1/callback&bot_prompt=aggressive';
-
-		return $url;
+		return 'https://access.line.me/oauth2/v2.1/authorize?' . http_build_query( $parameter );
 	}
 
 	/**
@@ -44,7 +43,7 @@ class SDK {
 		$body    = array(
 			'grant_type'    => 'authorization_code',
 			'code'          => $code,
-			'redirect_uri'  => home_url() . '/wp-json/form-notify/v1/callback',
+			'redirect_uri'  => rest_url( 'form-notify/v1/callback' ),
 			'client_id'     => get_option( 'form_notify_line_login_channel_id' ),
 			'client_secret' => get_option( 'form_notify_line_login_channel_secret' ),
 		);

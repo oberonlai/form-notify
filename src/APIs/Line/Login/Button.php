@@ -99,8 +99,8 @@ class Button {
 	 */
 	public function render_button( string $size, string $text, string $align, string $show = null, string $lgmode = 'true' ): string {
 		if ( ! is_user_logged_in() || 'show' === $show ) {
-			// Translators: %s: text.
-			return '<div class="form-notify-line-wrap ' . esc_attr( $align ) . '"><a class="size-' . esc_attr( $size ) . '" href="' . esc_attr( get_the_permalink() ) . '?lgmode=' . $lgmode . '"><img src="' . esc_attr( FORMNOTIFY_PLUGIN_URL ) . 'assets/img/icon-line.svg" />' . esc_html( $text ) . '</a></div>';
+			$href = add_query_arg( 'lgmode', rawurlencode( $lgmode ), get_the_permalink() );
+			return '<div class="form-notify-line-wrap ' . esc_attr( $align ) . '"><a class="size-' . esc_attr( $size ) . '" href="' . esc_url( $href ) . '"><img src="' . esc_url( FORMNOTIFY_PLUGIN_URL . 'assets/img/icon-line.svg' ) . '" />' . esc_html( $text ) . '</a></div>';
 		}
 
 		return '';
@@ -130,7 +130,8 @@ class Button {
 			$attrs
 		);
 
-		$r = '<div class="form-notify-line-wrap ' . $param['align'] . '"><a class="size-' . $param['size'] . '" href="' . get_the_permalink() . '?lgmode=' . $param['lgmode'] . '"><img src="' . FORMNOTIFY_PLUGIN_URL . 'assets/img/icon-line.svg">' . esc_html( $param['text'] ) . '</a></div>';
+		$href = add_query_arg( 'lgmode', rawurlencode( $param['lgmode'] ), get_the_permalink() );
+		$r    = '<div class="form-notify-line-wrap ' . esc_attr( $param['align'] ) . '"><a class="size-' . esc_attr( $param['size'] ) . '" href="' . esc_url( $href ) . '"><img src="' . esc_url( FORMNOTIFY_PLUGIN_URL . 'assets/img/icon-line.svg' ) . '">' . esc_html( $param['text'] ) . '</a></div>';
 
 		return $r;
 	}

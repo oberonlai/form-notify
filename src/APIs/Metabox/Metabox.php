@@ -152,14 +152,13 @@ class Metabox {
 
 		foreach ( $this->fields as $field ) {
 			if ( isset( $_POST[ $field['id'] ] ) ) {
-				$post_field_id = $this->sanitize_recursive( $_POST[ $field['id'] ] );
+				$raw           = wp_unslash( $_POST[ $field['id'] ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized below.
+				$post_field_id = $this->sanitize_recursive( $raw );
 
-				if ( 'text' === $field['type'] || 'textarea' === $field['type'] ) {
-					update_post_meta( $post->ID, $field['id'], $post_field_id );
-				} elseif ( 'multiselect' === $field['type'] ) {
+				if ( 'multiselect' === $field['type'] ) {
 					update_post_meta( $post->ID, $field['id'], wp_json_encode( $post_field_id ) );
 				} else {
-					update_post_meta( $post->ID, $field['id'], $post_field_id ); // phpcs:ignore
+					update_post_meta( $post->ID, $field['id'], $post_field_id );
 				}
 			} else {
 				delete_post_meta( $post->ID, $field['id'] );
@@ -167,16 +166,26 @@ class Metabox {
 		}
 	}
 
+	/**
+	 * Recursively sanitize a value (scalar or nested array).
+	 *
+	 * @param mixed $data Raw value.
+	 *
+	 * @return mixed
+	 */
 	public function sanitize_recursive( $data ) {
 		if ( is_array( $data ) ) {
+			$out = array();
 			foreach ( $data as $key => $value ) {
-				$data[ $key ] = $value;
+				$safe_key         = is_string( $key ) ? sanitize_key( $key ) : $key;
+				$out[ $safe_key ] = $this->sanitize_recursive( $value );
 			}
-		} else {
-			$data = sanitize_text_field( $data );
+			return $out;
 		}
-
-		return $data;
+		if ( is_scalar( $data ) ) {
+			return sanitize_textarea_field( (string) $data );
+		}
+		return '';
 	}
 
 	/**

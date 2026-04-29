@@ -13,7 +13,7 @@ use ODS\Updater;
  * Plugin Name:       FormNotify
  * Plugin URI:        https://oberonlai.blog/form-notify
  * Description:       Notification for WordPress form plugins.
- * Version:           1.1.10
+ * Version:           1.1.11
  * Author:            Daily WPdev.
  * Author URI:        https://oberonlai.blog
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ use ODS\Updater;
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FORMNOTIFY_VERSION', '1.1.10' );
+define( 'FORMNOTIFY_VERSION', '1.1.11' );
 define( 'FORMNOTIFY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FORMNOTIFY_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -41,7 +41,7 @@ function formnotify_load_plugin_i18n(): void {
 	load_plugin_textdomain( 'form-notify', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
-add_action( 'plugin_loaded', 'formnotify_load_plugin_i18n' );
+add_action( 'plugins_loaded', 'formnotify_load_plugin_i18n' );
 
 /**
  * Get params from url
@@ -50,11 +50,15 @@ add_action( 'plugin_loaded', 'formnotify_load_plugin_i18n' );
  *
  * @return string|null
  */
-function formnotify_get_params( string $key ): string|null {
+function formnotify_get_params( string $key ): string {
 	$query_string = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
 	parse_str( $query_string, $params );
 
-	return isset( $params[ $key ] ) ? $params[ $key ] : '';
+	if ( ! isset( $params[ $key ] ) || ! is_scalar( $params[ $key ] ) ) {
+		return '';
+	}
+
+	return sanitize_text_field( (string) $params[ $key ] );
 }
 
 /**

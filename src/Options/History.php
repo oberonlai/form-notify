@@ -53,8 +53,9 @@ class History {
 						<div id="post-body" class="metabox-holder">
 							<div id="post-body-content">
 								<div class="meta-box-sortables ui-sortable">
-									<form method="get" action="<?php echo esc_html( admin_url() ); ?>admin.php?edit_php?post_type=form-notify&page=form-notify-history">
-										<input type="hidden" name="page" value="form-notify-history"/>
+									<form method="get" action="<?php echo esc_url( admin_url( 'edit.php' ) ); ?>">
+										<input type="hidden" name="post_type" value="form-notify"/>
+											<input type="hidden" name="page" value="form-notify-history"/>
 										<?php
 										$this->list_obj->views();
 										$this->list_obj->prepare_items();
@@ -192,22 +193,22 @@ class History {
 	 */
 	public static function select( string $keyword, string $field ): int {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'form_notify_history';
-		$results    = $wpdb->get_results(
-			$wpdb->prepare(
-				'SELECT ID FROM %s WHERE %s LIKE %s',
-				$table_name,
-				$field,
-				'%' . $wpdb->esc_like( $keyword ) . '%'
-			)
-		);
-		if ( $results ) {
-			foreach ( $results as $result ) {
-				return $result->ID;
-			}
+
+		$allowed_fields = array( 'user_info', 'notify_type', 'notify_content', 'status' );
+		if ( ! in_array( $field, $allowed_fields, true ) ) {
+			return 0;
 		}
 
-		return 0;
+		$table_name = $wpdb->prefix . 'form_notify_history';
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $field is from allow-list above; $table_name is server-side.
+		$sql = $wpdb->prepare(
+			"SELECT id FROM {$table_name} WHERE {$field} LIKE %s LIMIT 1",
+			'%' . $wpdb->esc_like( $keyword ) . '%'
+		);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one-shot lookup.
+		$row = $wpdb->get_row( $sql );
+
+		return $row ? (int) $row->id : 0;
 	}
 }
 
