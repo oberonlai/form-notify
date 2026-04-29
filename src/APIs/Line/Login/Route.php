@@ -109,33 +109,17 @@ class Route {
 
 		if ( $user ) {
 
-			$user_raw_id  = $user->sub;
-			$user_display = $user->name;
-			$user_avatar  = $user->picture;
-			if ( isset( $_COOKIE['form_notify_line_email'] ) ) {
-				$line_email = sanitize_text_field( wp_unslash( $_COOKIE['form_notify_line_email'] ) );
-			}
-			$user_email = ( $user->email ) ? $user->email : $line_email;
-
-			if ( empty( $user_email ) ) {
-				$redirect_url = ( get_option( 'form_notify_line_btn_redirect' ) ) ? get_option( 'form_notify_line_btn_redirect' ) : home_url();
-
-				if ( 'auto' === get_option( 'form_notify_line_btn_user_email' ) ) {
-					$user_email = $user_raw_id . '@line.com';
-				} else {
-					wp_safe_redirect( $redirect_url . '?lgmode=check-email' );
-					exit;
-				}
-			} else {
-				unset( $_COOKIE['form_notify_line_email'] );
-				setcookie( 'form_notify_line_email', null, - 1, '/' );
-			}
+			$user_raw_id    = $user->sub;
+			$user_display   = $user->name;
+			$user_avatar    = $user->picture;
+			$has_real_email = ! empty( $user->email );
+			$user_email     = $has_real_email ? $user->email : $user_raw_id . '@line.com';
 
 			$user_obj = new User();
 			if ( $user_obj->is_member( $user_email, $user_avatar ) ) {
-				$user_obj->login( $user_raw_id, $user_email, $user_display, $user_avatar );
+				$user_obj->login( $user_raw_id, $user_email, $user_display, $user_avatar, $has_real_email );
 			} else {
-				$user_obj->sign_up( $user_raw_id, $user_email, $user_display, $user_avatar );
+				$user_obj->sign_up( $user_raw_id, $user_email, $user_display, $user_avatar, $has_real_email );
 			}
 		}
 
